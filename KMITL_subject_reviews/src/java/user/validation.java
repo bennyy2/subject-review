@@ -19,21 +19,21 @@ import javax.servlet.RequestDispatcher;
  */
 public class validation {
 
-    public static boolean email_validation(String email) {
-        boolean status = false;
-        String email_pattern = "^[0-9]{0,9}@kmitl.ac.th$";
-
-        Pattern pattern = Pattern.compile(email_pattern);
-        Matcher matcher = pattern.matcher(email);
-
-        if (matcher.matches()) {
-            status = true;
-        } else {
-            status = false;
-        }
-        return status;
-
-    }
+//    public static boolean email_validation(String email) {
+//        boolean status = false;
+//        String email_pattern = "^[0-9]{0,9}@kmitl.ac.th$";
+//
+//        Pattern pattern = Pattern.compile(email_pattern);
+//        Matcher matcher = pattern.matcher(email);
+//
+//        if (matcher.matches()) {
+//            status = true;
+//        } else {
+//            status = false;
+//        }
+//        return status;
+//
+//    }
 
     public static boolean findEmail(Connection con, String email) throws SQLException {
         boolean find = false;
@@ -77,5 +77,6 @@ public class validation {
         }
         return user;
     }
+    
 
 }

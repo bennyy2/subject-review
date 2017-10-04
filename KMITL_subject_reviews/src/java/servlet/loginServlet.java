@@ -46,6 +46,7 @@ public class loginServlet extends HttpServlet {
             boolean user = validation.login(con, username, password);
 
             if (user) {
+                request.setAttribute("username", username);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
                 dispatcher.forward(request, response);
             } else {

@@ -13,6 +13,7 @@
     </head>
     <body>
         <form action="loginServlet" method="POST">
+            <h3>${success}</h3>
             username :<input type="text" name="username" value="" />
             password :<input type="password" name="password" value="" />
             <input type="submit" value="login" /><br>

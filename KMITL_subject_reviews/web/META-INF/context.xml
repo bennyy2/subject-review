@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/KMITL_subject_reviews">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="subject_review" password="" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/kmitl_subject_database?zeroDateTimeBehavior=convertToNull" username="root"/>
+</Context>

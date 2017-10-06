@@ -43,13 +43,13 @@ public class loginServlet extends HttpServlet {
             String password = request.getParameter("password");
             String message = null;
             Connection con = (Connection) getServletContext().getAttribute("connection");
-            boolean user = validation.login(con, username, password);
 
-            if (user) {
+            
+            if(validation.login(con, username, password)){
                 request.setAttribute("username", username);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
                 dispatcher.forward(request, response);
-            } else {
+            }else{
                 message = "username or password is incorrect.";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");

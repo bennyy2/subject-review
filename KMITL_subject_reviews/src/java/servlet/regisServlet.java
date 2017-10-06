@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.UserProfile;
 
 /**
  *
@@ -48,73 +49,58 @@ public class regisServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
+            boolean errorRegis = false;
             String role = null;
-            String name = "";
             String[] address = new String[2];
             String id = UUID.randomUUID().toString();
+            String message = null;
 
             Connection con = (Connection) getServletContext().getAttribute("connection");
 
-            String message = null;
-            boolean find = validation.findEmail(con, email);
-            boolean user = validation.findUser(con, username);
-
-            if (user) {
-                message = "This username is already in use!.";
-                request.setAttribute("message", message);
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/register.jsp");
-                dispatcher.forward(request, response);
-                return;
-            }
-
-            if (find) {
-                message = "This e-mail is already in use!.";
-                request.setAttribute("message", message);
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/register.jsp");
-                dispatcher.forward(request, response);
-                return;
-            }
-
-            for (char i : email.toCharArray()) {
-                if (Character.toString(i).matches("@")) {
-                    name += " ";
-                } else {
-                    name += i;
-                }
-            }
-            address = name.split(" ");
-            if (!address[1].equals("kmitl.ac.th")) {
-                message = "This email is not KMITL account.";
-                request.setAttribute("message", message);
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/register.jsp");
-                dispatcher.forward(request, response);
-                return;
+            if (username.length() == 0 || password.length() == 0 || email.length() == 0) {
+                errorRegis = true;
+                message = "Please fill in your registration details.";
             } else {
-                for (char i : address[0].toCharArray()) {
-                    if (!Character.toString(i).matches("[0-9]")) {
-                        role = "teacher";
-                        break;
+                if (validation.findUser(con, username)) {
+                    errorRegis = true;
+                    message = "This username is already in use!.";
+                } else if (validation.findEmail(con, email)) {
+                    errorRegis = true;
+                    message = "This email is already in use!.";
+                } else {
+                    if (validation.email_validation(email)) {
+                        address = email.split("@");
+                        for (char i : address[0].toCharArray()) {
+                            if (!Character.toString(i).matches("[0-9]")) {
+                                role = "teacher";
+                                break;
+                            } else {
+                                role = "student";
+                            }
+                        }
+                        
+                        UserProfile user = new UserProfile(username, password, email);
+                        validation.insertUser(con, user, role);
+                        message = "Welcome to KMITL Subject reviews.";
+                        request.setAttribute("success", message);
+                        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
+                        dispatcher.forward(request, response);
                     } else {
-                        role = "student";
+                        errorRegis = true;
+                        message = "This email is not KMITL account.";
                     }
                 }
             }
-            
 
-            String sql = "Insert into user values (?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
 
-            pstm.setString(1, id);
-            pstm.setString(2, username);
-            pstm.setString(3, email);
-            pstm.setString(4, password);
-            pstm.setString(5, role);
-            pstm.executeUpdate();
-            message = "Welcome to KMITL Subject reviews.";
-            request.setAttribute("success", message);
-            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            if (errorRegis) {
+                request.setAttribute("message", message);
+                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/register.jsp");
+                dispatcher.forward(request, response);
+
+            }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -163,5 +149,4 @@ public class regisServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

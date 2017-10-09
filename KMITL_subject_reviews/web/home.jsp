@@ -19,14 +19,15 @@
                            user = "root"  password = ""/>
         <h1>Hello ${username}</h1>
         <form action="major.jsp" method="POST">
-            <select name="major">
+            <select name="type">
                 <sql:query dataSource = "${db}" var = "result">
-                    SELECT * FROM major;
+                    SELECT * FROM type;
                 </sql:query>
                 <c:forEach var = "row" items = "${result.rows}">
-                    <option>${row.major_name}</option>
+                    <option value="${row.type_id}">${row.type_name}</option>
                 </c:forEach>
             </select>
+            
             <input type="submit" value="ok" />
         </form>
         

@@ -14,12 +14,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>KMITL Subject review system</title>
     </head>
     <body>
         <sql:setDataSource var = "db" driver = "com.mysql.jdbc.Driver"
                            url = "jdbc:mysql://localhost:3306/kmitl_subject_database"
                            user = "root"  password = ""/>
-        <h1>Hello ${major}</h1>
+        <h1>hello ${username}</h1>
+        
+        <% request.setCharacterEncoding("UTF-8");
+            String type = (String) request.getParameter("type");%>
+
+        <sql:query dataSource = "${db}" var = "result">
+            SELECT * FROM subject where type_id = "<%= type%>";
+        </sql:query>
+        <c:forEach var = "row" items = "${result.rows}">
+            ${row.sj_name_eng} ${row.sj_description_eng}<br><br>
+        </c:forEach>
     </body>
 </html>

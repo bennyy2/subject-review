@@ -52,7 +52,7 @@ public class loginServlet extends HttpServlet {
             }else{
                 message = "username or password is incorrect.";
                 request.setAttribute("message", message);
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
+                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/register.jsp");
                 dispatcher.forward(request, response);
             }
 

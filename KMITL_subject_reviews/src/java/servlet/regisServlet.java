@@ -58,13 +58,14 @@ public class regisServlet extends HttpServlet {
             Connection con = (Connection) getServletContext().getAttribute("connection");
 
             if (username.length() == 0 || password.length() == 0 || email.length() == 0) {
+                out.print("0");
                 errorRegis = true;
                 message = "Please fill in your registration details.";
             } else {
                 if (validation.findUser(con, username)) {
                     errorRegis = true;
                     message = "This username is already in use!.";
-                } else if (validation.findEmail(con, email)) {
+                }else if (validation.findEmail(con, email)) {
                     errorRegis = true;
                     message = "This email is already in use!.";
                 } else {
@@ -78,12 +79,11 @@ public class regisServlet extends HttpServlet {
                                 role = "student";
                             }
                         }
-                        
                         UserProfile user = new UserProfile(username, password, email);
                         validation.insertUser(con, user, role);
                         message = "Welcome to KMITL Subject reviews.";
                         request.setAttribute("success", message);
-                        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
+                        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
                         dispatcher.forward(request, response);
                     } else {
                         errorRegis = true;

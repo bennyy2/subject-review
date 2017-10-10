@@ -95,7 +95,7 @@ public class regisServlet extends HttpServlet {
 
             if (errorRegis) {
                 request.setAttribute("message", message);
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/register.jsp");
+                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/regis.jsp");
                 dispatcher.forward(request, response);
 
             }

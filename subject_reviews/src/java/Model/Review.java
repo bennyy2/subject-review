@@ -14,6 +14,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,7 +46,49 @@ public class Review {
         this.user = user;
     }
 
-   
+//    public boolean updateReview(String text, int score, String userId, String subjectId) throws SQLException {
+//        Connection conn = null;
+//        PreparedStatement pstm = null;
+//        ResultSet rs = null;
+//        boolean status = true;
+//        String id = UUID.randomUUID().toString();
+//
+//        Date now = new Date();
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String date = df.format(now);
+//
+//        try {
+//            conn = DBConnection.getConnection();
+//            String sql = "Insert into review values (?,?,?,?,?,?)";
+//            pstm = conn.prepareStatement(sql);
+//            pstm.setString(1, id);
+//            pstm.setString(2, text);
+//            pstm.setString(3, date);
+//            pstm.setInt(4, score);
+//            pstm.setString(5, userId);
+//            pstm.setString(6, subjectId);
+//            pstm.executeUpdate();
+//
+//            rs.getString("review_id");
+//            this.content = rs.getString("content");
+//            this.date = rs.getString("date");
+//            this.score = rs.getInt("score");
+//            this.user = rs.getString("user");
+//
+//        } catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//            status = false;
+//        } finally {
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException ignore) {
+//                }
+//            }
+//        }
+//
+//        return status;
+//    }
 
     public String getUser() {
         return user;

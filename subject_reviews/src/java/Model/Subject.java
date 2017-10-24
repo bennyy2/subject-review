@@ -78,6 +78,8 @@ public class Subject {
 
         return status;
     }
+    
+    
 
     public String getSj_description_thai() {
         return sj_description_thai;

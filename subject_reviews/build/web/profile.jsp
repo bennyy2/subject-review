@@ -25,7 +25,7 @@
         ${sessionScope.user.getId()}
         ${sessionScope.user.getRole()}
         
-        
+        <a href="edituser.jsp">edit</a>
 
     </body>
 </html>

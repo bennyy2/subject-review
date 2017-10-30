@@ -2,13 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Benny/Documents/NetBeansProjects/subject_reviews/src/java/Servlet/viewSubjectSevlet.java</file>
-            <file>file:/C:/Users/Benny/Documents/NetBeansProjects/subject_reviews/src/java/Servlet/viewTypeServlet.java</file>
-            <file>file:/C:/Users/Benny/Documents/NetBeansProjects/subject_reviews/src/java/Model/Review.java</file>
-            <file>file:/C:/Users/Benny/Documents/NetBeansProjects/subject_reviews/src/java/Model/UserProfile.java</file>
-            <file>file:/C:/Users/Benny/Documents/NetBeansProjects/subject_reviews/src/java/Servlet/insertReviewServlet.java</file>
-            <file>file:/C:/Users/Benny/Documents/NetBeansProjects/subject_reviews/web/showSubject.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

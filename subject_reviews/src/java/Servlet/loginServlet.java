@@ -78,7 +78,7 @@ public class loginServlet extends HttpServlet {
                    if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
                 }
                 
-                request.setAttribute("allType", allType);
+                session.setAttribute("allType", allType);
                 session.setAttribute("user_id", user.getId());
                 session.setAttribute("user", user);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");

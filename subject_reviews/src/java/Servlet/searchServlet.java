@@ -1,34 +1,24 @@
-package Servlet;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import Connection.DBConnection;
-import Model.Review;
-import Model.Subject;
+package Servlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Benny
  */
-@WebServlet(name = "viewSubjectServlet", urlPatterns = {"/viewSubjectServlet"})
-public class viewSubjectSevlet extends HttpServlet {
+@WebServlet(name = "searchServlet", urlPatterns = {"/searchServlet"})
+public class searchServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,25 +34,15 @@ public class viewSubjectSevlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String id = request.getParameter("id");
-            Subject subject = new Subject();
-            Review review = new Review();
-            ArrayList<Review> showReview = new ArrayList<>();
-
-            showReview = review.showReview(id);
-
-
-            float total = review.getTotalScore(id);
-            subject.getSubject(id, total);
-            subject = new Subject(subject.getSubject_id(), subject.getSj_name_eng(), subject.getSj_name_thai(),
-                    subject.getSj_description_eng(), subject.getSj_description_thai(), subject.getTotal_score());
-
-            HttpSession session = request.getSession();
-            session.setAttribute("subject", subject);
-            session.setAttribute("subject_id", subject.getSubject_id());
-            session.setAttribute("showReview", showReview);
-            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/showSubject.jsp");
-            dispatcher.forward(request, response);
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet searchServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet searchServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

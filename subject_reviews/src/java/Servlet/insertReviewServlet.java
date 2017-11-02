@@ -53,32 +53,22 @@ public class insertReviewServlet extends HttpServlet {
             String text = request.getParameter("text");
             String checkBox = request.getParameter("disable");
             int score = Integer.parseInt(request.getParameter("score"));
-            UserProfile user = new UserProfile();
+            float total = 0;
             Subject subject = new Subject();
+            Review review = new Review();
+            ArrayList<Review> showReview;
 
             HttpSession session = request.getSession();
-            ResultSet rs = null;
-
-            ArrayList<Review> showReview = new ArrayList<>();
-
             String userId = (String) session.getAttribute("user_id");
             String subjectId = (String) session.getAttribute("subject_id");
 
-            out.println(showReview);
-
             Connection conn = null;
             PreparedStatement pstm = null;
-
             String id = UUID.randomUUID().toString();
-
             Date now = new Date();
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String date = df.format(now);
 
-//            String username = null;
-//            if (checkBox == null) {
-//                username = "xx";
-//            }
             try {
                 conn = DBConnection.getConnection();
                 String sql = "Insert into review values (?,?,?,?,?,?)";
@@ -91,26 +81,6 @@ public class insertReviewServlet extends HttpServlet {
                 pstm.setString(6, subjectId);
                 pstm.executeUpdate();
 
-                String sql1 = "SELECT * FROM review WHERE subject_id = ?";
-                pstm = conn.prepareStatement(sql1);
-                pstm.setString(1, subjectId);
-                rs = pstm.executeQuery();
-                
-//                String sql2 = "SELECT total_score, count(subject_id) FROM subject WHERE subject_id = ?";
-//                pstm = conn.prepareStatement(sql2);
-//                pstm.setString(1, subjectId);
-//                rs = pstm.executeQuery();
-                
-                
-
-                while (rs.next()) {
-
-                    Review review = new Review(rs.getString("review_id"), rs.getString("content"),
-                            rs.getString("date"), rs.getInt("score"), rs.getString("user_id"));
-
-                    showReview.add(review);
-                }
-
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
 
@@ -122,17 +92,18 @@ public class insertReviewServlet extends HttpServlet {
                     }
                 }
             }
+            showReview = review.showReview(subjectId);
 
+            total = review.getTotalScore(subjectId);
+            subject.getSubject(subjectId, total);
+            subject = new Subject(subject.getSubject_id(), subject.getSj_name_eng(), subject.getSj_name_thai(),
+                    subject.getSj_description_eng(), subject.getSj_description_thai(), subject.getTotal_score());
+            
+            session.setAttribute("subject", subject);
             session.setAttribute("showReview", showReview);
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/showSubject.jsp");
             dispatcher.forward(request, response);
-//            Review review = new Review();
-//            if (review.insertReview(text, score, username)) {
-//                response.sendRedirect("showSubject.jsp");
-//            } else {
-//                out.print("error");
-//                
-//            }
+
         }
     }
 

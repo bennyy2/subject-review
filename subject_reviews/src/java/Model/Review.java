@@ -46,6 +46,72 @@ public class Review {
         this.user = user;
     }
 
+    public Float getTotalScore(String id) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        float total = 0;
+        try {
+            conn = DBConnection.getConnection();
+            String sql = "SELECT AVG(score) 'total_score' from review where subject_id = ?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, id);
+            rs = pstm.executeQuery();
+            if(rs.next()){
+                total = rs.getFloat("total_score");
+            }
+            
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return total;
+
+    }
+
+    public ArrayList<Review> showReview(String id) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Review> subjectList= new ArrayList<>();
+        try {
+            conn = DBConnection.getConnection();
+            String sql = "SELECT * from review where subject_id = ? order by date DESC";
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, id);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                Review review = new Review(rs.getString("review_id"), rs.getString("content"),
+                        rs.getString("date"), rs.getInt("score"), rs.getString("user_id"));
+
+                subjectList.add(review);
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return subjectList;
+
+    }
+
 //    public boolean updateReview(String text, int score, String userId, String subjectId) throws SQLException {
 //        Connection conn = null;
 //        PreparedStatement pstm = null;
@@ -89,7 +155,6 @@ public class Review {
 //
 //        return status;
 //    }
-
     public String getUser() {
         return user;
     }

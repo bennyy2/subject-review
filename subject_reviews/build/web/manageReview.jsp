@@ -4,15 +4,24 @@
     Author     : Benny
 --%>
 
+
+
 <%@page import="Model.UserProfile"%>
+<%@page import="Model.Report"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>KMITL Subject review system</title>
+    </head>
+    <body>
+    <head>
         <meta charset="utf-8">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -28,11 +37,9 @@
                     <li class="active"><a href="#">Home</a></li>
 
                     <li><a href="profile.jsp">${sessionScope.user.getUsername()}</a></li>
-                    
+                    <li><a href="major.jsp">major</a></li>
                     <li><a href="subject_type.jsp">subject type</a></li>
-                    <li><a href="logoutServlet">logout</a></li>
-                    </ul>
-                
+                </ul>
                 <form class="navbar-form navbar-left" action="searchServlet" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
@@ -43,7 +50,6 @@
                         </div>
                     </div>
                 </form>
-                    
             </div>
         </nav>
 
@@ -56,12 +62,24 @@
 
 
         <h1>Hello</h1>
+        <a href="ReportServlet">refresh</a><br>
+        <%int c = 0;%>
+        
+        <c:forEach var = "show" items = "${sessionScope.showReport}">
+            <div id="<%=c%>">
+                ${c.toString()}
+                topic : ${show.getReport()}<br> 
+                Report by : ${show.getUser_report_id()}<br>
+                Date : ${show.getDate()}<br>  
+                Post by : ${show.getUser_post()}<br>
+                subject : ${show.getContent()}<br>
+                <a onclick="myFunction(<%=c%>)">delete</a>
+                <hr>
+            </div>
+                <%c+=1;%>
+        </c:forEach><br>
 
-            <c:forEach var = "type" items = "${sessionScope.allType}">
 
-                <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
-
-            </c:forEach>
 
 
 
@@ -74,7 +92,16 @@
         </footer>
 
 
-
+        <script>
+            function myFunction(i) {
+                var x = document.getElementById(i);
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>
     </body>
 </html>
 

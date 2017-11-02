@@ -41,7 +41,7 @@ public class Subject {
         this.total_score = total_score;
     }
 
-    public boolean getSubject(String id) {
+    public boolean getSubject(String id, float total) {
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -49,6 +49,7 @@ public class Subject {
         try {
             conn = DBConnection.getConnection();
             String sql = "Select * from subject where subject_id = ?";
+            
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, id);
             rs = pstm.executeQuery();
@@ -59,7 +60,7 @@ public class Subject {
                 this.sj_name_thai = rs.getString("sj_name_thai");
                 this.sj_description_eng = rs.getString("sj_description_eng");
                 this.sj_description_thai = rs.getString("sj_description_thai");
-                this.total_score = rs.getFloat("total_score");
+                this.total_score = total;
             } else {
                 status = false;
             }
@@ -80,6 +81,9 @@ public class Subject {
     }
     
     
+    
+    
+    
 
     public String getSj_description_thai() {
         return sj_description_thai;
@@ -98,6 +102,7 @@ public class Subject {
     }
 
     public float getTotal_score() {
+        
         return total_score;
     }
 

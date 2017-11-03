@@ -11,6 +11,7 @@ import Model.Subject;
 import Model.UserProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,6 +52,8 @@ public class insertReviewServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String text = request.getParameter("text");
+            byte[] bytes = text.getBytes(StandardCharsets.ISO_8859_1);
+            text = new String(bytes, StandardCharsets.UTF_8);
             String checkBox = request.getParameter("disable");
             int score = Integer.parseInt(request.getParameter("score"));
             float total = 0;

@@ -6,14 +6,13 @@
 <%@page import="Model.Subject"%>
 <%@page import="Model.Review"%>
 <%@page import="Model.UserProfile"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <title>Review subject</title>
-        <meta charset="utf-8">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
@@ -22,7 +21,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" style="color: white">KMITL review</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="home.jsp">Home</a></li>

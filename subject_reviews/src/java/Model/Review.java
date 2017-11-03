@@ -6,6 +6,7 @@
 package Model;
 
 import Connection.DBConnection;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +23,8 @@ import javax.servlet.http.HttpSession;
  * @author Benny
  */
 public class Review {
+    
+    
 
     private String review_id;
     private String content;
@@ -83,6 +86,7 @@ public class Review {
         ResultSet rs = null;
         ArrayList<Review> subjectList= new ArrayList<>();
         try {
+                      
             conn = DBConnection.getConnection();
             String sql = "SELECT * from review where subject_id = ? order by date DESC";
             pstm = conn.prepareStatement(sql);

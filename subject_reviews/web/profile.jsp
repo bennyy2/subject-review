@@ -22,7 +22,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" style="color: white">KMITL review</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="home.jsp">Home</a></li>
@@ -44,11 +44,11 @@
                 </form>
             </div>
         </nav>
-        <h1>Hello </h1>
-        ${sessionScope.user.getUsername()}
-        ${sessionScope.user.getEmail()}
-        ${sessionScope.user.getId()}
-        ${sessionScope.user.getRole()}
+        <h1>Hello ${sessionScope.user.getUsername()}</h1>
+        Username : ${sessionScope.user.getUsername()}<br>
+        Email : ${sessionScope.user.getEmail()}<br>
+        ID : ${sessionScope.user.getId()}<br>
+        Role : ${sessionScope.user.getRole()}<br>
         
         <a href="edituser.jsp">edit</a>
 

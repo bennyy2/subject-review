@@ -5,13 +5,18 @@
  */
 package Servlet;
 
+import Model.Subject;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,16 +38,17 @@ public class searchServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet searchServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet searchServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String search = request.getParameter("search");
+            byte[] bytes = search.getBytes(StandardCharsets.ISO_8859_1);
+            search = new String(bytes, StandardCharsets.UTF_8);
+            ArrayList<Subject> subjectList = new ArrayList<>();
+            Subject subject = new Subject();
+            subjectList = subject.searchSubject(search);
+            HttpSession session = request.getSession();
+            session.setAttribute("subjectList", subjectList);
+            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/search.jsp");
+            dispatcher.forward(request, response);
+            
         }
     }
 

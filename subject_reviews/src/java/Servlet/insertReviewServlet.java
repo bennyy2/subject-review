@@ -16,9 +16,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -64,17 +68,20 @@ public class insertReviewServlet extends HttpServlet {
             HttpSession session = request.getSession();
             String userId = (String) session.getAttribute("user_id");
             String subjectId = (String) session.getAttribute("subject_id");
-
+            String display_user = "yes";
+            if (checkBox != null) {
+                display_user = "no";
+            }
             Connection conn = null;
             PreparedStatement pstm = null;
             String id = UUID.randomUUID().toString();
-            Date now = new Date();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String date = df.format(now);
+
+            Timestamp time = new Timestamp(System.currentTimeMillis());
+            String date = time.toString();
 
             try {
                 conn = DBConnection.getConnection();
-                String sql = "Insert into review values (?,?,?,?,?,?)";
+                String sql = "Insert into review values (?,?,?,?,?,?,?)";
                 pstm = conn.prepareStatement(sql);
                 pstm.setString(1, id);
                 pstm.setString(2, text);
@@ -82,6 +89,7 @@ public class insertReviewServlet extends HttpServlet {
                 pstm.setInt(4, score);
                 pstm.setString(5, userId);
                 pstm.setString(6, subjectId);
+                pstm.setString(7, display_user);
                 pstm.executeUpdate();
 
             } catch (Exception ex) {
@@ -101,7 +109,7 @@ public class insertReviewServlet extends HttpServlet {
             subject.getSubject(subjectId, total);
             subject = new Subject(subject.getSubject_id(), subject.getSj_name_eng(), subject.getSj_name_thai(),
                     subject.getSj_description_eng(), subject.getSj_description_thai(), subject.getTotal_score());
-            
+
             session.setAttribute("subject", subject);
             session.setAttribute("showReview", showReview);
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/showSubject.jsp");

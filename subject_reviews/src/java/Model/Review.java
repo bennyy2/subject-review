@@ -31,13 +31,15 @@ public class Review {
     private String date;
     private int score;
     private String user;
+    private String display_user;
 
-    public Review(String review_id, String content, String date, int score, String user) {
+    public Review(String review_id, String content, String date, int score, String user, String display_user) {
         this.review_id = review_id;
         this.content = content;
         this.date = date;
         this.score = score;
         this.user = user;
+        this.display_user = display_user;
     }
 
     public Review() {
@@ -88,7 +90,7 @@ public class Review {
         try {
                       
             conn = DBConnection.getConnection();
-            String sql = "SELECT * from review where subject_id = ? order by date DESC";
+            String sql = "SELECT review_id, content, date, score, username 'user', display_user FROM review JOIN user USING (user_id) where subject_id = ? order by date DESC";
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, id);
             rs = pstm.executeQuery();
@@ -96,7 +98,7 @@ public class Review {
             while (rs.next()) {
 
                 Review review = new Review(rs.getString("review_id"), rs.getString("content"),
-                        rs.getString("date"), rs.getInt("score"), rs.getString("user_id"));
+                        rs.getString("date"), rs.getInt("score"),  rs.getString("user"), rs.getString("display_user"));
 
                 subjectList.add(review);
             }
@@ -116,49 +118,15 @@ public class Review {
 
     }
 
-//    public boolean updateReview(String text, int score, String userId, String subjectId) throws SQLException {
-//        Connection conn = null;
-//        PreparedStatement pstm = null;
-//        ResultSet rs = null;
-//        boolean status = true;
-//        String id = UUID.randomUUID().toString();
-//
-//        Date now = new Date();
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String date = df.format(now);
-//
-//        try {
-//            conn = DBConnection.getConnection();
-//            String sql = "Insert into review values (?,?,?,?,?,?)";
-//            pstm = conn.prepareStatement(sql);
-//            pstm.setString(1, id);
-//            pstm.setString(2, text);
-//            pstm.setString(3, date);
-//            pstm.setInt(4, score);
-//            pstm.setString(5, userId);
-//            pstm.setString(6, subjectId);
-//            pstm.executeUpdate();
-//
-//            rs.getString("review_id");
-//            this.content = rs.getString("content");
-//            this.date = rs.getString("date");
-//            this.score = rs.getInt("score");
-//            this.user = rs.getString("user");
-//
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//            status = false;
-//        } finally {
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException ignore) {
-//                }
-//            }
-//        }
-//
-//        return status;
-//    }
+    public String getDisplay_user() {
+        return display_user;
+    }
+
+    public void setDisplay_user(String display_user) {
+        this.display_user = display_user;
+    }
+
+    
     public String getUser() {
         return user;
     }

@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -27,9 +29,10 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(String subject_id, String sj_name_eng) {
+    public Subject(String subject_id, String sj_name_eng, String sj_name_thai) {
         this.subject_id = subject_id;
         this.sj_name_eng = sj_name_eng;
+        this.sj_name_thai = sj_name_thai;
     }
 
     public Subject(String subject_id, String sj_name_eng, String sj_name_thai, String sj_description_eng, String sj_description_thai, float total_score) {
@@ -41,6 +44,50 @@ public class Subject {
         this.total_score = total_score;
     }
 
+    public ArrayList<Subject> searchSubject(String search) {
+
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Subject> subjectList = new ArrayList<>();
+        try {
+
+            conn = DBConnection.getConnection();
+            String sql;
+
+            if (search.matches("[a-zA-Z]+\\.?")) {
+                search = search.toUpperCase();
+                sql = "SELECT * FROM subject where sj_name_eng like '%" + search + "%'";
+            } else if (search.matches("[0-9]+\\.?")) {
+                sql = "SELECT * FROM subject where subject_id like '" + search + "%'";
+            } else {
+                sql = "SELECT * FROM subject where sj_name_thai like '%" + search + "%'";
+            }
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                Subject subject = new Subject(rs.getString("subject_id"), rs.getString("sj_name_eng"), rs.getString("sj_name_thai"));
+
+                subjectList.add(subject);
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return subjectList;
+
+    }
+
     public boolean getSubject(String id, float total) {
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -49,7 +96,7 @@ public class Subject {
         try {
             conn = DBConnection.getConnection();
             String sql = "Select * from subject where subject_id = ?";
-            
+
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, id);
             rs = pstm.executeQuery();
@@ -79,11 +126,6 @@ public class Subject {
 
         return status;
     }
-    
-    
-    
-    
-    
 
     public String getSj_description_thai() {
         return sj_description_thai;
@@ -102,7 +144,7 @@ public class Subject {
     }
 
     public float getTotal_score() {
-        
+
         return total_score;
     }
 

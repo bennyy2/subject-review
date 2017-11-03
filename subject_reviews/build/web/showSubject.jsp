@@ -58,7 +58,16 @@
             ${show.getContent()}<br> 
             Score : ${show.getScore()}<br>
             Date : ${show.getDate()}<br>  
-            User : ${show.getUser()}<br><hr>
+
+            <c:choose>
+                <c:when test="${show.getDisplay_user()=='no'}">
+                    User : Unknow User<br><hr>
+                </c:when>    
+                <c:otherwise>
+                    User : ${show.getUser()}<br><hr>
+                </c:otherwise>
+            </c:choose>
+            
 
         </c:forEach><br>
 

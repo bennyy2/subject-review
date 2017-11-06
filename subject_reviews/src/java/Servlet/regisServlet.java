@@ -97,46 +97,6 @@ public class regisServlet extends HttpServlet {
                 }
             }
 
-//            String[] address = new String[2];
-//            String id = UUID.randomUUID().toString();
-//
-//            Connection con = (Connection) getServletContext().getAttribute("connection");
-//
-//            if (username.length() == 0 || password.length() == 0 || email.length() == 0) {
-//                errorRegis = true;
-//                message = "Please fill in your registration details.";
-//            } else {
-//                if (validation.findUser(con, username)) {
-//                    errorRegis = true;
-//                    message = "This username is already in use!.";
-//                }else if (validation.findEmail(con, email)) {
-//                    errorRegis = true;
-//                    message = "This email is already in use!.";
-//                } else {
-//                    if (validation.email_validation(email)) {
-//                        address = email.split("@");
-//                        for (char i : address[0].toCharArray()) {
-//                            if (!Character.toString(i).matches("[0-9]")) {
-//                                role = "teacher";
-//                                break;
-//                            } else {
-//                                role = "student";
-//                            }
-//                        }
-//                        UserProfile user = new UserProfile(username, password);
-//                        validation.insertUser(con, user, role);
-//                        message = "Welcome to KMITL Subject reviews.";
-//                        request.setAttribute("welcome", message);
-//                        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
-//                        dispatcher.forward(request, response);
-//                    } else {
-//                        errorRegis = true;
-//                        message = "This email is not KMITL account.";
-//                    }
-//                }
-//            }
-//
-//
             if (errorRegis) {
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/regis.jsp");

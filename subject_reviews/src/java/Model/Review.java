@@ -23,8 +23,6 @@ import javax.servlet.http.HttpSession;
  * @author Benny
  */
 public class Review {
-    
-    
 
     private String review_id;
     private String content;
@@ -32,6 +30,19 @@ public class Review {
     private int score;
     private String user;
     private String display_user;
+    private String subject_id;
+    private String sj_name;
+
+    public Review(String review_id, String content, String date, int score, String user, String display_user, String subject_id, String sj_name) {
+        this.review_id = review_id;
+        this.content = content;
+        this.date = date;
+        this.score = score;
+        this.user = user;
+        this.display_user = display_user;
+        this.subject_id = subject_id;
+        this.sj_name = sj_name;
+    }
 
     public Review(String review_id, String content, String date, int score, String user, String display_user) {
         this.review_id = review_id;
@@ -62,10 +73,9 @@ public class Review {
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, id);
             rs = pstm.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 total = rs.getFloat("total_score");
             }
-            
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -86,9 +96,9 @@ public class Review {
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
-        ArrayList<Review> subjectList= new ArrayList<>();
+        ArrayList<Review> reviewList = new ArrayList<>();
         try {
-                      
+
             conn = DBConnection.getConnection();
             String sql = "SELECT review_id, content, date, score, username 'user', display_user FROM review JOIN user USING (user_id) where subject_id = ? order by date DESC";
             pstm = conn.prepareStatement(sql);
@@ -98,14 +108,14 @@ public class Review {
             while (rs.next()) {
 
                 Review review = new Review(rs.getString("review_id"), rs.getString("content"),
-                        rs.getString("date"), rs.getInt("score"),  rs.getString("user"), rs.getString("display_user"));
+                        rs.getString("date"), rs.getInt("score"), rs.getString("user"), rs.getString("display_user"));
 
-                subjectList.add(review);
+                reviewList.add(review);
             }
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            
+
         } finally {
             if (conn != null) {
                 try {
@@ -114,8 +124,60 @@ public class Review {
                 }
             }
         }
-        return subjectList;
+        return reviewList;
 
+    }
+
+    public ArrayList<Review> showAllReview() {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Review> reviewList = new ArrayList<>();
+        try {
+
+            conn = DBConnection.getConnection();
+            String sql = "SELECT review_id, content, date, score, username 'user', display_user, subject_id, sj_name_eng 'sj_name' FROM review JOIN user USING (user_id) JOIN subject USING (subject_id) order by date DESC";
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                Review review = new Review(rs.getString("review_id"), rs.getString("content"),
+                        rs.getString("date"), rs.getInt("score"), rs.getString("user"), rs.getString("display_user"),
+                rs.getString("subject_id"), rs.getString("sj_name"));
+
+                reviewList.add(review);
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return reviewList;
+
+    }
+
+    public String getSubject_id() {
+        return subject_id;
+    }
+
+    public void setSubject_id(String subject_id) {
+        this.subject_id = subject_id;
+    }
+
+    public String getSj_name() {
+        return sj_name;
+    }
+
+    public void setSj_name(String sj_name) {
+        this.sj_name = sj_name;
     }
 
     public String getDisplay_user() {
@@ -126,7 +188,6 @@ public class Review {
         this.display_user = display_user;
     }
 
-    
     public String getUser() {
         return user;
     }

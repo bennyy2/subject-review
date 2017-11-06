@@ -5,11 +5,26 @@ body {
 #header_name{
     text-align: center;
     font-size: 60px;
-    color: pink;
     margin: 60px;
 }
 #login{
     padding-top: 50px;
+}
+
+#block{
+    text-align: center;
+    /*border:3px dashed plum;*/
+    background-color: #E6E6FA;
+    width: 90%;
+    margin-left: 20px;
+}
+
+.navbar-user {
+    float: right;
+    height: 50px;
+    padding: 15px 15px; 
+    font-size: 18px;
+    line-height: 20px;
 }
 .panel-login {
     border-color: #ccc;
@@ -80,10 +95,8 @@ body {
 
 .header {
     width: 100%;
-    height: 200px;
     padding-top: 0px;
     margin-top: 0px;
-    background-color: #FFCCFF;
 }
 
 /* Add a gray background color and some padding to the footer */
@@ -91,3 +104,4 @@ footer {
     background-color: #f2f2f2;
     padding: 25px;
 }
+

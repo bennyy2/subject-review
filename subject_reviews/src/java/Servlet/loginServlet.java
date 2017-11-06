@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import Connection.DBConnection;
+import Model.Review;
 import Model.Type;
 import Model.UserProfile;
 
@@ -50,40 +51,24 @@ public class loginServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String message = null;
-
-            Connection conn = null;
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
             UserProfile user = new UserProfile(username, password);
+            Review review = new Review();
+            Type type = new Type();
             ArrayList<Type> allType = new ArrayList<>();
+            ArrayList<Review> reviewList = new ArrayList<>();
             
             if (user.login()) {
                 HttpSession session = request.getSession();
+                allType = type.showAllType();
+                reviewList = review.showAllReview();
                 
-                // get type
-                try {
-                    conn = DBConnection.getConnection();
-                    String sql = "Select * from type";
-                    pstm = conn.prepareStatement(sql);
-                    rs = pstm.executeQuery();
-
-                    while (rs.next()) {
-                        Type type = new Type(rs.getString("type_id"), rs.getString("type_name"));
-                        allType.add(type);
-                    }
-
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                } finally {
-                   if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
-                }
-                
+                session.setAttribute("reviewList", reviewList);
                 session.setAttribute("allType", allType);
-                session.setAttribute("user_id", user.getId());
                 session.setAttribute("user", user);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
                 dispatcher.forward(request, response);
-            } else {
+            } 
+            else {
                 message = "username or password is incorrect.";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");

@@ -19,20 +19,19 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" style="color: white">KMITL review</a>
+                    <a class="navbar-brand" href="#" >KMITL review</a>
                 </div>
+
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
 
-                    <li><a href="profile.jsp">${sessionScope.user.getUsername()}</a></li>
-                    
                     <li><a href="subject_type.jsp">subject type</a></li>
                     <li><a href="logoutServlet">logout</a></li>
-                    </ul>
-                
+                </ul>
+
                 <form class="navbar-form navbar-left" action="searchServlet" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
@@ -43,25 +42,56 @@
                         </div>
                     </div>
                 </form>
-                    
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="profile.jsp">${sessionScope.user.getUsername()}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
         </nav>
 
         <div class="header">
             <div class="container text-center">
                 <h1>KMITL Subject review system</h1>      
-                <p>Tell me what is in your mind.</p>
+                <p>Tell me what is in your mind.</p><br><hr>
             </div>
         </div>
 
 
-        <h1>Hello</h1>
 
-            <c:forEach var = "type" items = "${sessionScope.allType}">
 
-                <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
+        <!--        <h1 style="text-align: center">Recent Review</h1><br>-->
 
+        <div>
+            <c:forEach var = "review" items = "${sessionScope.reviewList}">
+                <div class="col-md-4">
+
+                    <table  id="block" >
+                        <tr><td>
+                                <br>
+                                <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}</a><br>
+                                <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSj_name()}</a><br>
+                                ${review.getContent()}<br>
+                                <c:choose>
+                                    <c:when test="${review.getDisplay_user()=='no'}">
+                                        User : Unknow User<br>
+                                    </c:when>    
+                                    <c:otherwise>
+                                        User : ${review.getUser()}<br>
+                                    </c:otherwise>
+                                </c:choose><br>
+                            </td></tr>
+                    </table>
+                    <br>
+
+                </div>
             </c:forEach>
+        </div>
+        
+        
 
 
 
@@ -69,9 +99,12 @@
 
 
 
-        <footer class="container-fluid text-center">
-            <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
-        </footer>
+
+
+
+        <!--        <footer class="container-fluid text-center">
+                    <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
+                </footer>-->
 
 
 

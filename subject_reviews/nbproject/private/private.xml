@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/web/showSubject.jsp</file>
+            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/src/java/Model/Type.java</file>
+            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/src/java/Servlet/viewSubjectSevlet.java</file>
             <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/web/home.jsp</file>
+            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/web/search.jsp</file>
+            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/src/java/Servlet/viewTypeServlet.java</file>
+            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/src/java/Servlet/searchServlet.java</file>
+            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/src/java/Servlet/logoutServlet.java</file>
+            <file>file:/C:/Users/Benny/Desktop/subject-review/subject_reviews/src/java/Model/Subject.java</file>
         </group>
     </open-files>
 </project-private>

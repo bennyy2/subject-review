@@ -17,20 +17,19 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp" style="color: white">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
                 </div>
+
                 <ul class="nav navbar-nav">
                     <li><a href="home.jsp">Home</a></li>
 
-                    <li><a href="profile.jsp">${sessionScope.user.getUsername()}</a></li>
-                    
-                    <li  class="active"><a href="subject_type.jsp">subject type</a></li>
+                    <li class="active"><a href="subject_type.jsp">subject type</a></li>
                     <li><a href="logoutServlet">logout</a></li>
-                    </ul>
-                
+                </ul>
+
                 <form class="navbar-form navbar-left" action="searchServlet" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
@@ -41,15 +40,35 @@
                         </div>
                     </div>
                 </form>
-                    
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="profile.jsp">${sessionScope.user.getUsername()}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
         </nav>
-        <h1>วิชาสอนบริการ</h1>
-        <c:forEach var = "type" items = "${sessionScope.allType}">
+        <h1 style="text-align: center">วิชาสอนบริการ</h1><br><hr>
 
-                <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
 
+        <div>
+            <c:forEach var = "type" items = "${sessionScope.allType}">
+                <div class="col-xs-6">
+
+                    <table  id="block" >
+                        <tr><td>
+                                <br>
+                                <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
+                                <br>
+                            </td></tr>
+                    </table>
+                    <br>
+
+                </div>
             </c:forEach>
+        </div>
     </body>
 </html>
 <script src="js/bootstrap.js"/>

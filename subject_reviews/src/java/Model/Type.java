@@ -41,6 +41,8 @@ public class Type {
                 Type type = new Type(rs.getString("type_id"), rs.getString("type_name"));
                 allType.add(type);
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

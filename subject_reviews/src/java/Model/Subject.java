@@ -72,6 +72,8 @@ public class Subject {
 
                 subjectList.add(subject);
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -111,6 +113,8 @@ public class Subject {
             } else {
                 status = false;
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

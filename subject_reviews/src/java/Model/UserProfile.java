@@ -70,6 +70,8 @@ public class UserProfile {
             } else {
                 status = false;
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -105,6 +107,8 @@ public class UserProfile {
             } else if (!m.matches()) {
                 status = true;
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -120,7 +124,7 @@ public class UserProfile {
 
         return status;
     }
-    
+
     public boolean insertUser() {
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -165,8 +169,6 @@ public class UserProfile {
         }
         return status;
     }
-    
-    
 
     /**
      * @return the id

@@ -63,7 +63,7 @@ public class insertReviewServlet extends HttpServlet {
             float total = 0;
             Subject subject = new Subject();
             Review review = new Review();
-            ArrayList<Review> showReview;
+            ArrayList<Review> showReview = new ArrayList<>();
 
             HttpSession session = request.getSession();
             String userId = (String) session.getAttribute("user_id");
@@ -72,48 +72,23 @@ public class insertReviewServlet extends HttpServlet {
             if (checkBox != null) {
                 display_user = "no";
             }
-            Connection conn = null;
-            PreparedStatement pstm = null;
-            String id = UUID.randomUUID().toString();
 
-            Timestamp time = new Timestamp(System.currentTimeMillis());
-            String date = time.toString();
+            if (review.insertReview(text, userId, subjectId, score, display_user)) {
+                showReview = review.showReview(subjectId);
 
-            try {
-                conn = DBConnection.getConnection();
-                String sql = "Insert into review values (?,?,?,?,?,?,?)";
-                pstm = conn.prepareStatement(sql);
-                pstm.setString(1, id);
-                pstm.setString(2, text);
-                pstm.setString(3, date);
-                pstm.setInt(4, score);
-                pstm.setString(5, userId);
-                pstm.setString(6, subjectId);
-                pstm.setString(7, display_user);
-                pstm.executeUpdate();
+                total = review.getTotalScore(subjectId);
+                subject.getSubject(subjectId, total);
+                subject = new Subject(subject.getSubject_id(), subject.getSj_name_eng(), subject.getSj_name_thai(),
+                        subject.getSj_description_eng(), subject.getSj_description_thai(), subject.getTotal_score());
 
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-
-            } finally {
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException ignore) {
-                    }
-                }
+                session.setAttribute("subject", subject);
+                session.setAttribute("showReview", showReview);
+                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/showSubject.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                
+                out.println("fail");
             }
-            showReview = review.showReview(subjectId);
-
-            total = review.getTotalScore(subjectId);
-            subject.getSubject(subjectId, total);
-            subject = new Subject(subject.getSubject_id(), subject.getSj_name_eng(), subject.getSj_name_thai(),
-                    subject.getSj_description_eng(), subject.getSj_description_thai(), subject.getTotal_score());
-
-            session.setAttribute("subject", subject);
-            session.setAttribute("showReview", showReview);
-            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/showSubject.jsp");
-            dispatcher.forward(request, response);
 
         }
     }

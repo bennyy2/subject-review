@@ -4,7 +4,7 @@
     Author     : Benny
 --%>
 
-<%@page import="Model.UserProfile"%>
+<%@page import="Model.Review"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -64,6 +64,14 @@
 
 
         <!--        <h1 style="text-align: center">Recent Review</h1><br>-->
+        
+        <%
+        Review review = new Review();
+        ArrayList reviewList = new ArrayList<>();
+        reviewList = review.showAllReview();
+        session.setAttribute("reviewList", reviewList);
+        %>
+        
 
         <div>
             <c:forEach var = "review" items = "${sessionScope.reviewList}">
@@ -102,7 +110,7 @@
 
 
 
-        <!--        <footer class="container-fluid text-center">
+<!--                <footer id="footer">
                     <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
                 </footer>-->
 

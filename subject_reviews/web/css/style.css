@@ -19,6 +19,10 @@ body {
     margin-left: 20px;
 }
 
+
+
+
+
 .navbar-user {
     float: right;
     height: 50px;
@@ -99,9 +103,10 @@ body {
     margin-top: 0px;
 }
 
-/* Add a gray background color and some padding to the footer */
+
+/* Add a gray background color and some padding to the footer 
 footer {
     background-color: #f2f2f2;
     padding: 25px;
-}
+}*/
 

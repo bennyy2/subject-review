@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,6 +63,45 @@ public class Review {
         this.user = user;
     }
 
+    public boolean insertReview(String text, String userId, String subjectId, int score, String display_user) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        boolean status = true;
+        String id = UUID.randomUUID().toString();
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        String date = time.toString();
+//        Date curDate = new Date();
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//        String date = format.format(curDate);
+        try {
+            conn = DBConnection.getConnection();
+            String sql = "INSERT INTO review VALUES(?,?,?,?,?,?,?)";
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, id);
+            pstm.setString(2, text);
+            pstm.setString(3, date);
+            pstm.setInt(4, score);
+            pstm.setString(5, userId);
+            pstm.setString(6, subjectId);
+            pstm.setString(7, display_user);
+            pstm.executeUpdate();
+            pstm.close();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            status = false;
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+
+        return status;
+    }
+
     public Float getTotalScore(String id) {
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -76,6 +116,8 @@ public class Review {
             if (rs.next()) {
                 total = rs.getFloat("total_score");
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -112,6 +154,8 @@ public class Review {
 
                 reviewList.add(review);
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -144,10 +188,12 @@ public class Review {
 
                 Review review = new Review(rs.getString("review_id"), rs.getString("content"),
                         rs.getString("date"), rs.getInt("score"), rs.getString("user"), rs.getString("display_user"),
-                rs.getString("subject_id"), rs.getString("sj_name"));
+                        rs.getString("subject_id"), rs.getString("sj_name"));
 
                 reviewList.add(review);
             }
+            rs.close();
+            pstm.close();
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

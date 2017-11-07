@@ -52,17 +52,13 @@ public class loginServlet extends HttpServlet {
             String password = request.getParameter("password");
             String message = null;
             UserProfile user = new UserProfile(username, password);
-            Review review = new Review();
             Type type = new Type();
             ArrayList<Type> allType = new ArrayList<>();
-            ArrayList<Review> reviewList = new ArrayList<>();
             
             if (user.login()) {
                 HttpSession session = request.getSession();
                 allType = type.showAllType();
-                reviewList = review.showAllReview();
                 
-                session.setAttribute("reviewList", reviewList);
                 session.setAttribute("allType", allType);
                 session.setAttribute("user", user);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");

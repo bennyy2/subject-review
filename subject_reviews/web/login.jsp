@@ -18,10 +18,10 @@
     <body>
         <h3 id="header_name">KMITL Subject reviews</h3>
         <div class="container" id="login">
-            
+
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    
+
                     <div class="panel panel-login">
                         <div class="panel-heading">
                             <h3>Log in</h3>
@@ -46,14 +46,16 @@
                                 <button type="submit" value="login" class="btn btn-default">Submit</button>
                             </form>
                         </div>
-                                <div class="regis">
-                                     <a href="regis.jsp">create new account</a>
-                                </div>
+                        <div class="regis">
+                            <a href="regis.jsp">create new account</a>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
 
-                </body>
-                </html>
-                <script src="js/bootstrap.js"/>
-                <script src="js/bootstrap.min.js"/>
+    </body>
+</html>
+<script src="js/bootstrap.js"/>
+<script src="js/bootstrap.min.js"/>

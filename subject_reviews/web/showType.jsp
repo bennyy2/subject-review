@@ -16,20 +16,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp" style="color: white">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
                 </div>
+
                 <ul class="nav navbar-nav">
                     <li><a href="home.jsp">Home</a></li>
 
-                    <li><a href="profile.jsp">${sessionScope.user.getUsername()}</a></li>
-                    
-                    <li  class="active"><a href="subject_type.jsp">subject type</a></li>
+                    <li class="active"><a href="subject_type.jsp">subject type</a></li>
                     <li><a href="logoutServlet">logout</a></li>
-                    </ul>
-                
+                </ul>
+
                 <form class="navbar-form navbar-left" action="searchServlet" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
@@ -40,15 +39,38 @@
                         </div>
                     </div>
                 </form>
-                    
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="profile.jsp">${sessionScope.user.getUsername()}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
         </nav>
-        <h1>${requestScope.type_name}</h1>
+        <h1 style="text-align: center">${requestScope.type_name}</h1><br>
 
-        <c:forEach var = "sub" items = "${sessionScope.allSub}">
-            <a href="viewSubjectServlet?id=${sub.getSubject_id()}">${sub.getSubject_id()}   ${sub.getSj_name_eng()}</a><br>
 
-        </c:forEach>
+
+
+        <div>
+            <c:forEach var = "sub" items = "${sessionScope.allSub}">
+                <div class="col-md-10" >
+
+                    <table  id="block" style="margin-left: 15%">
+                        <tr><td>
+                                <br>
+                                <a href="viewSubjectServlet?id=${sub.getSubject_id()}">${sub.getSubject_id()}   ${sub.getSj_name_eng()}</a><br>
+
+                                <br>
+                            </td></tr>
+                    </table>
+                    <br>
+
+                </div>
+            </c:forEach>
+        </div>
 
     </body>
 </html>

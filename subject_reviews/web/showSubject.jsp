@@ -18,17 +18,16 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp" style="color: white">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
                 </div>
+
                 <ul class="nav navbar-nav">
                     <li><a href="home.jsp">Home</a></li>
 
-                    <li><a href="profile.jsp">${sessionScope.user.getUsername()}</a></li>
-
-                    <li><a href="subject_type.jsp">subject type</a></li>
+                    <li class="active"><a href="subject_type.jsp">subject type</a></li>
                     <li><a href="logoutServlet">logout</a></li>
                 </ul>
 
@@ -43,52 +42,69 @@
                     </div>
                 </form>
 
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="profile.jsp">${sessionScope.user.getUsername()}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
         </nav>
+        <div class="container">
+            <div class="jumbotron" style="text-align: center">
+                <h1>${sessionScope.subject.getSubject_id()}</h1>
 
-        <h1>${sessionScope.subject.getSubject_id()}</h1>
+                <h2>${sessionScope.subject.getSj_name_eng()}<br><br>
+                    ${sessionScope.subject.getSj_name_thai()}<br><br></h2></div>
 
-        <h2>${sessionScope.subject.getSj_name_eng()}<br><br>
-            ${sessionScope.subject.getSj_name_thai()}<br><br></h2>
-        <h3>Description : </h3>${sessionScope.subject.getSj_description_eng()}<br><br>
-        <h3>คำอธิบายรายวิชา : </h3>${sessionScope.subject.getSj_description_thai()}<br><br>
-        <h3>score : </h3>${sessionScope.subject.getTotal_score()}<br><br><hr>
-
-        <c:forEach var = "show" items = "${sessionScope.showReview}">
-            ${show.getContent()}<br> 
-            Score : ${show.getScore()}<br>
-            Date : ${show.getDate()}<br>  
-
-            <c:choose>
-                <c:when test="${show.getDisplay_user()=='no'}">
-                    User : Unknow User<br><hr>
-                </c:when>    
-                <c:otherwise>
-                    User : ${show.getUser()}<br><hr>
-                </c:otherwise>
-            </c:choose>
-            
-
-        </c:forEach><br>
+            <h3 >Description : </h3>${sessionScope.subject.getSj_description_eng()}<br><br>
+            <h3>คำอธิบายรายวิชา : </h3>${sessionScope.subject.getSj_description_thai()}<br><br>
+            <h3>score : </h3>${sessionScope.subject.getTotal_score()}
 
 
+            <br><br><hr>
+
+            <c:forEach var = "show" items = "${sessionScope.showReview}">
+                ${show.getContent()}<br> 
+                Score : ${show.getScore()}<br><br>
+                
+
+                <c:choose>
+                    <c:when test="${show.getDisplay_user()=='no'}">
+                        <b>User : </b>Unknow User
+                    </c:when>    
+                    <c:otherwise>
+                        <b>User : </b>${show.getUser()}
+                    </c:otherwise>
+                </c:choose>
+                                      <b>Time : </b> ${show.getDate()}<br><hr>
 
 
-        <c:if test="${sessionScope.user.getRole() == 'student'}">
-            <form action="insertReviewServlet" method="POST">
-                <textarea name="text" rows="4" cols="50">
-                </textarea><br>
-                <input type="checkbox" name="disable" value="ON" />Disable  username <br>
-                Score : <br>
-                <input type="radio" name="score" value="1" /> 1
-                <input type="radio" name="score" value="2" /> 2
-                <input type="radio" name="score" value="3" /> 3
-                <input type="radio" name="score" value="4" /> 4
-                <input type="radio" name="score" value="5" /> 5
-                <br><input type="submit" value="submit" />
-            </form>
+            </c:forEach><br>
 
-        </c:if>
+
+
+
+            <c:if test="${sessionScope.user.getRole() == 'student'}">
+                <form action="insertReviewServlet" method="POST">
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="5" name="text">
+                        </textarea></div><br>
+                    <input type="checkbox" name="disable" value="ON" />Disable  username <br><br>
+                    Score : 
+                    <input type="radio" name="score" value="1" /> 1
+                    <input type="radio" name="score" value="2" /> 2
+                    <input type="radio" name="score" value="3" /> 3
+                    <input type="radio" name="score" value="4" /> 4
+                    <input type="radio" name="score" value="5" /> 5
+                    <br><br>
+                    <button type="submit" value="submit" class="btn btn-primary btn-md">submit</button>
+                </form>
+
+            </c:if>
+        </div>
 
 
 

@@ -39,23 +39,25 @@
                                     <label for="pwd">Password:</label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                 </div>
-                                
+
                                 <div class="message">
                                     <label>${message}</label>
                                 </div>
                                 <button type="submit" value="regis" class="btn btn-default">Register</button>
                             </form>
                         </div>
-                                <div class="regis">
-                                     <a href="login.jsp"><< Back to log in</a>
-                                </div>
-                      
+                        <div class="regis">
+                            <a href="login.jsp"><< Back to log in</a>
+                        </div>
+
                     </div>
                 </div>
-                
+            </div>
+        </div>
 
-                </body>
-                </html>
-                <script src="js/bootstrap.js"/>
-                <script src="js/bootstrap.min.js"/>
+
+    </body>
+</html>
+<script src="js/bootstrap.js"/>
+<script src="js/bootstrap.min.js"/>
 

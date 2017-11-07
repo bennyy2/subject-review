@@ -18,20 +18,19 @@
         <title>Search Page</title>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp" style="color: white">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.jsp">Home</a></li>
 
-                    <li><a href="profile.jsp">${sessionScope.user.getUsername()}</a></li>
-                    
-                    <li><a href="subject_type.jsp">subject type</a></li>
+                <ul class="nav navbar-nav">
+                    <li><a href="home.jsp">Home</a></li>
+
+                    <li class="active"><a href="subject_type.jsp">subject type</a></li>
                     <li><a href="logoutServlet">logout</a></li>
-                    </ul>
-                
+                </ul>
+
                 <form class="navbar-form navbar-left" action="searchServlet" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
@@ -42,20 +41,40 @@
                         </div>
                     </div>
                 </form>
-                    
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="profile.jsp">${sessionScope.user.getUsername()}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
         </nav>
-        <h1>Hello World!</h1>
-        <c:forEach var = "subject" items = "${sessionScope.subjectList}">
+                        <h3 style="margin-left: 15%">The subjects you search for..</h3><br>
+        
+        <div>
+            <c:forEach var = "subject" items = "${sessionScope.subjectList}">
+                <div class="col-md-10" >
 
-                <a href="viewSubjectServlet?id=${subject.getSubject_id()}" >
-                    ${subject.getSubject_id()}<br>
-                    ${subject.getSj_name_eng()}<br>
-                    ${subject.getSj_name_thai()}<br><hr>
-                    
-                </a><br>
+                    <table  id="block" style="margin-left: 15%">
+                        <tr><td>
+                                <br>
+                                <a href="viewSubjectServlet?id=${subject.getSubject_id()}" >
+                                    ${subject.getSubject_id()}<br>
+                                    ${subject.getSj_name_eng()}
+                                    ${subject.getSj_name_thai()}<br>
 
+                                </a>
+                                <br>
+                            </td></tr>
+                    </table>
+                    <br>
+
+                </div>
             </c:forEach>
+        </div>
+
     </body>
 </html>
 <script src="js/bootstrap.js"/>

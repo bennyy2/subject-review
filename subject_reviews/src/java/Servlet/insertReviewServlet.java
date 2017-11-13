@@ -11,6 +11,7 @@ import Model.Subject;
 import Model.UserProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,6 +64,7 @@ public class insertReviewServlet extends HttpServlet {
             float total = 0;
             Subject subject = new Subject();
             Review review = new Review();
+            UserProfile user = new UserProfile();
             ArrayList<Review> showReview = new ArrayList<>();
 
             HttpSession session = request.getSession();
@@ -72,6 +74,7 @@ public class insertReviewServlet extends HttpServlet {
             if (checkBox != null) {
                 display_user = "no";
             }
+
 
             if (review.insertReview(text, userId, subjectId, score, display_user)) {
                 showReview = review.showReview(subjectId);

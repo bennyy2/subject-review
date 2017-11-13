@@ -6,6 +6,7 @@
 package Model;
 
 import Connection.DBConnection;
+import static java.lang.System.out;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,6 +75,7 @@ public class Review {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 //        String date = format.format(curDate);
         try {
+            
             conn = DBConnection.getConnection();
             String sql = "INSERT INTO review VALUES(?,?,?,?,?,?,?)";
             pstm = conn.prepareStatement(sql);

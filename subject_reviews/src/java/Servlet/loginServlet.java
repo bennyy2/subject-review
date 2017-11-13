@@ -61,6 +61,7 @@ public class loginServlet extends HttpServlet {
                 
                 session.setAttribute("allType", allType);
                 session.setAttribute("user", user);
+                session.setAttribute("user_id", user.getId());
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
                 dispatcher.forward(request, response);
             } 

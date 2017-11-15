@@ -5,14 +5,17 @@
             <url>web/css/style.css</url>
             <bookmark id="1">
                 <name/>
-                <line>22</line>
+                <line>25</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/56070031/Documents/NetBeansProjects/subject-review/subject_reviews/web/subject_type.jsp</file>
+            <file>file:/C:/Users/56070031/Documents/NetBeansProjects/subject-review/subject_reviews/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/56070031/Documents/NetBeansProjects/subject-review/subject_reviews/web/home.jsp</file>
+            <file>file:/C:/Users/56070031/Documents/NetBeansProjects/subject-review/subject_reviews/web/showType.jsp</file>
         </group>
     </open-files>
 </project-private>

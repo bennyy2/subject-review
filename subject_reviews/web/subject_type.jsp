@@ -8,10 +8,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Subject type</title>
+        <meta charset="utf-8">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
@@ -34,7 +36,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit" style="padding-top: 12px">
+                            <button class="btn btn-default" type="submit" >
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </div>
@@ -58,11 +60,13 @@
                 <div class="col-xs-6">
 
                     <table  id="block" >
-                        <tr><td>
+                        <tr>
+                            <td>
                                 <br>
                                 <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
                                 <br>
-                            </td></tr>
+                            </td>
+                        </tr>
                     </table>
                     <br>
 

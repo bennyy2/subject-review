@@ -16,9 +16,12 @@ body {
     /*border:3px dashed plum;*/
     background-color: #E6E6FA;
     width: 90%;
-    margin-left: 20px;
+    margin:0px auto;
 }
-
+#block :hover{
+    background-color: #d5d5ff;
+    width: 92%;
+}
 
 
 

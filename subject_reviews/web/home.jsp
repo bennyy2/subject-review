@@ -22,11 +22,11 @@
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#" >KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
                 </div>
 
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="home.jsp">Home</a></li>
 
                     <li><a href="subject_type.jsp">subject type</a></li>
                     <li><a href="logoutServlet">logout</a></li>
@@ -78,7 +78,8 @@
                 <div class="col-md-4">
 
                     <table  id="block" >
-                        <tr><td>
+                        <tr>
+                            <td>
                                 <br>
                                 <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}</a><br>
                                 <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSj_name()}</a><br>
@@ -91,7 +92,8 @@
                                         User : ${review.getUser()}<br>
                                     </c:otherwise>
                                 </c:choose><br>
-                            </td></tr>
+                            </td>
+                        </tr>
                     </table>
                     <br>
 

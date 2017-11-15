@@ -64,7 +64,7 @@
 
 
 
-        <h1 >Top review score</h1><br>
+        <h1 style="margin-left: 50px">Top review score</h1><br>
 
         <%
             Review review = new Review();
@@ -78,7 +78,7 @@
             session.setAttribute("topList", topList);
         %>
 
-        <div>
+        <div class="body1">
             <c:forEach var = "subject" items = "${sessionScope.topList}">
 
                 <div class="col-md-4">
@@ -87,12 +87,11 @@
                         <tr><td>
                                 <br>
                                 <a href="viewSubjectServlet?id=${subject.getSubject_id()}">${subject.getSubject_id()}<br>
-                                    ${subject.getSj_name_eng()}<br>
+                                    ${subject.getSj_name_eng()}<br></a>
                                     ${subject.getSj_name_thai()}
-                                </a><br>
+                                <br>
                                 score : ${subject.getTotal_score()}
-
-
+                                <br><br>
                             </td></tr>
                     </table>
                     <br>
@@ -102,12 +101,13 @@
 
 
 
-        <br><hr><br>
-        <h1 >Recently review</h1><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <hr><br>
+        <h1 style="margin-left: 50px">Recently review</h1><br>
 
 
 
-        <div>
+        <div class="body2">
             <c:forEach var = "review" items = "${sessionScope.reviewList}">
                 <div class="col-md-4">
 
@@ -129,7 +129,7 @@
                             </td>
                         </tr>
                     </table>
-                    <br>
+                    <br><br>
 
                 </div>
             </c:forEach>

@@ -19,7 +19,7 @@
         <title>Profile</title>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="home.jsp" style="color: white">KMITL review</a>

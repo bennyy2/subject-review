@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="home.jsp" >KMITL review</a>

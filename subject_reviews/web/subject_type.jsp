@@ -17,7 +17,7 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="home.jsp" >KMITL review</a>
@@ -34,7 +34,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
+                            <button class="btn btn-default" type="submit" style="padding-top: 12px">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </div>

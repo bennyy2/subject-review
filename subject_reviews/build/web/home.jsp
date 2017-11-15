@@ -19,7 +19,7 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#" >KMITL review</a>
@@ -64,14 +64,14 @@
 
 
         <!--        <h1 style="text-align: center">Recent Review</h1><br>-->
-        
+
         <%
-        Review review = new Review();
-        ArrayList reviewList = new ArrayList<>();
-        reviewList = review.showAllReview();
-        session.setAttribute("reviewList", reviewList);
+            Review review = new Review();
+            ArrayList reviewList = new ArrayList<>();
+            reviewList = review.showAllReview();
+            session.setAttribute("reviewList", reviewList);
         %>
-        
+
 
         <div>
             <c:forEach var = "review" items = "${sessionScope.reviewList}">
@@ -98,8 +98,6 @@
                 </div>
             </c:forEach>
         </div>
-        
-        
 
 
 
@@ -110,9 +108,11 @@
 
 
 
-<!--                <footer id="footer">
-                    <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
-                </footer>-->
+
+
+        <!--                <footer id="footer">
+                            <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
+                        </footer>-->
 
 
 

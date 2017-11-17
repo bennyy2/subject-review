@@ -17,11 +17,13 @@ body {
     background-color: #E6E6FA;
     width: 90%;
     margin:0px auto;
+    
 }
 #block :hover{
     background-color: #d5d5ff;
-    width: 92%;
+    
 }
+
 
 
 

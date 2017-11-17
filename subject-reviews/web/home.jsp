@@ -109,15 +109,15 @@
 
         <div class="body2">
             <c:forEach var = "review" items = "${sessionScope.reviewList}">
-                <div class="col-md-4">
+                <div class="col-md-4" >
 
-                    <table  id="block" >
+                    <table  id="block" style="overflow: hidden;">
                         <tr>
                             <td>
                                 <br>
                                 <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}<br>
                                     ${review.getSj_name()}</a><br>
-                                ${review.getContent()}<br>
+                                    <p>${review.getContent()}<p><br>
                                 <c:choose>
                                     <c:when test="${review.getDisplay_user()=='no'}">
                                         User : Unknow User<br>

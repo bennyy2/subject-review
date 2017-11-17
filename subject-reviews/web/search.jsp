@@ -63,7 +63,7 @@
                     <c:forEach var = "subject" items = "${sessionScope.subjectList}">
                         <div class="col-md-10" >
 
-                            <table  id="block" style="margin-left: 15%">
+                            <table  id="block">
                                 <tr><td>
                                         <br>
                                         <a href="viewSubjectServlet?id=${subject.getSubject_id()}" >

@@ -61,7 +61,7 @@
                 <c:otherwise>
                     <h3 style="margin-left: 15%">The subjects you search for..</h3><br>
                     <c:forEach var = "subject" items = "${sessionScope.subjectList}">
-                        <div class="col-md-10" >
+                        <div class="col-md-10" style="width: 100%">
 
                             <table  id="block">
                                 <tr><td>

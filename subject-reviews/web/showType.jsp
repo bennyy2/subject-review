@@ -56,7 +56,7 @@
 
         <div>
             <c:forEach var = "sub" items = "${sessionScope.allSub}">
-                <div class="col-md-10" >
+                <div class="col-md-10" style="width: 100%">
 
                     <table  id="block">
                         <tr><td>

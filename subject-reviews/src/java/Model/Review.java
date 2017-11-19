@@ -144,7 +144,7 @@ public class Review {
         try {
 
             conn = DBConnection.getConnection();
-            String sql = "SELECT review_id, content, date, score, username 'user', display_user FROM review JOIN user USING (user_id) where subject_id = ? order by date ASC";
+            String sql = "SELECT review_id, content, date, score, username 'user', display_user FROM review JOIN user USING (user_id) where subject_id = ? order by date DESC";
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, id);
             rs = pstm.executeQuery();
@@ -182,7 +182,7 @@ public class Review {
         try {
 
             conn = DBConnection.getConnection();
-            String sql = "SELECT review_id, content, date, score, username 'user', display_user, subject_id, sj_name_eng 'sj_name' FROM review JOIN user USING (user_id) JOIN subject USING (subject_id) order by date ASC";
+            String sql = "SELECT review_id, content, date, score, username 'user', display_user, subject_id, sj_name_eng 'sj_name' FROM review JOIN user USING (user_id) JOIN subject USING (subject_id) order by date DESC";
             pstm = conn.prepareStatement(sql);
             rs = pstm.executeQuery();
 

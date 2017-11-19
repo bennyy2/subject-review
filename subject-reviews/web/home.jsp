@@ -114,7 +114,9 @@
 
                                 <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}<br>
                                     ${review.getSj_name()}</a><br>
-                                    <p>${review.getContent()}<p><br>
+                                    <p style="white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;">${review.getContent()}<p><br>
                                 <c:choose>
                                     <c:when test="${review.getDisplay_user()=='no'}">
                                         User : Unknow User<br>

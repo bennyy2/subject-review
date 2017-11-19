@@ -107,14 +107,11 @@
 
 
 
-        <div class="body2">
+        <div class="body2" style="padding-left: 30px; padding-right: 30px;">
+            <div class="grid">
             <c:forEach var = "review" items = "${sessionScope.reviewList}">
-                <div class="col-md-4" >
+                <div class="box" >
 
-                    <table  id="block" style="overflow: hidden;">
-                        <tr>
-                            <td>
-                                <br>
                                 <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}<br>
                                     ${review.getSj_name()}</a><br>
                                     <p>${review.getContent()}<p><br>
@@ -126,13 +123,10 @@
                                         User : ${review.getUser()}<br>
                                     </c:otherwise>
                                 </c:choose><br>
-                            </td>
-                        </tr>
-                    </table>
-                    <br><br>
-
+                         
                 </div>
             </c:forEach>
+            </div>
         </div>
 
 

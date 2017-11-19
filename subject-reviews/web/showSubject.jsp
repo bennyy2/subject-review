@@ -64,7 +64,8 @@
 
 
             <br><br><hr>
-
+        </div>
+            <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
                 ${show.getContent()}<br> 
                 Score : ${show.getScore()}<br><br>
@@ -85,7 +86,8 @@
 
 
 
-
+            </div>
+            <div class="container">
             <c:if test="${sessionScope.user.getRole() == 'student'}">
                 <form action="insertReviewServlet" method="POST">
                     <div class="form-group">

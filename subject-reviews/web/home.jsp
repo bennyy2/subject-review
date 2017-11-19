@@ -76,40 +76,46 @@
             ArrayList topList = new ArrayList<>();
             topList = subject.getTopReview();
             session.setAttribute("topList", topList);
+        
+            float width1 = ((subject.getTopReview().get(0)).getTotal_score()*40)/5+50;
+            float width2 = ((subject.getTopReview().get(1)).getTotal_score()*40)/5+50;
+            float width3 = ((subject.getTopReview().get(2)).getTotal_score()*40)/5+50;
+            float width4 = ((subject.getTopReview().get(3)).getTotal_score()*40)/5+50;
+            float width5 = ((subject.getTopReview().get(4)).getTotal_score()*40)/5+50;
         %>
         
         <div class="top5">
             <ul class="top5_bar">
                 <li class="top5_bar_li" style="background: rgba(255, 57, 65, 0.9) !important;
-                    width: 97.6% !important;">${topList[0].getSj_name_eng()}<br>${topList[0].getSj_name_thai()}
+                    width: <%out.print(width1);%>% !important;">${topList[0].getSj_name_eng()}<br>${topList[0].getSj_name_thai()}
                     <span class="top5_bar_hold">
                         <p class="top5_score">${topList[0].getTotal_score()}</p>
                         <span class="top5_bar_tri"></span>
                     </span>
                 </li>
                 <li class="top5_bar_li" style="background: rgba(255, 103, 57, 0.9) !important;
-                    width: 90% !important;">${topList[1].getSj_name_eng()}<br>${topList[1].getSj_name_thai()}
+                    width: <%out.print(width2);%>% !important;">${topList[1].getSj_name_eng()}<br>${topList[1].getSj_name_thai()}
                     <span class="top5_bar_hold">
                         <p class="top5_score">${topList[1].getTotal_score()}</p>
                         <span class="top5_bar_tri"></span>
                     </span>
                 </li>
                 <li class="top5_bar_li" style="background: rgba(255, 218, 57, 0.9) !important;
-                    width: 82% !important;">${topList[2].getSj_name_eng()}<br>${topList[2].getSj_name_thai()}
+                    width: <%out.print(width3);%>% !important;">${topList[2].getSj_name_eng()}<br>${topList[2].getSj_name_thai()}
                     <span class="top5_bar_hold">
                         <p class="top5_score">${topList[2].getTotal_score()}</p>
                         <span class="top5_bar_tri"></span>
                     </span>
                 </li>
                 <li class="top5_bar_li" style="    background: rgba(193, 241, 78, 0.9) !important;
-                    width: 74% !important;">${topList[3].getSj_name_eng()}<br>${topList[3].getSj_name_thai()}
+                    width: <%out.print(width4);%>% !important;">${topList[3].getSj_name_eng()}<br>${topList[3].getSj_name_thai()}
                     <span class="top5_bar_hold">
                         <p class="top5_score">${topList[3].getTotal_score()}</p>
                         <span class="top5_bar_tri"></span>
                     </span>
                 </li>
                 <li class="top5_bar_li" style="background: rgba(29, 195, 246, 0.9) !important;
-                    width: 66% !important;">${topList[4].getSj_name_eng()}<br>${topList[4].getSj_name_thai()}
+                    width: <%out.print(width5);%>% !important;">${topList[4].getSj_name_eng()}<br>${topList[4].getSj_name_thai()}
                     <span class="top5_bar_hold">
                         <p class="top5_score">${topList[4].getTotal_score()}</p>
                         <span class="top5_bar_tri"></span>
@@ -117,10 +123,6 @@
                 </li>
             </ul>
         </div>
-
-
-
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <hr><br>
         <h1 style="margin-left: 50px">Recently review</h1><br>
 
@@ -161,9 +163,9 @@
 
 
 
-        <!--                <footer id="footer">
+                        <footer id="footer">
                             <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
-                        </footer>-->
+                        </footer>
 
 
 

@@ -77,26 +77,45 @@
             topList = subject.getTopReview();
             session.setAttribute("topList", topList);
         %>
-
-        <div class="body1">
-            <c:forEach var = "subject" items = "${sessionScope.topList}">
-
-                <div class="col-md-4">
-
-                    <table  id="block" >
-                        <tr><td>
-                                <br>
-                                <a href="viewSubjectServlet?id=${subject.getSubject_id()}">${subject.getSubject_id()}<br>
-                                    ${subject.getSj_name_eng()}<br></a>
-                                    ${subject.getSj_name_thai()}
-                                <br>
-                                score : ${subject.getTotal_score()}
-                                <br><br>
-                            </td></tr>
-                    </table>
-                    <br>
-                </div>
-            </c:forEach>
+        
+        <div class="top5">
+            <ul class="top5_bar">
+                <li class="top5_bar_li" style="background: rgba(255, 57, 65, 0.9) !important;
+                    width: 97.6% !important;">${topList[0].getSj_name_eng()}<br>${topList[0].getSj_name_thai()}
+                    <span class="top5_bar_hold">
+                        <p class="top5_score">${topList[0].getTotal_score()}</p>
+                        <span class="top5_bar_tri"></span>
+                    </span>
+                </li>
+                <li class="top5_bar_li" style="background: rgba(255, 103, 57, 0.9) !important;
+                    width: 90% !important;">${topList[1].getSj_name_eng()}<br>${topList[1].getSj_name_thai()}
+                    <span class="top5_bar_hold">
+                        <p class="top5_score">${topList[1].getTotal_score()}</p>
+                        <span class="top5_bar_tri"></span>
+                    </span>
+                </li>
+                <li class="top5_bar_li" style="background: rgba(255, 218, 57, 0.9) !important;
+                    width: 82% !important;">${topList[2].getSj_name_eng()}<br>${topList[2].getSj_name_thai()}
+                    <span class="top5_bar_hold">
+                        <p class="top5_score">${topList[2].getTotal_score()}</p>
+                        <span class="top5_bar_tri"></span>
+                    </span>
+                </li>
+                <li class="top5_bar_li" style="    background: rgba(193, 241, 78, 0.9) !important;
+                    width: 74% !important;">${topList[3].getSj_name_eng()}<br>${topList[3].getSj_name_thai()}
+                    <span class="top5_bar_hold">
+                        <p class="top5_score">${topList[3].getTotal_score()}</p>
+                        <span class="top5_bar_tri"></span>
+                    </span>
+                </li>
+                <li class="top5_bar_li" style="background: rgba(29, 195, 246, 0.9) !important;
+                    width: 66% !important;">${topList[4].getSj_name_eng()}<br>${topList[4].getSj_name_thai()}
+                    <span class="top5_bar_hold">
+                        <p class="top5_score">${topList[4].getTotal_score()}</p>
+                        <span class="top5_bar_tri"></span>
+                    </span>
+                </li>
+            </ul>
         </div>
 
 
@@ -109,25 +128,25 @@
 
         <div class="body2" style="padding-left: 30px; padding-right: 30px;">
             <div class="grid">
-            <c:forEach var = "review" items = "${sessionScope.reviewList}">
-                <div class="box" >
+                <c:forEach var = "review" items = "${sessionScope.reviewList}">
+                    <div class="box" >
 
-                                <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}<br>
-                                    ${review.getSj_name()}</a><br>
-                                    <p style="white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;">${review.getContent()}<p><br>
-                                <c:choose>
-                                    <c:when test="${review.getDisplay_user()=='no'}">
-                                        User : Unknow User<br>
-                                    </c:when>    
-                                    <c:otherwise>
-                                        User : ${review.getUser()}<br>
-                                    </c:otherwise>
-                                </c:choose><br>
-                         
-                </div>
-            </c:forEach>
+                        <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}<br>
+                            ${review.getSj_name()}</a><br>
+                        <p style="    white-space: nowrap;
+                           text-overflow: ellipsis;
+                           overflow: hidden;">${review.getContent()}<p><br>
+                            <c:choose>
+                                <c:when test="${review.getDisplay_user()=='no'}">
+                                    User : Unknow User<br>
+                                </c:when>    
+                                <c:otherwise>
+                                    User : ${review.getUser()}<br>
+                                </c:otherwise>
+                            </c:choose><br>
+
+                    </div>
+                </c:forEach>
             </div>
         </div>
 

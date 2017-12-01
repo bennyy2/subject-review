@@ -15,9 +15,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>KMITL Subject review system</title>
         <meta charset="utf-8">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -84,7 +85,7 @@
             float width5 = ((subject.getTopReview().get(4)).getTotal_score()*40)/5+50;
         %>
         
-        <div class="top5">
+        <div class="top5" style="margin-left: 4%;">
             <ul class="top5_bar">
                 <li class="top5_bar_li" style="background: rgba(255, 57, 65, 0.9) !important;
                     width: <%out.print(width1);%>% !important;">${topList[0].getSj_name_eng()}<br>${topList[0].getSj_name_thai()}
@@ -143,9 +144,9 @@
                                     User : Unknow User<br>
                                 </c:when>    
                                 <c:otherwise>
-                                    User : ${review.getUser()}<br>
+                                    User : ${review.getUser()}
                                 </c:otherwise>
-                            </c:choose><br>
+                            </c:choose>
 
                     </div>
                 </c:forEach>

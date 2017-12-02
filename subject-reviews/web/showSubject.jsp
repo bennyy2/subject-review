@@ -25,6 +25,7 @@
                 $("#textarea" + i).css("visibility", "hidden");
                 var text = $('textarea[name="' + i + '1"]').val();
                 $.post("ReportServlet", {text: text, user_report: "${sessionScope.user.getId()}", review_id: i, user_post: u}, function (responseText) {
+                    $("#msg" + i).text(responseText).fadeIn(1);
                     $("#msg" + i).text(responseText).delay(1200).fadeOut(1000);
                 });
 
@@ -93,10 +94,10 @@
         </div>
         <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
-                <div id="report${show.getReview_id()}" style="float: right;">
-                    <p id="msg${show.getReview_id()}" style="position: absolute;right: 400px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc"></i>
-                    <a href="#" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 50px;right: 380px;visibility: hidden;">Send</a>
-                    <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 380px;height: 50px;width: 300px; visibility: hidden;"></textarea>
+                <div id="report${show.getReview_id()}" style="float: right;position: relative;width: 220px;height: 90px;">
+                    <p id="msg${show.getReview_id()}" style="position: absolute;right: 15px;width: 120px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc" style="float: right;"></i>
+                    <a href="#" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 75px;right: 0px;visibility: hidden;">Send</a>
+                    <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 0px;height: 60px;width: 300px; visibility: hidden;margin-top: 15px; resize: none;padding: 5px;" placeholder="Write report . . ."></textarea>
                 </div>
                 ${show.getContent()}<br> 
                 Score : ${show.getScore()}<br><br>

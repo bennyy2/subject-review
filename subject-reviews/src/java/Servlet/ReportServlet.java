@@ -73,7 +73,7 @@ public class ReportServlet extends HttpServlet {
                     out.println(sub);
                     out.println(rs2.getString("user_post_id"));
 
-                    Report report = new Report(rs1.getString("report_id"), rs1.getString("report"), rs1.getString("date_report"), rs1.getString("user_report_id"), rs1.getString("username"), rs2.getString("user_post_id"), rs2.getString("username"), rs1.getString("content"), sub);
+                    Report report = new Report(rs1.getString("report_id"), rs1.getString("report"), rs1.getString("date_report"), rs1.getString("user_report_id"), rs1.getString("username"), rs2.getString("user_post_id"), rs2.getString("username"), rs1.getString("content"), sub, rs1.getString("review_id"));
 
                     showReport.add(report);
 
@@ -112,6 +112,7 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

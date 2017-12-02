@@ -24,6 +24,20 @@ import javax.servlet.http.HttpSession;
 public class Report {
 
     /**
+     * @return the reviewid
+     */
+    public String getReviewid() {
+        return reviewid;
+    }
+
+    /**
+     * @param reviewid the reviewid to set
+     */
+    public void setReviewid(String reviewid) {
+        this.reviewid = reviewid;
+    }
+
+    /**
      * @return the user_post
      */
     private String report_id;
@@ -35,6 +49,7 @@ public class Report {
     private String user_report;
     private String subject;
     private String content;
+    private String reviewid;
 
     public Report(String report_id, String report, String date, String user_report_id, String user_post_id, String subject) {
         this.report_id = report_id;
@@ -45,7 +60,7 @@ public class Report {
         this.subject = subject;
     }
 
-    public Report(String report_id, String report, String date, String user_report_id, String user_report, String user_post_id, String user_post, String content, String subject) {
+    public Report(String report_id, String report, String date, String user_report_id, String user_report, String user_post_id, String user_post, String content, String subject, String reviewid) {
         this.report_id = report_id;
         this.report = report;
         this.date = date;
@@ -55,6 +70,7 @@ public class Report {
         this.user_post_id = user_post_id;
         this.content = content;
         this.subject = subject;
+        this.reviewid = reviewid;
     }
 
     public Report() {

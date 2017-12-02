@@ -15,7 +15,7 @@
 
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>KMITL Subject review system</title>
@@ -26,6 +26,24 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            function delReportAndReview(Rep, Rev) {
+                $.get("manageReport", {report: Rep, review: Rev}, function (responseText) {
+
+                    $("#re" + Rep).text(responseText);//.delay(1200).fadeOut(1000);
+                });
+
+
+            }
+            function delReport(Rep) {
+                $.get("manageReport", {report: Rep}, function (responseText) {
+
+                    $("#re" + Rep).text(responseText);//.delay(1200).fadeOut(1000);
+                });
+            }
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -73,9 +91,9 @@
         <h1>Hello</h1>
         <a href="ReportServlet">refresh</a><br>
         <%int c = 0;%>
-        
+
         <c:forEach var = "show" items = "${sessionScope.showReport}">
-            <div id="<%=c%>">
+            <div id="re${show.getReport_id()}" style="position: relative;"><i class="fa fa-times" aria-hidden="true" style="float: right;" onclick="delReport('${show.getReport_id()}')"></i>
                 ${c.toString()}
                 topic : ${show.getReport()}<br>
                 Content :${show.getContent()}<br>
@@ -83,10 +101,10 @@
                 Date : ${show.getDate()}<br>  
                 Post by : ${show.getUser_post()}<br>
                 subject : ${show.getsubject()}<br>
-                <a onclick="myFunction(<%=c%>)">delete</a>
+                <a onclick="delReportAndReview('${show.getReport_id()}','${show.getReviewid()}')">delete</a>
                 <hr>
             </div>
-                <%c+=1;%>
+            <%c += 1;%>
         </c:forEach><br>
 
 
@@ -102,16 +120,7 @@
         </footer>
 
 
-        <script>
-            function myFunction(i) {
-                var x = document.getElementById(i);
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                } else {
-                    x.style.display = "none";
-                }
-            }
-        </script>
+        
     </body>
 </html>
 

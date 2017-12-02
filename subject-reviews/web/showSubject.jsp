@@ -95,7 +95,7 @@
             <c:forEach var = "show" items = "${sessionScope.showReview}">
                 <div id="report${show.getReview_id()}" style="float: right;">
                     <p id="msg${show.getReview_id()}" style="position: absolute;right: 400px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc"></i>
-                    <a id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 50px;right: 380px;visibility: hidden;">Send</a>
+                    <a href="#" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 50px;right: 380px;visibility: hidden;">Send</a>
                     <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 380px;height: 50px;width: 300px; visibility: hidden;"></textarea>
                 </div>
                 ${show.getContent()}<br> 

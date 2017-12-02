@@ -16,6 +16,16 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            function reportFunction(i,u) {
+                var text = $('textarea[name="'+i+'1"]').val();
+                $.post("ReportServlet", {text: text,user_report:"${sessionScope.user.getId()}",review_id:i,user_post:u}, function (responseText) {
+                    $("#report"+i).text(responseText);
+                });
+            }
+            
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -65,11 +75,11 @@
 
             <br><br><hr>
         </div>
-            <div class="container" style="word-wrap: break-word;">
+        <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
                 ${show.getContent()}<br> 
                 Score : ${show.getScore()}<br><br>
-                
+
 
                 <c:choose>
                     <c:when test="${show.getDisplay_user()=='no'}">
@@ -79,15 +89,20 @@
                         <b>User : </b>${show.getUser()}
                     </c:otherwise>
                 </c:choose>
-                                      <b>Time : </b> ${show.getDate()}<br><hr>
+                <b>Time : </b> ${show.getDate()}
+                <div id="report${show.getReview_id()}" style="float: right;">
+                    <a id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}','${show.getUser()}')">report</a>
+                </div>
+                <br>
+                <textarea id="somebutton" name="${show.getReview_id()}1">Reeport</textarea>
 
-
+                <hr>
             </c:forEach><br>
+            
 
 
-
-            </div>
-            <div class="container">
+        </div>
+        <div class="container">
             <c:if test="${sessionScope.user.getRole() == 'student'}">
                 <form action="insertReviewServlet" method="POST">
                     <div class="form-group">

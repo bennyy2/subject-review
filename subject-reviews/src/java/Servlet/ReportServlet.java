@@ -50,7 +50,7 @@ public class ReportServlet extends HttpServlet {
             PreparedStatement pstm = null;
             ResultSet rs1 = null;
             ResultSet rs2 = null;
-            
+
             ArrayList<Report> showReport = new ArrayList<>();
             try {
                 conn = DBConnection.getConnection();
@@ -61,13 +61,13 @@ public class ReportServlet extends HttpServlet {
                 pstm = conn.prepareStatement(sql2);
                 rs2 = pstm.executeQuery();
                 while (rs1.next() && rs2.next()) {
-                out.println(rs1.getString("date_report"));
-                out.println(rs2.getString("user_post_id"));
+                    out.println(rs1.getString("date_report"));
+                    out.println(rs2.getString("user_post_id"));
                     Report report = new Report(rs1.getString("report_id"), rs1.getString("report"),
-                            rs1.getString("date_report"), rs1.getString("user_report_id"),rs1.getString("username"), rs2.getString("user_post_id"),rs2.getString("username"),rs1.getString("content"));
-                    
+                            rs1.getString("date_report"), rs1.getString("user_report_id"), rs1.getString("username"), rs2.getString("user_post_id"), rs2.getString("username"), rs1.getString("content"));
+
                     showReport.add(report);
-                    
+
                 }
 
             } catch (Exception ex) {
@@ -81,14 +81,12 @@ public class ReportServlet extends HttpServlet {
                 }
             }
 
-            
-
             HttpSession session = request.getSession();
             /*session.setAttribute("subject", subject);
             session.setAttribute("subject_id", subject.getSubject_id());*/
             session.setAttribute("showReport", showReport);
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/manageReview.jsp");
-            dispatcher.forward(request, response);  
+            dispatcher.forward(request, response);
         }
     }
 
@@ -118,7 +116,38 @@ public class ReportServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+        response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+        String text = request.getParameter("text");
+        String review_id = request.getParameter("review_id");
+        String user_report = request.getParameter("user_report");
+        String user_post = request.getParameter("user_post");
+        
+
+        //data insert
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs1 = null;
+        ResultSet rs2 = null;
+
+        ArrayList<Report> showReport = new ArrayList<>();
+        try {
+            conn = DBConnection.getConnection();
+            String sql = "SELECT user_id FROM `user` where username=\""+user_post+"\";";
+            pstm = conn.prepareStatement(sql);
+            rs1 = pstm.executeQuery();
+            rs1.next();
+            user_post=rs1.getString(1);
+            
+            sql = "INSERT INTO it58070079.report (date_report, user_report_id, user_post_id, review_id, status, report) VALUES (CURRENT_DATE"+",\""+user_report+"\",\""+user_post+"\",\""+review_id+"\",\""+"unread\","+"\""+text+"\");";
+            response.getWriter().write(text);
+            pstm.execute(sql);
+            response.getWriter().write("Report success");
+        } catch (Exception ex) {
+            response.getWriter().write(ex.getMessage());
+        }
+        
     }
 
     /**

@@ -13,6 +13,7 @@ import Model.Review;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -118,13 +119,19 @@ public class ReportServlet extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-        response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+        response.setCharacterEncoding("UTF-8"); 
+        request.setCharacterEncoding("UTF-8"); // You want world domination, huh?
         String text = request.getParameter("text");
+
+//        byte[] bytes = text.getBytes(StandardCharsets.ISO_8859_1);
+//        text = new String(bytes, StandardCharsets.UTF_8);
         String review_id = request.getParameter("review_id");
         String user_report = request.getParameter("user_report");
         String user_post = request.getParameter("user_post");
-        
-
+        if(user_report==""){
+            response.getWriter().write("Please login agian");
+            
+        }
         //data insert
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -134,20 +141,20 @@ public class ReportServlet extends HttpServlet {
         ArrayList<Report> showReport = new ArrayList<>();
         try {
             conn = DBConnection.getConnection();
-            String sql = "SELECT user_id FROM `user` where username=\""+user_post+"\";";
+            String sql = "SELECT user_id FROM `user` where username=\"" + user_post + "\";";
             pstm = conn.prepareStatement(sql);
             rs1 = pstm.executeQuery();
             rs1.next();
-            user_post=rs1.getString(1);
-            
-            sql = "INSERT INTO it58070079.report (date_report, user_report_id, user_post_id, review_id, status, report) VALUES (CURRENT_DATE"+",\""+user_report+"\",\""+user_post+"\",\""+review_id+"\",\""+"unread\","+"\""+text+"\");";
+            user_post = rs1.getString(1);
+
+            sql = "INSERT INTO it58070079.report (date_report, user_report_id, user_post_id, review_id, status, report) VALUES (CURRENT_DATE" + ",\"" + user_report + "\",\"" + user_post + "\",\"" + review_id + "\",\"" + "unread\"," + "\"" + text + "\");";
             response.getWriter().write(text);
             pstm.execute(sql);
             response.getWriter().write("Report success");
         } catch (Exception ex) {
             response.getWriter().write(ex.getMessage());
         }
-        
+
     }
 
     /**

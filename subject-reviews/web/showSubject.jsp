@@ -23,6 +23,7 @@
                 $.post("ReportServlet", {text: text,user_report:"${sessionScope.user.getId()}",review_id:i,user_post:u}, function (responseText) {
                     $("#report"+i).text(responseText);
                 });
+                $("#textarea").hide();
             }
             
         </script>
@@ -94,7 +95,7 @@
                     <a id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}','${show.getUser()}')">report</a>
                 </div>
                 <br>
-                <textarea id="somebutton" name="${show.getReview_id()}1">Reeport</textarea>
+                <textarea id="textarea" name="${show.getReview_id()}1">Reeport</textarea>
 
                 <hr>
             </c:forEach><br>

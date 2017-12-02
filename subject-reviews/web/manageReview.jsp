@@ -93,15 +93,15 @@
         <%int c = 0;%>
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">
-            <div id="re${show.getReport_id()}" style="position: relative;"><i class="fa fa-times" aria-hidden="true" style="float: right;" onclick="delReport('${show.getReport_id()}')"></i>
+            <div id="re${show.getReport_id()}" style="position: relative;padding-left: 5%;padding-right: 5%;"><i class="fa fa-times" aria-hidden="true" style="float: right;" onclick="delReport('${show.getReport_id()}')"></i>
                 ${c.toString()}
                 topic : ${show.getReport()}<br>
                 Content :${show.getContent()}<br>
                 Report by : ${show.getUser_report()}<br>
                 Date : ${show.getDate()}<br>  
                 Post by : ${show.getUser_post()}<br>
-                subject : ${show.getsubject()}<br>
-                <a onclick="delReportAndReview('${show.getReport_id()}','${show.getReviewid()}')">delete</a>
+                subject : ${show.getsubject()}<i class="fa fa-trash" aria-hidden="true" style="float: right;" onclick="delReportAndReview('${show.getReport_id()}', '${show.getReviewid()}')"></i><br>
+
                 <hr>
             </div>
             <%c += 1;%>
@@ -115,12 +115,12 @@
 
 
 
-        <footer class="container-fluid text-center">
+        <footer id="footer">
             <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
         </footer>
 
 
-        
+
     </body>
 </html>
 

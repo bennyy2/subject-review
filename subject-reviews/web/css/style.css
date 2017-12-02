@@ -192,9 +192,13 @@ body {
 .box:hover{
     background-color: mediumturquoise;
 }
-/* Add a gray background color and some padding to the footer 
+/* Add a gray background color and some padding to the footer */
 footer {
     background-color: #f2f2f2;
     padding: 25px;
-}*/
+    position: fixed;
+    text-align: center;
+    bottom: 0px;
+    width: 100%;
+}
 

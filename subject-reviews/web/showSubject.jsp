@@ -16,16 +16,31 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
-            function reportFunction(i,u) {
-                var text = $('textarea[name="'+i+'1"]').val();
-                $.post("ReportServlet", {text: text,user_report:"${sessionScope.user.getId()}",review_id:i,user_post:u}, function (responseText) {
-                    $("#report"+i).text(responseText);
+            function reportFunction(i, u) {
+                $("#bc").attr("class", "fa fa-bug");
+                $("#" + i).css("visibility", "hidden");
+                $("#textarea" + i).css("visibility", "hidden");
+                var text = $('textarea[name="' + i + '1"]').val();
+                $.post("ReportServlet", {text: text, user_report: "${sessionScope.user.getId()}", review_id: i, user_post: u}, function (responseText) {
+                    $("#msg" + i).text(responseText).delay(1200).fadeOut(1000);
                 });
-                $("#textarea").hide();
+
+
             }
-            
+            function showForm(id) {
+                if ($("#bc").attr("class").toString() == "fa fa-bug") {
+                    $("#bc").attr("class", "fa fa-times");
+                    $("#" + id).css("visibility", "visible");
+                    $("#textarea" + id).css("visibility", "visible");
+                } else {
+                    $("#bc").attr("class", "fa fa-bug");
+                    $("#" + id).css("visibility", "hidden");
+                    $("#textarea" + id).css("visibility", "hidden");
+                }
+            }
         </script>
     </head>
     <body>
@@ -78,6 +93,11 @@
         </div>
         <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
+                <div id="report${show.getReview_id()}" style="float: right;">
+                    <p id="msg${show.getReview_id()}" style="position: absolute;right: 400px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc"></i>
+                    <a id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 50px;right: 380px;visibility: hidden;">Send</a>
+                    <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 380px;height: 50px;width: 300px; visibility: hidden;"></textarea>
+                </div>
                 ${show.getContent()}<br> 
                 Score : ${show.getScore()}<br><br>
 
@@ -91,18 +111,17 @@
                     </c:otherwise>
                 </c:choose>
                 <b>Time : </b> ${show.getDate()}
-                <div id="report${show.getReview_id()}" style="float: right;">
-                    <a id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}','${show.getUser()}')">report</a>
-                </div>
+
                 <br>
-                <textarea id="textarea" name="${show.getReview_id()}1">Reeport</textarea>
+
 
                 <hr>
             </c:forEach><br>
-            
+
 
 
         </div>
+
         <div class="container">
             <c:if test="${sessionScope.user.getRole() == 'student'}">
                 <form action="insertReviewServlet" method="POST">

@@ -148,7 +148,7 @@ public class ReportServlet extends HttpServlet {
             user_post = rs1.getString(1);
 
             sql = "INSERT INTO it58070079.report (date_report, user_report_id, user_post_id, review_id, status, report) VALUES (CURRENT_DATE" + ",\"" + user_report + "\",\"" + user_post + "\",\"" + review_id + "\",\"" + "unread\"," + "\"" + text + "\");";
-            response.getWriter().write(text);
+            
             pstm.execute(sql);
             response.getWriter().write("Report success");
         } catch (Exception ex) {

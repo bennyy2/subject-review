@@ -16,7 +16,7 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
             function reportFunction(i, u) {

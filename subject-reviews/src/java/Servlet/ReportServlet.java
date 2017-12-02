@@ -46,6 +46,7 @@ public class ReportServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
             Connection conn = null;
             PreparedStatement pstm = null;
@@ -53,7 +54,10 @@ public class ReportServlet extends HttpServlet {
             ResultSet rs2 = null;
 
             ArrayList<Report> showReport = new ArrayList<>();
+
             try {
+                out.println("test");
+
                 conn = DBConnection.getConnection();
                 String sql = "Select * from report left outer join user on report.user_report_id=user.user_id left join review on report.review_id=review.review_id ";//Ureport
                 String sql2 = "Select * from report left outer join user on report.user_post_id=user.user_id  "; //Upost
@@ -62,17 +66,21 @@ public class ReportServlet extends HttpServlet {
                 pstm = conn.prepareStatement(sql2);
                 rs2 = pstm.executeQuery();
                 while (rs1.next() && rs2.next()) {
-                    out.println(rs1.getString("date_report"));
+                    out.println(rs1.getString("subject_id"));
+                    ArrayList<Subject> subject = new Subject().searchSubject(rs1.getString("subject_id"));
+                    out.println(subject);
+                    String sub = subject.get(0).getSubject_id() + " " + subject.get(0).getSj_name_thai() + " " + subject.get(0).getSj_name_eng();
+                    out.println(sub);
                     out.println(rs2.getString("user_post_id"));
-                    Report report = new Report(rs1.getString("report_id"), rs1.getString("report"),
-                            rs1.getString("date_report"), rs1.getString("user_report_id"), rs1.getString("username"), rs2.getString("user_post_id"), rs2.getString("username"), rs1.getString("content"));
+
+                    Report report = new Report(rs1.getString("report_id"), rs1.getString("report"), rs1.getString("date_report"), rs1.getString("user_report_id"), rs1.getString("username"), rs2.getString("user_post_id"), rs2.getString("username"), rs1.getString("content"), sub);
 
                     showReport.add(report);
 
                 }
 
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                out.println(ex.getMessage());
             } finally {
                 if (conn != null) {
                     try {
@@ -119,7 +127,7 @@ public class ReportServlet extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-        response.setCharacterEncoding("UTF-8"); 
+        response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8"); // You want world domination, huh?
         String text = request.getParameter("text");
 
@@ -128,33 +136,34 @@ public class ReportServlet extends HttpServlet {
         String review_id = request.getParameter("review_id");
         String user_report = request.getParameter("user_report");
         String user_post = request.getParameter("user_post");
-        if(user_report==""){
+        if (user_report == "") {
             response.getWriter().write("Please login agian");
-            
+
+        } else {
+
+            //data insert
+            Connection conn = null;
+            PreparedStatement pstm = null;
+            ResultSet rs1 = null;
+            ResultSet rs2 = null;
+
+            ArrayList<Report> showReport = new ArrayList<>();
+            try {
+                conn = DBConnection.getConnection();
+                String sql = "SELECT user_id FROM `user` where username=\"" + user_post + "\";";
+                pstm = conn.prepareStatement(sql);
+                rs1 = pstm.executeQuery();
+                rs1.next();
+                user_post = rs1.getString(1);
+
+                sql = "INSERT INTO it58070079.report (date_report, user_report_id, user_post_id, review_id, status, report) VALUES (CURRENT_DATE" + ",\"" + user_report + "\",\"" + user_post + "\",\"" + review_id + "\",\"" + "unread\"," + "\"" + text + "\");";
+
+                pstm.execute(sql);
+                response.getWriter().write("Report success");
+            } catch (Exception ex) {
+                response.getWriter().write(ex.getMessage());
+            }
         }
-        //data insert
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet rs1 = null;
-        ResultSet rs2 = null;
-
-        ArrayList<Report> showReport = new ArrayList<>();
-        try {
-            conn = DBConnection.getConnection();
-            String sql = "SELECT user_id FROM `user` where username=\"" + user_post + "\";";
-            pstm = conn.prepareStatement(sql);
-            rs1 = pstm.executeQuery();
-            rs1.next();
-            user_post = rs1.getString(1);
-
-            sql = "INSERT INTO it58070079.report (date_report, user_report_id, user_post_id, review_id, status, report) VALUES (CURRENT_DATE" + ",\"" + user_report + "\",\"" + user_post + "\",\"" + review_id + "\",\"" + "unread\"," + "\"" + text + "\");";
-            
-            pstm.execute(sql);
-            response.getWriter().write("Report success");
-        } catch (Exception ex) {
-            response.getWriter().write(ex.getMessage());
-        }
-
     }
 
     /**

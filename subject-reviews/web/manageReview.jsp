@@ -28,18 +28,19 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
 
-                    <li><a href="profile.jsp">${sessionScope.user.getUsername()}</a></li>
-                    <li><a href="major.jsp">major</a></li>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="home.jsp">Home</a></li>
+
                     <li><a href="subject_type.jsp">subject type</a></li>
+                    <li><a href="logoutServlet">logout</a></li>
                 </ul>
+
                 <form class="navbar-form navbar-left" action="searchServlet" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
@@ -50,6 +51,14 @@
                         </div>
                     </div>
                 </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        <a href="profile.jsp">${sessionScope.user.getUsername()}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
         </nav>
 
@@ -68,11 +77,12 @@
         <c:forEach var = "show" items = "${sessionScope.showReport}">
             <div id="<%=c%>">
                 ${c.toString()}
-                topic : ${show.getReport()}<br> 
-                Report by : ${show.getUser_report_id()}<br>
+                topic : ${show.getReport()}<br>
+                Content :${show.getContent()}<br>
+                Report by : ${show.getUser_report()}<br>
                 Date : ${show.getDate()}<br>  
                 Post by : ${show.getUser_post()}<br>
-                subject : ${show.getContent()}<br>
+                subject : ${show.getsubject()}<br>
                 <a onclick="myFunction(<%=c%>)">delete</a>
                 <hr>
             </div>

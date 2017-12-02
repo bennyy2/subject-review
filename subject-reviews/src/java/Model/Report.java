@@ -33,29 +33,28 @@ public class Report {
     private String user_post_id;
     private String user_post;
     private String user_report;
-    private String sub_id;
+    private String subject;
     private String content;
-    
 
-    public Report(String report_id, String report, String date, String user_report_id, String user_post_id, String sub_id) {
+    public Report(String report_id, String report, String date, String user_report_id, String user_post_id, String subject) {
         this.report_id = report_id;
         this.report = report;
         this.date = date;
         this.user_report_id = user_report_id;
         this.user_post_id = user_post_id;
-        this.sub_id = sub_id;
+        this.subject = subject;
     }
 
-    public Report(String report_id, String report, String date, String user_report_id, String user_report, String user_post_id, String user_post,String content) {
+    public Report(String report_id, String report, String date, String user_report_id, String user_report, String user_post_id, String user_post, String content, String subject) {
         this.report_id = report_id;
         this.report = report;
         this.date = date;
         this.user_report = user_report;
         this.user_post = user_post;
-        this.user_report_id=user_report_id;
-        this.user_post_id=user_post_id;
-        this.content=content;
-                
+        this.user_report_id = user_report_id;
+        this.user_post_id = user_post_id;
+        this.content = content;
+        this.subject = subject;
     }
 
     public Report() {
@@ -127,17 +126,17 @@ public class Report {
     }
 
     /**
-     * @return the sub_id
+     * @return the subject
      */
-    public String getSub_id() {
-        return sub_id;
+    public String getsubject() {
+        return subject;
     }
 
     /**
-     * @param sub_id the sub_id to set
+     * @param subject the subject to set
      */
-    public void setSub_id(String sub_id) {
-        this.sub_id = sub_id;
+    public void setsubject(String subject) {
+        this.subject = subject;
     }
 
     /**

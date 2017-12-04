@@ -39,7 +39,7 @@ public class manageReport extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             response.setCharacterEncoding("UTF-8");
-            request.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+            request.setCharacterEncoding("UTF-8");
             String report = request.getParameter("report");
             String review = request.getParameter("review");
 

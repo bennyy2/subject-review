@@ -211,6 +211,57 @@ public class Review {
         return reviewList;
 
     }
+    
+    public ArrayList<Review> showHistoryReview(String id) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Review> reviewList = new ArrayList<>();
+        try {
+
+            conn = DBConnection.getConnection();
+            String sql = "SELECT review_id, content, date, score, display_user, subject_id, sj_name_eng 'sj_name' FROM review JOIN subject USING (subject_id) where user_id = ? order by date DESC";
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, id);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+
+                Review review = new Review(rs.getString("review_id"), rs.getString("content"), rs.getString("date"), rs.getInt("score"),
+                        rs.getString("display_user"), rs.getString("subject_id"), rs.getString("sj_name"));
+                reviewList.add(review);
+            }
+            rs.close();
+            pstm.close();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return reviewList;
+
+    }
+
+    public Review(String review_id, String content, String date, int score, String display_user, String subject_id, String sj_name) {
+        this.review_id = review_id;
+        this.content = content;
+        this.date = date;
+        this.score = score;
+        this.display_user = display_user;
+        this.subject_id = subject_id;
+        this.sj_name = sj_name;
+    }
+
+    
+    
+    
 
     public String getSubject_id() {
         return subject_id;

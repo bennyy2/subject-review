@@ -20,13 +20,34 @@
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
-        <h1>Hello ${sessionScope.user.getUsername()}</h1>
+        <h1>Profile ${sessionScope.user.getUsername()}</h1><a href="edituser.jsp">edit</a>
         Username : ${sessionScope.user.getUsername()}<br>
         Email : ${sessionScope.user.getEmail()}<br>
         ID : ${sessionScope.user.getId()}<br>
         Role : ${sessionScope.user.getRole()}<br>
         
-        <a href="edituser.jsp">edit</a>
+        <h1>Review History</h1>
+        
+        <c:forEach var = "review" items = "${sessionScope.showHistory}">
+                Content : ${review.getContent()}<br>
+                Date : ${review.getDate()}<br>
+                Score : ${review.getScore()}<br>
+                <c:choose>
+                        <c:when test="${review.getDisplay_user()=='no'}">
+                            Status : Hiding post
+                        </c:when>    
+                        <c:otherwise>
+                            Status : Showing
+                        </c:otherwise>
+                </c:choose><br>
+                Date : ${review.getDate()}<br>
+                Subject : ${review.getSubject_id()} ${review.getSj_name()}<br>
+                <hr>
+        </c:forEach><br>
+       
+        
+        
+        
 
     </body>
 </html>

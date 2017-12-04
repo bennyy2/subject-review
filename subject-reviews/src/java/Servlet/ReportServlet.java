@@ -138,7 +138,8 @@ public class ReportServlet extends HttpServlet {
             response.getWriter().write("Please login agian");
 
         } else {
-
+            
+            
             //data insert
             Connection conn = null;
             PreparedStatement pstm = null;

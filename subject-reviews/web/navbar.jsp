@@ -40,12 +40,12 @@
                 <ul class="nav navbar-nav navbar-right">
                     <c:if test="${sessionScope.user.getUsername()=='admin'}">
                         <li <c:if test="${pageContext.request.servletPath==''}">class="active"</c:if>>
-                            <a href="manageReview.jsp">manager
+                            <a href="ReportServlet">manager
                             </a>
                         </li>
                     </c:if>
                     <li >
-                        <a href="profile.jsp">${sessionScope.user.getUsername()}
+                        <a href="viewHistory">${sessionScope.user.getUsername()}
                         </a>
                     </li>
                 </ul>

@@ -1,11 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : Oct 4, 2017, 9:44:19 PM
-    Author     : Benny
---%>
-
-
-
 <%@page import="Model.UserProfile"%>
 <%@page import="Model.Report"%>
 
@@ -56,8 +48,7 @@
         </div>
 
 
-        <h1>Hello</h1>
-        <a href="ReportServlet">refresh</a><br>
+        <h1>Review report</h1>
         <%int c = 0;%>
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">

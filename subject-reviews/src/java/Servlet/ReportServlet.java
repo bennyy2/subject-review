@@ -56,7 +56,6 @@ public class ReportServlet extends HttpServlet {
             ArrayList<Report> showReport = new ArrayList<>();
 
             try {
-                out.println("test");
 
                 conn = DBConnection.getConnection();
                 String sql = "Select * from report left outer join user on report.user_report_id=user.user_id left join review on report.review_id=review.review_id ";//Ureport
@@ -66,12 +65,10 @@ public class ReportServlet extends HttpServlet {
                 pstm = conn.prepareStatement(sql2);
                 rs2 = pstm.executeQuery();
                 while (rs1.next() && rs2.next()) {
-                    out.println(rs1.getString("subject_id"));
+
                     ArrayList<Subject> subject = new Subject().searchSubject(rs1.getString("subject_id"));
-                    out.println(subject);
+
                     String sub = subject.get(0).getSubject_id() + " " + subject.get(0).getSj_name_thai() + " " + subject.get(0).getSj_name_eng();
-                    out.println(sub);
-                    out.println(rs2.getString("user_post_id"));
 
                     Report report = new Report(rs1.getString("report_id"), rs1.getString("report"), rs1.getString("date_report"), rs1.getString("user_report_id"), rs1.getString("username"), rs2.getString("user_post_id"), rs2.getString("username"), rs1.getString("content"), sub, rs1.getString("review_id"));
 
@@ -112,7 +109,7 @@ public class ReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
     }
 
     /**

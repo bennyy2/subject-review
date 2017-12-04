@@ -45,39 +45,7 @@
         </script>
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
-                </div>
-
-                <ul class="nav navbar-nav">
-                    <li><a href="home.jsp">Home</a></li>
-
-                    <li class="active"><a href="subject_type.jsp">subject type</a></li>
-                    <li><a href="logoutServlet">logout</a></li>
-                </ul>
-
-                <form class="navbar-form navbar-left" action="searchServlet" method="POST">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="search" value="">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li >
-                        <a href="profile.jsp">${sessionScope.user.getUsername()}
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </nav>
+        <%@ include file = "navbar.jsp" %>
         <div class="container">
             <div class="jumbotron" style="text-align: center">
                 <h1>${sessionScope.subject.getSubject_id()}</h1>
@@ -94,29 +62,27 @@
         </div>
         <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
-                <div id="report${show.getReview_id()}" style="float: right;position: relative;width: 220px;height: 90px;">
-                    <p id="msg${show.getReview_id()}" style="position: absolute;right: 15px;width: 120px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc" style="float: right;"></i>
-                    <a href="#" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 75px;right: 0px;visibility: hidden;">Send</a>
-                    <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 0px;height: 60px;width: 300px; visibility: hidden;margin-top: 15px; resize: none;padding: 5px;" placeholder="Write report . . ."></textarea>
+                <div class="content">
+                    <div id="report${show.getReview_id()}" style="float: right;position: relative;width: 0;height: 90px;">
+                        <p id="msg${show.getReview_id()}" style="position: absolute;right: 15px;width: 120px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc" style="float: right;"></i>
+                        <a href="#" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 75px;right: 0px;visibility: hidden;">Send</a>
+                        <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 0px;height: 60px;width: 300px; visibility: hidden;margin-top: 15px; resize: none;padding: 5px;" placeholder="Write report . . ."></textarea>
+                    </div>
+                    <p>${show.getContent()}</p> 
+                    <p><b>Score : </b>${show.getScore()}</p>
+
+
+                    <c:choose>
+                        <c:when test="${show.getDisplay_user()=='no'}">
+                            <p><b>User : </b>Unknow User</p>
+                        </c:when>    
+                        <c:otherwise>
+                            <p><b>User : </b>${show.getUser()}</p>
+                        </c:otherwise>
+                    </c:choose>
+                    <p><b>Time : </b> ${show.getDate()}</p>
+                    <hr>
                 </div>
-                ${show.getContent()}<br> 
-                Score : ${show.getScore()}<br><br>
-
-
-                <c:choose>
-                    <c:when test="${show.getDisplay_user()=='no'}">
-                        <b>User : </b>Unknow User
-                    </c:when>    
-                    <c:otherwise>
-                        <b>User : </b>${show.getUser()}
-                    </c:otherwise>
-                </c:choose>
-                <b>Time : </b> ${show.getDate()}
-
-                <br>
-
-
-                <hr>
             </c:forEach><br>
 
 

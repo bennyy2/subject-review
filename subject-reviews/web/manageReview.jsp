@@ -46,39 +46,7 @@
         </script>
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
-                </div>
-
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.jsp">Home</a></li>
-
-                    <li><a href="subject_type.jsp">subject type</a></li>
-                    <li><a href="logoutServlet">logout</a></li>
-                </ul>
-
-                <form class="navbar-form navbar-left" action="searchServlet" method="POST">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="search" value="">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li >
-                        <a href="profile.jsp">${sessionScope.user.getUsername()}
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </nav>
+        <%@ include file = "navbar.jsp" %>
 
         <div class="header">
             <div class="container text-center">

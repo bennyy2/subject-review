@@ -58,18 +58,16 @@
                 <p>Tell me what is in your mind.</p>
             </div>
         </div>
-<<<<<<< HEAD
+
 
 
         <h1>Review report</h1><br>
         <a href="ReportServlet">refresh</a><br>
         <%int c = 0;%>
-=======
+
         <div id="refresh" style="display: block; position: fixed;top: 20%; right: 0;visibility: hidden; background-color: #029f5b">
             <i class="fa fa-refresh fa-spin fa-fw"></i><a id="newR"></a></div>
-        <h1>Review report</h1>
 
->>>>>>> 212d452ab8ca7d1d1910b49a25a353b0cec73170
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">
             <div id="re${show.getReport_id()}" style="position: relative;padding-left: 5%;padding-right: 5%;"><i class="fa fa-times" aria-hidden="true" style="float: right;" onclick="delReport('${show.getReport_id()}')"></i>
@@ -85,12 +83,6 @@
             </div>
 
         </c:forEach><br>
-
-
-
-
-
-
 
 
 

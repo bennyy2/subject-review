@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,27 +51,41 @@ public class manageReport extends HttpServlet {
                 try {
                     conn = DBConnection.getConnection();
                     String sql = "DELETE FROM report WHERE report_id = " + request.getParameter("report") + ";";
-                    
+
                     pstm = conn.prepareStatement(sql);
                     pstm.execute();
                     response.getWriter().write("Report Delete");
                 } catch (Exception ex) {
                     response.getWriter().write(ex.getMessage());
+                } finally {
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException ignore) {
+                        }
+                    }
                 }
             } else {
                 try {
                     conn = DBConnection.getConnection();
                     String sql = "DELETE FROM report WHERE report_id = " + request.getParameter("report") + ";";
-                    
+
                     pstm = conn.prepareStatement(sql);
                     pstm.execute();
                     sql = "DELETE FROM review WHERE review_id = \"" + request.getParameter("review") + "\";";
-                    
+
                     pstm = conn.prepareStatement(sql);
                     pstm.execute();
                     response.getWriter().write("Report & Review Delete");
                 } catch (Exception ex) {
                     response.getWriter().write(ex.getMessage());
+                } finally {
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException ignore) {
+                        }
+                    }
                 }
             }
         }
@@ -118,6 +133,13 @@ public class manageReport extends HttpServlet {
             response.getWriter().write(rs1.getString(1));
         } catch (Exception ex) {
             response.getWriter().write(ex.getMessage());
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
 
     }

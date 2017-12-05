@@ -140,8 +140,7 @@ public class ReportServlet extends HttpServlet {
             response.getWriter().write("Please login agian");
 
         } else {
-            
-            
+
             //data insert
             Connection conn = null;
             PreparedStatement pstm = null;
@@ -163,6 +162,13 @@ public class ReportServlet extends HttpServlet {
                 response.getWriter().write("Report success");
             } catch (Exception ex) {
                 response.getWriter().write(ex.getMessage());
+            } finally {
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException ignore) {
+                    }
+                }
             }
         }
     }

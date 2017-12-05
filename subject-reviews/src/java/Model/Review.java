@@ -75,7 +75,7 @@ public class Review {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 //        String date = format.format(curDate);
         try {
-            
+
             conn = DBConnection.getConnection();
             String sql = "INSERT INTO review VALUES(?,?,?,?,?,?,?)";
             pstm = conn.prepareStatement(sql);
@@ -211,7 +211,37 @@ public class Review {
         return reviewList;
 
     }
+
+    public boolean deleteReview(String review_id) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        boolean status = true;
+        try {
+
+            conn = DBConnection.getConnection();
+            String sql = "DELETE FROM review WHERE review_id = ?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, review_id);
+            pstm.execute();
+            pstm.close();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            status = false;
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return status;
+    }
     
+    
+
     public ArrayList<Review> showHistoryReview(String id) {
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -248,6 +278,35 @@ public class Review {
         return reviewList;
 
     }
+    
+    public boolean updateReview(String review_id, String content) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        boolean status = true;
+        try {
+
+            conn = DBConnection.getConnection();
+            String sql = "UPDATE review SET content = ? WHERE review_id = ?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, content);
+            pstm.setString(2, review_id);
+            pstm.execute();
+            pstm.close();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            status = false;
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return status;
+    }
 
     public Review(String review_id, String content, String date, int score, String display_user, String subject_id, String sj_name) {
         this.review_id = review_id;
@@ -258,11 +317,7 @@ public class Review {
         this.subject_id = subject_id;
         this.sj_name = sj_name;
     }
-
     
-    
-    
-
     public String getSubject_id() {
         return subject_id;
     }
@@ -326,5 +381,7 @@ public class Review {
     public void setScore(int score) {
         this.score = score;
     }
+
+    
 
 }

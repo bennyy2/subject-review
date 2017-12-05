@@ -31,7 +31,7 @@
                             <form action="editServlet" method="POST">
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" id="username" name="username" value="${sessionScope.user.getUsername()}">
+                                    <input type="text" class="form-control" id="username" name="username" value="${sessionScope.user.getUsername()}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>

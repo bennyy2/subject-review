@@ -42,6 +42,8 @@
                 </c:choose><br>
                 Date : ${review.getDate()}<br>
                 Subject : ${review.getSubject_id()} ${review.getSj_name()}<br>
+                <a href="deleteReviewServlet?id=${review.getReview_id()}">delete</a><br>
+                <a href="editReviewServlet?id=${review.getReview_id()}">edit</a>
                 <hr>
         </c:forEach><br>
        

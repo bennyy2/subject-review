@@ -38,17 +38,14 @@ public class deleteReviewServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String review_id = request.getParameter("id");
             Review review = new Review();
-            if(review.deleteReview(review_id)){
+            if (review.deleteReview(review_id)) {
                 HttpSession session = request.getSession();
-            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/viewHistory");
-            dispatcher.forward(request, response);
-            }else{
+                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/viewHistory");
+                dispatcher.forward(request, response);
+            } else {
                 out.print("Connection fail");
             }
-            
-            
-            
-            
+
         }
     }
 

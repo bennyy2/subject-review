@@ -48,7 +48,8 @@
         </div>
 
 
-        <h1>Review report</h1>
+        <h1>Review report</h1><br>
+        <a href="ReportServlet">refresh</a><br>
         <%int c = 0;%>
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">

@@ -20,14 +20,14 @@ public class DBConnection {
         String url = "";
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            url ="jdbc:mysql://tcmysql.it.kmitl.ac.th:8000/it58070079?useUnicode=true&characterEncoding=UTF8";
-//            url = "jdbc:mysql:///localhost:3306/kmitl_subject_database?useUnicode=true&characterEncoding=UTF8";
+//            url ="jdbc:mysql://tcmysql.it.kmitl.ac.th:8000/it58070079?useUnicode=true&characterEncoding=UTF8";
+            url = "jdbc:mysql:///localhost:3306/kmitl_subject_database?useUnicode=true&characterEncoding=UTF8";
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
 
-        return DriverManager.getConnection(url, "it58070079", "jqdAg6xB");
-//        return DriverManager.getConnection(url, "root", "");
+//        return DriverManager.getConnection(url, "it58070079", "jqdAg6xB");
+        return DriverManager.getConnection(url, "root", "");
     }
 }

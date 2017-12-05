@@ -75,7 +75,9 @@ public class ReportServlet extends HttpServlet {
                     showReport.add(report);
 
                 }
-
+                sql = "UPDATE report SET status = 'read' WHERE status= 'unread'";
+                pstm = conn.prepareStatement(sql);
+                pstm.execute();
             } catch (Exception ex) {
                 out.println(ex.getMessage());
             } finally {

@@ -50,7 +50,7 @@ public class manageReport extends HttpServlet {
                 try {
                     conn = DBConnection.getConnection();
                     String sql = "DELETE FROM report WHERE report_id = " + request.getParameter("report") + ";";
-                    response.getWriter().write(sql);
+                    
                     pstm = conn.prepareStatement(sql);
                     pstm.execute();
                     response.getWriter().write("Report Delete");
@@ -61,11 +61,11 @@ public class manageReport extends HttpServlet {
                 try {
                     conn = DBConnection.getConnection();
                     String sql = "DELETE FROM report WHERE report_id = " + request.getParameter("report") + ";";
-                    response.getWriter().write(sql);
+                    
                     pstm = conn.prepareStatement(sql);
                     pstm.execute();
                     sql = "DELETE FROM review WHERE review_id = \"" + request.getParameter("review") + "\";";
-                    response.getWriter().write(sql);
+                    
                     pstm = conn.prepareStatement(sql);
                     pstm.execute();
                     response.getWriter().write("Report & Review Delete");
@@ -102,7 +102,24 @@ public class manageReport extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs1 = null;
+        try {
+            conn = DBConnection.getConnection();
+            String sql = "SELECT COUNT(status) FROM report WHERE status='unread';";
+
+            pstm = conn.prepareStatement(sql);
+            rs1 = pstm.executeQuery();
+            rs1.next();
+            response.getWriter().write(rs1.getString(1));
+        } catch (Exception ex) {
+            response.getWriter().write(ex.getMessage());
+        }
+
     }
 
     /**

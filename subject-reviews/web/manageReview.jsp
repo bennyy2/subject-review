@@ -24,7 +24,7 @@
             function delReportAndReview(Rep, Rev) {
                 $.get("manageReport", {report: Rep, review: Rev}, function (responseText) {
 
-                    $("#re" + Rep).text(responseText);//.delay(1200).fadeOut(1000);
+                    $("#re" + Rep).text(responseText).delay(1200).fadeOut(1000);
                 });
 
 
@@ -32,9 +32,21 @@
             function delReport(Rep) {
                 $.get("manageReport", {report: Rep}, function (responseText) {
 
-                    $("#re" + Rep).text(responseText);//.delay(1200).fadeOut(1000);
+                    $("#re" + Rep).text(responseText).delay(1200).fadeOut(1000);
                 });
             }
+            setInterval(function () {
+
+                $.post("manageReport", function (responseText) {
+                    if (responseText !== "0") {
+                        $("#refresh").css("visibility", "visible");
+                        $("#newR").text("  new " + responseText + " report").fadeIn();
+                    }else{
+                        $("#refresh").css("visibility", "hidden");
+                    }
+                });
+
+            }, 10000);
         </script>
     </head>
     <body>
@@ -46,10 +58,10 @@
                 <p>Tell me what is in your mind.</p>
             </div>
         </div>
-
-
+        <div id="refresh" style="display: block; position: fixed;top: 20%; right: 0;visibility: hidden; background-color: #029f5b">
+            <i class="fa fa-refresh fa-spin fa-fw"></i><a id="newR"></a></div>
         <h1>Review report</h1>
-        <%int c = 0;%>
+
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">
             <div id="re${show.getReport_id()}" style="position: relative;padding-left: 5%;padding-right: 5%;"><i class="fa fa-times" aria-hidden="true" style="float: right;" onclick="delReport('${show.getReport_id()}')"></i>
@@ -63,7 +75,7 @@
 
                 <hr>
             </div>
-            <%c += 1;%>
+
         </c:forEach><br>
 
 

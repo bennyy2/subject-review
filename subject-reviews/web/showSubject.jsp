@@ -42,6 +42,7 @@
                     $("#textarea" + id).css("visibility", "hidden");
                 }
             }
+            
         </script>
     </head>
     <body>
@@ -94,8 +95,7 @@
                 <form action="insertReviewServlet" method="POST">
                     <div class="form-group">
                         <label for="comment">Comment:</label>
-                        <textarea class="form-control" rows="5" name="text">
-                        </textarea></div><br>
+                        <textarea class="form-control" rows="5" name="text" style="resize: vertical;"></textarea></div><br>
                     <input type="checkbox" name="disable" value="ON" />Disable  username <br><br>
                     Score : 
                     <input type="radio" name="score" value="0" /> 0
@@ -112,7 +112,7 @@
         </div>
 
 
-
+        <%@ include file = "footer.jsp" %>
     </body>
 
 

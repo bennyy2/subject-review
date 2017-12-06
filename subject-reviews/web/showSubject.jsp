@@ -65,7 +65,7 @@
                 <div class="content">
                     <div id="report${show.getReview_id()}" style="float: right;position: relative;width: 0;height: 90px;">
                         <p id="msg${show.getReview_id()}" style="position: absolute;right: 15px;width: 120px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc" style="float: right;"></i>
-                        <a href="#" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}')" style="position: absolute;margin-top: 75px;right: 0px;visibility: hidden;">Send</a>
+                        <a href="javascript:void(0)" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}'); return false;" style="position: absolute;margin-top: 75px;right: 0px;visibility: hidden;">Send</a>
                         <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 0px;height: 60px;width: 300px; visibility: hidden;margin-top: 15px; resize: none;padding: 5px;" placeholder="Write report . . ."></textarea>
                     </div>
                     <p>${show.getContent()}</p> 
@@ -98,7 +98,7 @@
                         </textarea></div><br>
                     <input type="checkbox" name="disable" value="ON" />Disable  username <br><br>
                     Score : 
-                    <input type="radio" name="score" checked="true" value="0" /> 0
+                    <input type="radio" name="score" value="0" /> 0
                     <input type="radio" name="score" value="1" /> 1
                     <input type="radio" name="score" value="2" /> 2
                     <input type="radio" name="score" value="3" /> 3

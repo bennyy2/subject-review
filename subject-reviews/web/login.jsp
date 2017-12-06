@@ -31,7 +31,7 @@
                             <form action="loginServlet" method="POST">
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="User">
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="User" autofocus="autofocus">
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd">Password:</label>

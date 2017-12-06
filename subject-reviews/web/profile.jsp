@@ -66,7 +66,7 @@
         ID : ${sessionScope.user.getId()}<br>
         Role : ${sessionScope.user.getRole()}<br>
 
-        <h1>Review History</h1>
+        <h1>Review History <i class="fa fa-history" aria-hidden="true"></i></h1>
         <div style="margin-left: 100px;margin-right: 100px;">
             <c:forEach var = "review" items = "${sessionScope.showHistory}">
                 <div id="review${review.getReview_id()}">

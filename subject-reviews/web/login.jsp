@@ -68,11 +68,11 @@
 <script>
     var typed = new Typed('#typed', {
         stringsElement: '#typed-strings',
-        typeSpeed: 70,
+        typeSpeed: 100,
         backSpeed: 0,
-        backDelay: 2000,
+        backDelay: 1000,
         fadeOut: true,
-        startDelay: 2000,
+        startDelay: 2000
         
     });
 </script>

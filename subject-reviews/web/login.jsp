@@ -63,8 +63,7 @@
 
     </body>
 </html>
-<script src="js/bootstrap.js"></script>
-<script src="js/bootstrap.min.js"/></script>
+<script src="js/bootstrap.min.js"></script>
 <script>
     var typed = new Typed('#typed', {
         stringsElement: '#typed-strings',

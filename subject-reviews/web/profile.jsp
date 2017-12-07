@@ -100,5 +100,4 @@
 
     </body>
 </html>
-<script src="js/bootstrap.js"/>
-<script src="js/bootstrap.min.js"/>
+<script src="js/bootstrap.min.js"></script>

@@ -88,7 +88,7 @@
             <c:forEach var = "show" items = "${sessionScope.showReview}">
                 <div class="content">
 
-                    <i class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');" id="bc" style="float: right;"></i>
+                    <i class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');" id="bc" style="float: right;" data-toggle="tooltip" data-placement="top" title="Report"></i>
                     <p>${show.getContent()}</p> 
                     <p><b>Score : </b>${show.getScore()}</p>
 
@@ -144,3 +144,4 @@
 
 
 </html>
+<script src="js/bootstrap.min.js"></script>

@@ -19,30 +19,35 @@
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
-            function reportFunction(i, u) {
-                $("#bc").attr("class", "fa fa-bug");
-                $("#" + i).css("visibility", "hidden");
-                $("#textarea" + i).css("visibility", "hidden");
-                var text = $('textarea[name="' + i + '1"]').val();
-                $.post("ReportServlet", {text: text, user_report: "${sessionScope.user.getId()}", review_id: i, user_post: u}, function (responseText) {
-                    $("#msg" + i).text(responseText).fadeIn(1);
-                    $("#msg" + i).text(responseText).delay(1200).fadeOut(1000);
+            function reportFunction() {
+
+
+                $.post("ReportServlet", {text: $('textarea[name="text"]').val(), user_report: "${sessionScope.user.getId()}", review_id: $("#rID").text(), user_post: $("#userR").text()}, function (responseText) {
+                    $("#test").text(responseText).fadeIn(1);
+                    $("#test").text(responseText).delay(1200).fadeOut(1000);
+
                 });
 
 
             }
-            function showForm(id) {
-                if ($("#bc").attr("class").toString() == "fa fa-bug") {
-                    $("#bc").attr("class", "fa fa-times");
-                    $("#" + id).css("visibility", "visible");
-                    $("#textarea" + id).css("visibility", "visible");
+            function toggle_visible(usp, rID) {
+                if ($("#popup-box1").css('display') === 'none') {
+                    $("#cover").fadeIn("slow");
+                    $("#popup-box1").fadeIn("slow");
+                    $("#userR").text(usp);
+                    $("#rID").text(rID);
                 } else {
-                    $("#bc").attr("class", "fa fa-bug");
-                    $("#" + id).css("visibility", "hidden");
-                    $("#textarea" + id).css("visibility", "hidden");
+                    closepop();
                 }
+
             }
-            
+            function closepop() {
+                $("#cover").fadeOut();
+                $("#popup-box1").fadeOut();
+                $("#userR").text("");
+                $("#rID").text("");
+                $('textarea[name="text"]').val("");
+            }
         </script>
     </head>
     <body>
@@ -61,14 +66,29 @@
 
             <br><br><hr>
         </div>
+        <!--          ///popup///  -->
+        <div id="popup-box1" class="popup-position" onclick="">
+
+            <div id="popup-wrapper">
+                <div id="popup-container">
+                    <p id="userR" hidden=""></p>
+                    <p id="rID" hidden=""></p>
+                    <h1 >Report</h1>
+                    <h1 id="test"></h1>
+                    <textarea style="width: 100%;resize: none;margin: 10px;" name="text"></textarea>
+                    <p style="text-align: right"><a onclick="reportFunction();">send</a></p>
+                    <p><a href="javascript:void(0)" onclick="toggle_visible('popup-box1');">close</a></p>
+                </div>
+                <div id="cover"></div>
+            </div>
+
+        </div>
+
         <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
                 <div class="content">
-                    <div id="report${show.getReview_id()}" style="float: right;position: relative;width: 0;height: 90px;">
-                        <p id="msg${show.getReview_id()}" style="position: absolute;right: 15px;width: 120px;"></p><i class="fa fa-bug" aria-hidden="true" onclick="showForm('${show.getReview_id()}')" id="bc" style="float: right;"></i>
-                        <a href="javascript:void(0)" id="${show.getReview_id()}" onclick="reportFunction('${show.getReview_id()}', '${show.getUser()}'); return false;" style="position: absolute;margin-top: 75px;right: 0px;visibility: hidden;">Send</a>
-                        <textarea id="textarea${show.getReview_id()}" name="${show.getReview_id()}1"  style="position: absolute;right: 0px;height: 60px;width: 300px; visibility: hidden;margin-top: 15px; resize: none;padding: 5px;" placeholder="Write report . . ."></textarea>
-                    </div>
+
+                    <i class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');" id="bc" style="float: right;"></i>
                     <p>${show.getContent()}</p> 
                     <p><b>Score : </b>${show.getScore()}</p>
 
@@ -113,6 +133,11 @@
 
 
         <%@ include file = "footer.jsp" %>
+        <script>
+            $("#cover").click(function () {
+                closepop();
+            });
+        </script>
     </body>
 
 

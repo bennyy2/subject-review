@@ -1,9 +1,9 @@
 <%-- 
-    Document   : showType
-    Created on : Oct 21, 2017, 2:34:22 AM
+    Document   : showMajor
+    Created on : Dec 8, 2017, 2:58:59 PM
     Author     : Benny
 --%>
-<%@page import="Model.Type"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -13,22 +13,20 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <title>Type</title>
+        <title>JSP Page</title>
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
-        <h1 style="text-align: center">${requestScope.type_name}</h1><br>
-        
-        <a href="addSubject.jsp">Add New Subject</a><br>
+        <h1 style="text-align: center">วิชาเลือกคณะ</h1><br>
 
         <div>
-            <c:forEach var = "sub" items = "${sessionScope.allSub}">
+            <c:forEach var = "major" items = "${sessionScope.allMajor}">
                 <div class="col-md-10" style="width: 100%">
 
                     <table  id="block">
                         <tr><td>
                                 <br>
-                                <a href="viewSubjectServlet?id=${sub.getSubject_id()}">${sub.getSubject_id()}   ${sub.getSj_name_eng()}</a><br>
+                                <a href="viewSubjectServlet?id=${major.getMajor_id()}">${major.getMajor_name()}</a><br>
 
                                 <br>
                             </td></tr>

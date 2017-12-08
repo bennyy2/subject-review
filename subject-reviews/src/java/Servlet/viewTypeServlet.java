@@ -45,33 +45,10 @@ public class viewTypeServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String id = request.getParameter("id");
             String name = request.getParameter("name");
-            Connection conn = null;
-            PreparedStatement pstm = null;
-            ResultSet rs = null;
             ArrayList<Subject> allSub = new ArrayList<>();
+            Subject subject = new Subject();
 
-            try {
-                conn = DBConnection.getConnection();
-                String sql = "SELECT * FROM subject WHERE type_id = ?";
-                pstm = conn.prepareStatement(sql);
-                pstm.setString(1, id);
-                rs = pstm.executeQuery();
-
-                while (rs.next()) {
-                    Subject subject = new Subject(rs.getString("subject_id"), rs.getString("sj_name_eng"), rs.getString("sj_name_thai"));
-                    allSub.add(subject);
-                }
-
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            } finally {
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException ignore) {
-                    }
-                }
-            }
+            allSub = subject.getSubjectByType(id);
             
             HttpSession session = request.getSession();
             request.setAttribute("type_name", name);

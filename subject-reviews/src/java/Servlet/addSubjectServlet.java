@@ -5,34 +5,25 @@
  */
 package Servlet;
 
-
+import Model.Subject;
+import Model.Type;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
-import Connection.DBConnection;
-import Model.Review;
-import Model.Type;
-import Model.UserProfile;
 
 /**
  *
  * @author Benny
  */
-@WebServlet(name = "loginServlet", urlPatterns = {"/loginServlet"})
-public class loginServlet extends HttpServlet {
+@WebServlet(name = "addSubjectServlet", urlPatterns = {"/addSubjectServlet"})
+public class addSubjectServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,32 +33,40 @@ public class loginServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String message = null;
-            UserProfile user = new UserProfile(username, password);
+            String id = request.getParameter("id");
+            String subject_thai = request.getParameter("subject_thai");
+            String subject_eng = request.getParameter("subject_eng");
+            String des_thai = request.getParameter("des_thai");
+            String des_eng = request.getParameter("des_eng");
+            String type_id = request.getParameter("type");
+            Subject subject = new Subject();
             Type type = new Type();
             ArrayList<Type> allType = new ArrayList<>();
-            
-            if (user.login()) {
-                HttpSession session = request.getSession();
-                allType = type.showAllType();
-                session.setAttribute("allType", allType);
-                session.setAttribute("user", user);
-                session.setAttribute("user_id", user.getId());
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
-                dispatcher.forward(request, response);
-            } 
-            else {
-                message = "username or password is incorrect.";
+            String message = null;
+
+            if (id != "" || subject_thai != "" || subject_eng != "" || des_thai != "" || des_eng != "") {
+                if (subject.insertNewSubject(id, subject_thai, subject_eng, des_thai, des_eng, type_id)) {
+                    HttpSession session = request.getSession();
+                    allType = type.showAllType();
+                    message = "Add Subject Completed";
+                    request.setAttribute("message", message);
+                    session.setAttribute("allType", allType);
+                    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/subject_type.jsp");
+                    dispatcher.forward(request, response);
+                }else{
+                    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/error.html");
+                    dispatcher.forward(request, response);
+                }
+
+            } else {
+                message = "Fill the form";
                 request.setAttribute("message", message);
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
+                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/addSubject.jsp");
                 dispatcher.forward(request, response);
             }
 
@@ -86,11 +85,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(loginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -104,11 +99,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(loginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

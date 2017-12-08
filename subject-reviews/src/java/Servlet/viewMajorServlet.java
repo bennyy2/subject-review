@@ -5,34 +5,24 @@
  */
 package Servlet;
 
-
+import Model.Major;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
-import Connection.DBConnection;
-import Model.Review;
-import Model.Type;
-import Model.UserProfile;
 
 /**
  *
  * @author Benny
  */
-@WebServlet(name = "loginServlet", urlPatterns = {"/loginServlet"})
-public class loginServlet extends HttpServlet {
+@WebServlet(name = "viewMajorServlet", urlPatterns = {"/viewMajorServlet"})
+public class viewMajorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,35 +32,18 @@ public class loginServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String message = null;
-            UserProfile user = new UserProfile(username, password);
-            Type type = new Type();
-            ArrayList<Type> allType = new ArrayList<>();
-            
-            if (user.login()) {
-                HttpSession session = request.getSession();
-                allType = type.showAllType();
-                session.setAttribute("allType", allType);
-                session.setAttribute("user", user);
-                session.setAttribute("user_id", user.getId());
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
-                dispatcher.forward(request, response);
-            } 
-            else {
-                message = "username or password is incorrect.";
-                request.setAttribute("message", message);
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");
-                dispatcher.forward(request, response);
-            }
-
+            Major major = new Major();
+            ArrayList<Major> allMajor = new ArrayList<>();
+            allMajor = major.getMajor();
+            HttpSession session = request.getSession();
+            session.setAttribute("allMajor", allMajor);
+            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/showMajor.jsp");
+            dispatcher.forward(request, response);
         }
     }
 
@@ -86,11 +59,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(loginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -104,11 +73,7 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(loginServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

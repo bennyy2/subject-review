@@ -10,10 +10,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<<<<<<< HEAD
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <title>Type</title>
+=======
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <title>JSP Page</title>
+>>>>>>> 40c950fab75c08611804bc1c3cee27f1e3dd20b7
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
@@ -41,5 +47,4 @@
 
     </body>
 </html>
-<script src="js/bootstrap.js"/>
-<script src="js/bootstrap.min.js"/>
+<script src="js/bootstrap.min.js"></script>

@@ -18,7 +18,7 @@
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
@@ -122,14 +122,10 @@
         </div>
 
 
-                        <footer id="footer">
-                            <p>Copyright &copy; 2017 KMITL Subject review. All rights reserved.</p>  
-                        </footer>
+                        
 
 
-
+<%@ include file = "footer.jsp" %>
     </body>
 </html>
-
-<script src="js/bootstrap.js"/>
-<script src="js/bootstrap.min.js"/>
+<script src="js/bootstrap.min.js"></script>

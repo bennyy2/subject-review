@@ -11,9 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
         <title>KMITL Subject review system</title>
     </head>
@@ -36,7 +37,7 @@
                                 <div class="form-group">
                                     <label for="email">Email:</label>
                                     <input type="email" class="form-control" value="${sessionScope.user.getEmail()}" readonly>
-                                    
+
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd">Old-Password:</label>
@@ -50,23 +51,22 @@
                                     <label for="pwd">Confirm-Password:</label>
                                     <input type="password" class="form-control" id="password" name="c-password" placeholder="Confirm-Password">
                                 </div>
-                                
+
                                 <div class="message">
                                     <label>${message}</label>
                                 </div>
                                 <button type="submit" value="confirm" class="btn btn-default">save</button>
                             </form>
                         </div>
-                                <div class="regis">
-                                     <a href="login.jsp"><< Back to log in</a>
-                                </div>
-                      
+                        <div class="regis">
+                            <a href="login.jsp"><< Back to log in</a>
+                        </div>
+
                     </div>
                 </div>
-                
+            </div>
+        </div>
 
-                </body>
-                </html>
-                <script src="js/bootstrap.js"/>
-                <script src="js/bootstrap.min.js"/>
-
+    </body>
+</html>
+<script src="js/bootstrap.min.js"></script>

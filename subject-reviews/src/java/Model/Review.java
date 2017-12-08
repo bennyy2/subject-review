@@ -116,7 +116,7 @@ public class Review {
             pstm.setString(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
-                total = rs.getFloat("total_score");
+                total = rs.getFloat("total_score")%.2f;
             }
             rs.close();
             pstm.close();

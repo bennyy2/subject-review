@@ -8,6 +8,7 @@
 <%@page import="Model.UserProfile"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -61,7 +62,7 @@
 
             <h3 >Description : </h3>${sessionScope.subject.getSj_description_eng()}<br><br>
             <h3>คำอธิบายรายวิชา : </h3>${sessionScope.subject.getSj_description_thai()}<br><br>
-            <h3>score : </h3>${sessionScope.subject.getTotal_score()}
+            <h3>score : </h3><fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.subject.getTotal_score()}"/>
 
 
             <br><br><hr>

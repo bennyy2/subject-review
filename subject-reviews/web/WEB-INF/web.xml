@@ -9,7 +9,7 @@
     </welcome-file-list>
     <session-config>
         <session-timeout>
-            300
+            60
         </session-timeout>
     </session-config>
     <jsp-config>

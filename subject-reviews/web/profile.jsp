@@ -60,7 +60,7 @@
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
-        <h1>Profile ${sessionScope.user.getUsername()}</h1><a href="edituser.jsp">edit</a>
+        <h1>Hi... ${sessionScope.user.getUsername()}</h1><a href="edituser.jsp">edit</a>
         Username : ${sessionScope.user.getUsername()}<br>
         Email : ${sessionScope.user.getEmail()}<br>
         ID : ${sessionScope.user.getId()}<br>

@@ -19,7 +19,8 @@
     </head>
     <body>
         <div id="typed-strings">
-            <h1 >KMITL Subject review system</h1>
+            <h1>Welcome</h1>
+            <h1><span style="color: #eea236">KMITL</span> Subject review system</h1>
         </div>
         <h1 id="header_name"><span id="typed"></span></h1>
 
@@ -71,7 +72,7 @@
         backSpeed: 0,
         backDelay: 1000,
         fadeOut: true,
-        startDelay: 2000
+        startDelay: 1000
         
     });
 </script>

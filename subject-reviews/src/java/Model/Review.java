@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -115,6 +116,10 @@ public class Review {
             if (rs.next()) {
                 total = rs.getFloat("total_score");
             }
+
+            DecimalFormat df = new DecimalFormat();
+            df.setMaximumFractionDigits(2);
+            total= Float.valueOf(df.format(total));
             rs.close();
             pstm.close();
 
@@ -236,8 +241,6 @@ public class Review {
         }
         return status;
     }
-    
-    
 
     public ArrayList<Review> showHistoryReview(String id) {
         Connection conn = null;
@@ -275,7 +278,7 @@ public class Review {
         return reviewList;
 
     }
-    
+
     public boolean updateReview(String review_id, String content) {
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -314,7 +317,7 @@ public class Review {
         this.subject_id = subject_id;
         this.sj_name = sj_name;
     }
-    
+
     public String getSubject_id() {
         return subject_id;
     }
@@ -378,7 +381,5 @@ public class Review {
     public void setScore(int score) {
         this.score = score;
     }
-
-    
 
 }

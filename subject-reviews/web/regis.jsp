@@ -29,11 +29,11 @@
                             <form action="regisServlet" method="POST">
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="User">
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="User name">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail : example@kmitl.ac.th">
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd">Password:</label>
@@ -41,6 +41,7 @@
                                 </div>
 
                                 <div class="message">
+                                    *ใช้อีเมล์ของสถาบันได้เท่านั้น example@kmitl.ac.th
                                     <label>${message}</label>
                                 </div>
                                 <button type="submit" value="regis" class="btn btn-default">Register</button>

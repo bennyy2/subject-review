@@ -26,7 +26,7 @@
         <div class="header">
             <div class="container text-center">
                 <h1>KMITL Subject review system</h1>      
-                <p>Tell me what is in your mind.</p><br><hr>
+                <p>Tell me what is in your mind.</p>
             </div>
         </div>
 

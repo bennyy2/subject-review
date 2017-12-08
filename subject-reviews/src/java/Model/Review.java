@@ -71,9 +71,6 @@ public class Review {
         String id = UUID.randomUUID().toString();
         Timestamp time = new Timestamp(System.currentTimeMillis());
         String date = time.toString();
-//        Date curDate = new Date();
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//        String date = format.format(curDate);
         try {
 
             conn = DBConnection.getConnection();
@@ -116,7 +113,7 @@ public class Review {
             pstm.setString(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
-                total = rs.getFloat("total_score")%.2f;
+                total = rs.getFloat("total_score");
             }
             rs.close();
             pstm.close();

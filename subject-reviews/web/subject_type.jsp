@@ -23,6 +23,9 @@
         <%@ include file = "navbar.jsp" %>
         <h1 style="text-align: center">วิชาสอนบริการ</h1><br><hr>
 
+        <div class="welcome" style="text-align: center">
+            <label>${message}</label>
+        </div>
 
         <div>
             <c:forEach var = "type" items = "${sessionScope.allType}">
@@ -32,7 +35,16 @@
                         <tr>
                             <td>
                                 <br>
-                                <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
+                                <c:choose>
+                                    <c:when test="${type.getType_id() == '15'}">
+                                        <a href="viewMajorServlet" >${type.getType_name()}</a><br>
+                                    </c:when>    
+                                    <c:otherwise>
+                                        <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
+                                    </c:otherwise>
+                                </c:choose>
+
+
                                 <br>
                             </td>
                         </tr>

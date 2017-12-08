@@ -21,7 +21,7 @@
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
-        <h1 style="text-align: center">วิชาสอนบริการ</h1><br><hr>
+        <h1 style="text-align: center">วิชาสอนบริการ</h1><br>
 
         <div class="welcome" style="text-align: center">
             <label>${message}</label>

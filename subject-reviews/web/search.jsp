@@ -28,26 +28,19 @@
                     <h3 style="margin-left: 15%">There are no subject that you are searching for.</h3><br>
                 </c:when>    
                 <c:otherwise>
-                    <h3 style="margin-left: 15%">The subjects you search for..</h3><br>
-                    <c:forEach var = "subject" items = "${sessionScope.subjectList}">
-                        <div class="col-md-10" style="width: 100%">
+                    <h3 style="margin-left: 15%">The subjects you search for..</h3>
+                    <ul id="myUL">
+                        <c:forEach var = "subject" items = "${sessionScope.subjectList}">
+                            <li>
+                                <a href="viewSubjectServlet?id=${subject.getSubject_id()}" style="text-align: center">
+                                    ${subject.getSubject_id()}<br>
+                                    ${subject.getSj_name_eng()}
+                                    ${subject.getSj_name_thai()}<br>
 
-                            <table  id="block">
-                                <tr><td>
-                                        <br>
-                                        <a href="viewSubjectServlet?id=${subject.getSubject_id()}" >
-                                            ${subject.getSubject_id()}<br>
-                                            ${subject.getSj_name_eng()}
-                                            ${subject.getSj_name_thai()}<br>
-
-                                        </a>
-                                        <br>
-                                    </td></tr>
-                            </table>
-                            <br>
-
-                        </div>
-                    </c:forEach>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>>
                 </c:otherwise>
             </c:choose>
 

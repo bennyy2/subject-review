@@ -46,7 +46,7 @@
                     }
                 });
 
-            }, 10000);
+            }, 5000);
         </script>
     </head>
     <body>
@@ -65,8 +65,8 @@
         <a href="ReportServlet">refresh</a><br>
         <%int c = 0;%>
 
-        <div id="refresh" style="display: block; position: fixed;top: 20%; right: 0;visibility: hidden; background-color: #029f5b">
-            <i class="fa fa-refresh fa-spin fa-fw"></i><a id="newR"></a></div>
+        <div id="refresh" style="display: block; position: fixed;top: 20%; right: 0;visibility: hidden; background-color: rgba (255,0,0,0.5); z-index: 1;">
+            <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><a id="newR" style="font-size: 35px"></a></div>
 
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">

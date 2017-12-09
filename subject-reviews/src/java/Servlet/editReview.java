@@ -95,12 +95,16 @@ public class editReview extends HttpServlet {
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs1 = null;
-
+        if("true".equals(disable)){
+            disable = "no";
+        }else if("false".equals(disable)){
+            disable = "yes";
+        }
         ArrayList<Report> showReport = new ArrayList<>();
         try {
             conn = DBConnection.getConnection();
             String sql = "UPDATE review SET content=\"" + text + "\" ,score=" + score + " ,display_user=\"" + disable + "\" where review_id=\"" + review_id + "\";";
-
+            
             pstm = conn.prepareStatement(sql);
             pstm.execute();
             sql = "SELECT review_id, content, date, score, display_user, subject_id, sj_name_eng 'sj_name' FROM review JOIN subject USING (subject_id) where review_id ='" + review_id + "';";
@@ -110,8 +114,8 @@ public class editReview extends HttpServlet {
             text = "";
             //response.getWriter().write(sql);
             out.println("<div id=\"icon\">");
-            out.println("<i style=\"position: absolute;right: 15px;width: 120px;\" class=\"fa fa-trash\" aria-hidden=\"true\" href=\"deleteReviewServlet?id=" + rs1.getString("review_id") + "\" style=\"position: absolute;right: 15px;width: 120px;\"></i> ");
-            out.println("<i style=\"position: absolute;right: 35px;width: 120px;\" class=\"fa fa-pencil\" aria-hidden=\"true\" href=\"javascript:void(0)\" onclick=\"editReview('" + rs1.getString("review_id") + "','" + rs1.getString("display_user") + "','" + rs1.getString("score") + "');return false;\"></i></div>");
+            out.println("<a style=\"color: black\" href=\"deleteReviewServlet?id="+review_id+"\"><i class=\"fa fa-trash\" aria-hidden=\"true\"  style=\"position: absolute;width: 120px;\"></i></a>");
+            out.println("<i style=\"position: absolute;right: 10px;\" class=\"fa fa-pencil\" aria-hidden=\"true\" href=\"javascript:void(0)\" onclick=\"editReview('" + rs1.getString("review_id") + "','" + rs1.getString("display_user") + "','" + rs1.getString("score") + "');return false;\"data-toggle=\"modal\" data-target=\"#myModal\"></i></div>");
             out.println("<p >Content : <span id='C" + rs1.getString("review_id") + "'>" + rs1.getString("content") + "</span></p>");
             out.println("<p id=\"S" + rs1.getString("review_id") + "\">Score : " + rs1.getString("score") + "</p>");
             if ("no".equals(rs1.getString("display_user"))) {

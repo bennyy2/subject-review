@@ -9,11 +9,7 @@
 <html>
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>KMITL Subject review system</title>
-    </head>
-    <body>
-    <head>
+       
         <meta charset="utf-8">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -41,14 +37,14 @@
                     if (responseText !== "0") {
                         $("#refresh").css("visibility", "visible");
                         $("#newR").text("  new " + responseText + " report").fadeIn();
-                    }else{
+                    } else {
                         $("#refresh").css("visibility", "hidden");
                     }
                 });
 
             }, 5000);
         </script>
-    </head>
+
     <body>
         <%@ include file = "navbar.jsp" %>
 

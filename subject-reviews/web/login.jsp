@@ -18,9 +18,10 @@
         <title>KMITL Subject review system</title>
     </head>
     <body>
+        <img src="img/bglog.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
         <div id="typed-strings">
             <h1>Welcome</h1>
-            <h1><span style="color: #eea236">KMITL</span> Subject review system</h1>
+            <h1><span style="color: #eea236;font-size: 100px">KMITL</span> Subject review system</h1>
         </div>
         <h1 id="header_name"><span id="typed"></span></h1>
 
@@ -73,6 +74,6 @@
         backDelay: 1000,
         fadeOut: true,
         startDelay: 1000
-        
+
     });
 </script>

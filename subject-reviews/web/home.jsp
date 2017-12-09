@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>KMITL Subject review system</title>
         <meta charset="utf-8">
@@ -21,6 +22,7 @@
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     </head>
     <body>
+        <img src="img/bg.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
         <%@ include file = "navbar.jsp" %>
 
         <div class="header">

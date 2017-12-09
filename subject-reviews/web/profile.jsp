@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -67,7 +68,7 @@
         Role : ${sessionScope.user.getRole()}<br>
 
         <h1>Review History <i class="fa fa-history" aria-hidden="true"></i></h1>
-        <div style="margin-left: 100px;margin-right: 100px;">
+        <div style="margin-left: 86px;margin-right: 100px;">
             <c:forEach var = "review" items = "${sessionScope.showHistory}">
                 <div id="review${review.getReview_id()}">
                     <div id="icon">

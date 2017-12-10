@@ -1,4 +1,7 @@
-
+@font-face {
+    font-family: bangna;
+    src: url(../fonts/WDB_Bangna.ttf);
+}
 body {
     padding-top: 60px;
     margin-top: 0px;
@@ -201,9 +204,10 @@ p{
 }
 /* Add a gray background color and some padding to the footer */
 footer {
+    bottom: 0;
     background-color: #f2f2f2;
     padding: 15px 15px 5px 15px;
-    position: inherit;
+    position: absolute;
     text-align: center;
     bottom: 0px;
     width: 100%;
@@ -353,10 +357,37 @@ blink, .blink {
         grid-template-columns: 50% 50% !important;
         text-align: center;
     }
-    .grid{
-        align-content: center;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+}
 
-    }
+
+#recent {
+    
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    
+}
+#recent li{
+    padding: 0 0 10px 0;
+}
+#recent li a {
+    /*  border: 1px solid #ddd;*/
+    
+    margin-right : 10%; /* Prevent double borders */
+    
+    background-color: rgba(255,255,255,0.5);
+    padding: 12px;
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+    display: block;
+    line-height: 20px;
+}
+#recent li a p{
+    line-height: 30px;
+    padding-left: 5px;
+    margin: 0;
+}
+#recent li a:hover:not(.header) {
+    background-color: #eee;
 }

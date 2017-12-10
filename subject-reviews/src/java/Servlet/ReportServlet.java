@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlet;
 
 import Connection.DBConnection;
@@ -90,8 +85,6 @@ public class ReportServlet extends HttpServlet {
             }
 
             HttpSession session = request.getSession();
-            /*session.setAttribute("subject", subject);
-            session.setAttribute("subject_id", subject.getSubject_id());*/
             session.setAttribute("showReport", showReport);
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/manageReview.jsp");
             dispatcher.forward(request, response);

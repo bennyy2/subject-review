@@ -18,8 +18,6 @@
         <%@ include file = "navbar.jsp" %>
         <h1 style="text-align: center">Add new Subject</h1><br>
         <form action="addSubjectServlet">
-
-
             <div class="container">
                 <div class="form-group">
                     <label for="id">Subject ID</label>
@@ -52,15 +50,9 @@
                 <div class="message">
                     <label>${message}</label>
                 </div>
-
-
                 <button type="submit" class="btn btn-default">Submit</button>
-
             </div>
-
-
         </form>
-
     </body>
 </html>
 <script src="js/bootstrap.js"/>

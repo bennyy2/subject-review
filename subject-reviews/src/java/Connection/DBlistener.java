@@ -17,10 +17,8 @@ public class DBlistener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-
     
    }
-
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
 

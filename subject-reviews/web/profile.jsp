@@ -60,11 +60,12 @@
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
-        <h1>Profile ${sessionScope.user.getUsername()}</h1><a href="edituser.jsp">edit</a>
+        <h1>Profile ${sessionScope.user.getUsername()}</h1>
         Username : ${sessionScope.user.getUsername()}<br>
         Email : ${sessionScope.user.getEmail()}<br>
         ID : ${sessionScope.user.getId()}<br>
         Role : ${sessionScope.user.getRole()}<br>
+        <a href="edituser.jsp">edit password</a>
 
         <h1>Review History <i class="fa fa-history" aria-hidden="true"></i></h1>
         <div style="margin-left: 100px;margin-right: 100px;">

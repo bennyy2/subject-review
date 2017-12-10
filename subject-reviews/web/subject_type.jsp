@@ -24,12 +24,8 @@
         <img src="img/lib.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
         <%@ include file = "navbar.jsp" %>
         <h1 style="text-align: center">วิชาสอนบริการ</h1><br>
-
-        <div class="welcome" style="text-align: center">
-            <label>${message}</label>
-        </div>
-
-        <ul id="myUL" style="columns: 2;text-align: center;">
+        
+        <ul id="myUL1">
             <c:forEach var = "type" items = "${sessionScope.allType}">
                 <li>
                                 <c:choose>
@@ -43,6 +39,7 @@
                 </li>
             </c:forEach>
         </ul>
+        
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

@@ -61,6 +61,10 @@ public class loginServlet extends HttpServlet {
                 session.setAttribute("allType", allType);
                 session.setAttribute("user", user);
                 session.setAttribute("user_id", user.getId());
+                if("admin".equals(user.getRole())){
+                    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/manageReview.jsp");
+                dispatcher.forward(request, response);
+                }
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
                 dispatcher.forward(request, response);
             } 

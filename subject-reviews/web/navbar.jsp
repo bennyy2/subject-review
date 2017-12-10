@@ -7,6 +7,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<script>
+    setInterval(function () {
+
+        $.post("manageReport", function (responseText) {
+            if (responseText !== "0") {
+                $("#nofi").attr('data-badge', responseText);
+                $("#nofi").fadeIn();
+                
+            } else if (responseText === "0") {
+                $("#nofi").fadeOut();
+            }
+        });
+
+    }, 1000);
+</script>
 <html>
 
     <body>
@@ -56,7 +71,7 @@
 
                         <c:if test="${sessionScope.user.getUsername()=='admin'}">
                             <li <c:if test="${pageContext.request.servletPath==''}">class="active"</c:if>>
-                                    <a href="ReportServlet">manager
+                                <a href="manageReview.jsp" >manager<span class="badge1" data-badge="" id="nofi" style="display: none"></span>
                                     </a>
                                 </li>
                         </c:if>

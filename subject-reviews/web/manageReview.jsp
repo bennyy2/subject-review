@@ -9,7 +9,7 @@
 <html>
 
     <head>
-       
+
         <meta charset="utf-8">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -31,20 +31,26 @@
                     $("#re" + Rep).text(responseText).delay(1200).fadeOut(1000);
                 });
             }
+            var a = "0";
             setInterval(function () {
-
+                
                 $.post("manageReport", function (responseText) {
-                    if (responseText !== "0") {
-                        $("#refresh").css("visibility", "visible");
-                        $("#newR").text("  new " + responseText + " report").fadeIn();
-                    } else {
-                        $("#refresh").css("visibility", "hidden");
+                    if (responseText !== a && responseText!=="0") {
+                        $("#refresh").fadeIn();
+                        $("#refresh").delay(5000).fadeOut();
+                        a = responseText;
+
                     }
                 });
 
-            }, 5000);
+            }, 1000);
         </script>
-
+        <%
+            Report report = new Report();
+            ArrayList reportList = new ArrayList<>();
+            reportList = report.showReport();
+            session.setAttribute("showReport", reportList);
+        %>
     <body>
         <%@ include file = "navbar.jsp" %>
 
@@ -58,11 +64,10 @@
 
 
         <h1>Review report</h1><br>
-        <a href="ReportServlet">refresh</a><br>
-        <%int c = 0;%>
+        <p id="refresh" style="display: none; position: fixed; padding:10px 20px 15px 20px; background-color: darkgray;border-radius: 10px 10px 10px 10px; left: 10px; bottom: 10px; width: auto;height: 50px; z-index: 1;">
+            <a id="newR" style="font-size: 20px;color: white;"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  You have new report</a>
 
-        <div id="refresh" style="display: block; position: fixed;top: 20%; right: 0;visibility: hidden; background-color: rgba (255,0,0,0.5); z-index: 1;">
-            <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><a id="newR" style="font-size: 35px"></a></div>
+        </p><br>
 
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">

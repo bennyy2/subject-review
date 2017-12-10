@@ -20,10 +20,20 @@
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
+            
+            function bind() {
+                
+                if ($('[name="textre"]').val()!=""){ 
+                    $('#save').attr('disabled',false);
+                    
+                } else {
+                    $('#save').attr('disabled',true);
+                }
+            }
             function reportFunction() {
 
 
-                $.post("ReportServlet", {text: $('textarea[name="text"]').val(), user_report: "${sessionScope.user.getId()}", review_id: $("#rID").text(), user_post: $("#userR").text()}, function (responseText) {
+                $.post("ReportServlet", {text: $('textarea[name="textre"]').val(), user_report: "${sessionScope.user.getId()}", review_id: $("#rID").text(), user_post: $("#userR").text()}, function (responseText) {
                     $("#test").text(responseText).fadeIn(1);
                     $("#test").text(responseText).delay(1200).fadeOut(1000);
 
@@ -32,22 +42,19 @@
 
             }
             function toggle_visible(usp, rID) {
-                if ($("#popup-box1").css('display') === 'none') {
-                    $("#cover").fadeIn("slow");
-                    $("#popup-box1").fadeIn("slow");
-                    $("#userR").text(usp);
-                    $("#rID").text(rID);
-                } else {
-                    closepop();
-                }
+                $("#userR").text("");
+                $("#rID").text("");
+                $('textarea[name="textre"]').val("");
+                $("#userR").text(usp);
+                $("#rID").text(rID);
+
 
             }
             function closepop() {
-                $("#cover").fadeOut();
-                $("#popup-box1").fadeOut();
+
                 $("#userR").text("");
                 $("#rID").text("");
-                $('textarea[name="text"]').val("");
+                $('textarea[name="textre"]').val("");
             }
         </script>
     </head>
@@ -68,28 +75,32 @@
             <br><br><hr>
         </div>
         <!--          ///popup///  -->
-        <div id="popup-box1" class="popup-position" onclick="">
-
-            <div id="popup-wrapper">
-                <div id="popup-container">
-                    <p id="userR" hidden=""></p>
-                    <p id="rID" hidden=""></p>
-                    <h1 >Report</h1>
-                    <h1 id="test"></h1>
-                    <textarea style="width: 100%;resize: none;margin: 10px;" name="text"></textarea>
-                    <p style="text-align: right"><a onclick="reportFunction();">send</a></p>
-                    <p><a href="javascript:void(0)" onclick="toggle_visible('popup-box1');">close</a></p>
-                </div>
-                <div id="cover"></div>
-            </div>
-
-        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Report</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="userR" hidden=""></p>
+                        <p id="rID" hidden=""></p>
+                        <textarea class='form-control' rows='5' name='textre' onkeyup="bind();"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="save" data-dismiss="modal" onclick="reportFunction();" disabled="true">Send report</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
         <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
                 <div class="content">
 
-                    <i class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');" id="bc" style="float: right;" data-toggle="tooltip" data-placement="top" title="Report"></i>
+                    <i href="javascript:void(0)" class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');
+                            return false;" id="bc" style="float: right;" data-toggle="modal" data-target="#myModal"></i>
                     <p>${show.getContent()}</p> 
                     <p><b>Score : </b>${show.getScore()}</p>
 
@@ -146,3 +157,9 @@
 
 </html>
 <script src="js/bootstrap.min.js"></script>
+<script>
+            $('#myModal').on('shown.bs.modal', function () {
+                $('[name="text"]').focus();
+            });
+
+</script>

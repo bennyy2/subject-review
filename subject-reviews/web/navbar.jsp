@@ -7,12 +7,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<script>
+    setInterval(function () {
+
+        $.post("manageReport", function (responseText) {
+            if (responseText !== "0") {
+                $("#nofi").attr('data-badge', responseText);
+                $("#nofi").fadeIn();
+                
+            } else if (responseText === "0") {
+                $("#nofi").fadeOut();
+            }
+        });
+
+    }, 1000);
+</script>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+
     <body>
+        <%
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("login.jsp");
+            }
+
+        %>
+
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container" style="width: 90%;">
                 <div class="navbar-header"> 
@@ -27,10 +46,14 @@
                 <div id="navbar" class="navbar-collapse collapse" style="overflow-x: hidden;">
 
                     <ul class="nav navbar-nav">
-                        <li <c:if test="${pageContext.request.servletPath=='/home.jsp'}">class="active"</c:if>><a href="home.jsp">Home</a></li>
+                        <li <c:if test="${pageContext.request.servletPath=='/home.jsp'}">class="active"</c:if>>
+                                <a href="home.jsp">Home</a>
+                            </li>
 
                             <li <c:if test="${pageContext.request.servletPath=='/subject_type.jsp'}">class="active"</c:if>><a href="subject_type.jsp">Subject type</a></li>
-                        <li <c:if test="${pageContext.request.servletPath=='/addSubject.jsp'}">class="active"</c:if>><a href="addSubject.jsp">Add Subject</a></li>
+                        <li <c:if test="${pageContext.request.servletPath=='/addSubject.jsp'}">class="active"</c:if>>
+                                <a href="addSubject.jsp">Add Subject</a>
+                            </li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
@@ -48,21 +71,17 @@
 
                         <c:if test="${sessionScope.user.getUsername()=='admin'}">
                             <li <c:if test="${pageContext.request.servletPath==''}">class="active"</c:if>>
-                                    <a href="ReportServlet">manager
+                                <a href="manageReview.jsp" >manager<span class="badge1" data-badge="" id="nofi" style="display: none"></span>
                                     </a>
                                 </li>
                         </c:if>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.user.getUsername()}   <span class="caret"></span></a>
-                        <ul class="dropdown-menu" style="min-width: 110px;">
+                            <ul class="dropdown-menu" style="min-width: 110px;">
                                 <li><a href="viewHistory">Profile<span class="glyphicon glyphicon-user" aria-hidden="true" style="float: right"></span></a></li>
                                 <li><a href="logoutServlet">logout<span class="glyphicon glyphicon-log-out" aria-hidden="true" style="float: right"></span></a></li>
                             </ul>
                         </li>
-                        <!--                        <li >
-                                                    <a href="viewHistory">${sessionScope.user.getUsername()}
-                                                    </a>
-                                                </li>-->
                     </ul>
 
                 </div>

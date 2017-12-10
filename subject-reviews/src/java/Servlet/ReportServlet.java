@@ -40,6 +40,7 @@ public class ReportServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
@@ -89,6 +90,59 @@ public class ReportServlet extends HttpServlet {
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/manageReview.jsp");
             dispatcher.forward(request, response);
         }
+=======
+//        response.setContentType("text/html;charset=UTF-8");
+//
+//        try (PrintWriter out = response.getWriter()) {
+//            Connection conn = null;
+//            PreparedStatement pstm = null;
+//            ResultSet rs1 = null;
+//            ResultSet rs2 = null;
+//
+//            ArrayList<Report> showReport = new ArrayList<>();
+//
+//            try {
+//
+//                conn = DBConnection.getConnection();
+//                String sql = "Select * from report left outer join user on report.user_report_id=user.user_id left join review on report.review_id=review.review_id ";//Ureport
+//                String sql2 = "Select * from report left outer join user on report.user_post_id=user.user_id  "; //Upost
+//                pstm = conn.prepareStatement(sql);
+//                rs1 = pstm.executeQuery();
+//                pstm = conn.prepareStatement(sql2);
+//                rs2 = pstm.executeQuery();
+//                while (rs1.next() && rs2.next()) {
+//
+//                    ArrayList<Subject> subject = new Subject().searchSubject(rs1.getString("subject_id"));
+//
+//                    String sub = subject.get(0).getSubject_id() + " " + subject.get(0).getSj_name_thai() + " " + subject.get(0).getSj_name_eng();
+//
+//                    Report report = new Report(rs1.getString("report_id"), rs1.getString("report"), rs1.getString("date_report"), rs1.getString("user_report_id"), rs1.getString("username"), rs2.getString("user_post_id"), rs2.getString("username"), rs1.getString("content"), sub, rs1.getString("review_id"));
+//
+//                    showReport.add(report);
+//
+//                }
+//                sql = "UPDATE report SET status = 'read' WHERE status= 'unread'";
+//                pstm = conn.prepareStatement(sql);
+//                pstm.execute();
+//            } catch (Exception ex) {
+//                out.println(ex.getMessage());
+//            } finally {
+//                if (conn != null) {
+//                    try {
+//                        conn.close();
+//                    } catch (SQLException ignore) {
+//                    }
+//                }
+//            }
+//
+//            HttpSession session = request.getSession();
+//            /*session.setAttribute("subject", subject);
+//            session.setAttribute("subject_id", subject.getSubject_id());*/
+//            session.setAttribute("showReport", showReport);
+//            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/manageReview.jsp");
+//            dispatcher.forward(request, response);
+//        }
+>>>>>>> 5074711778ee6f96d7a9d01da92541f4459d9673
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

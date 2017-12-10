@@ -49,48 +49,48 @@ public class editServlet extends HttpServlet {
             String message = null;
             UserProfile u = new UserProfile();
             HttpSession session = request.getSession();
-            u=(UserProfile) session.getAttribute("user");
-            
-            
+            u = (UserProfile) session.getAttribute("user");
+
             Connection conn = null;
             PreparedStatement pstm = null;
             ResultSet rs = null;
-            
+
             boolean errorRegis = false;
-            
 
             try {
                 conn = DBConnection.getConnection();
-                String sql = "UPDATE user SET username ='"+username+"' WHERE user.email='"+u.getEmail()+"'";
+                String sql = "UPDATE user SET username ='" + username + "' WHERE user.email='" + u.getEmail() + "'";
                 pstm = conn.prepareStatement(sql);
-                
+
                 pstm.execute();
                 u.setUsername(username);
                 out.println(u.getUsername());
                 //RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/profile.jsp");
                 //dispatcher.forward(request, response);
-                if(u.getPassword().equals(o_password)){
-                    out.println(u.getPassword());
-                    if(n_password.equals(c_password)){
-                    sql = "UPDATE user SET password ='"+c_password+"' WHERE user.email='"+u.getEmail()+"'";
-                    pstm = conn.prepareStatement(sql);
-                    pstm.execute();
-                    u.setPassword(c_password);
+                if (o_password != null && n_password != null && c_password != null) {
+                    if (u.getPassword().equals(o_password)) {
+                        out.println(u.getPassword());
+                        if (n_password.equals(c_password)) {
+                            sql = "UPDATE user SET password ='" + c_password + "' WHERE user.email='" + u.getEmail() + "'";
+                            pstm = conn.prepareStatement(sql);
+                            pstm.execute();
+                            u.setPassword(c_password);
+                        } else {
+                            message = "Password does not match the confirm password";
+                            request.setAttribute("message", message);
+                            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/edituser.jsp");
+                            dispatcher.forward(request, response);
+                        }
+
+                    } else {
+                        message = "incorrect password, password is not change";
+                        request.setAttribute("message", message);
+                        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/edituser.jsp");
+                        dispatcher.forward(request, response);
                     }
-                    else{
-                     message = "Password does not match the confirm password";
-                    request.setAttribute("message", message);
-                    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/edituser.jsp");
-                    dispatcher.forward(request, response);
-                    }
-                    
+
                 }
-                else{
-                    message = "incorrect password, password is not change";
-                    request.setAttribute("message", message);
-                    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/edituser.jsp");
-                    dispatcher.forward(request, response);
-                    }
+
             } catch (Exception ex) {
                 out.println(ex.getMessage());
             } finally {
@@ -104,10 +104,10 @@ public class editServlet extends HttpServlet {
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/profile.jsp");
             dispatcher.forward(request, response);
         }
-        
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

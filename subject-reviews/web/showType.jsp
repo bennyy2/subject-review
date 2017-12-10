@@ -22,6 +22,7 @@
         
     </head>
     <body>
+        <img src="img/lib.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
         <%@ include file = "navbar.jsp" %>
         <h1 style="text-align: center">${requestScope.type_name}</h1><br>
 

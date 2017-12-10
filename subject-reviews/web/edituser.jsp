@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -19,6 +20,7 @@
         <title>KMITL Subject review system</title>
     </head>
     <body>
+        <%@ include file = "navbar.jsp" %>
         <h3 id="header_name">KMITL Subject reviews</h3>
         <div class="container" id="login">
             <div class="row">
@@ -32,7 +34,7 @@
                             <form action="editServlet" method="POST">
                                 <div class="form-group">
                                     <label for="username">Username:</label>
-                                    <input type="text" class="form-control" id="username" name="username" value="${sessionScope.user.getUsername()}" readonly>
+                                    <input type="text" class="form-control" id="username" name="username" value="${sessionScope.user.getUsername()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>
@@ -41,7 +43,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd">Old-Password:</label>
-                                    <input type="password" class="form-control" id="password" name="o-password" >
+                                    <input type="password" class="form-control" id="password" name="o-password" placeholder="Old-Password">
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd">New-Password:</label>
@@ -59,7 +61,7 @@
                             </form>
                         </div>
                         <div class="regis">
-                            <a href="login.jsp"><< Back to log in</a>
+                            <a href="profile.jsp"><< Back </a>
                         </div>
 
                     </div>

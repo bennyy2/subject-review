@@ -14,27 +14,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Subject type</title>
         <meta charset="utf-8">
+        
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     </head>
     <body>
+        <img src="img/lib.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
         <%@ include file = "navbar.jsp" %>
         <h1 style="text-align: center">วิชาสอนบริการ</h1><br>
-
-        <div class="welcome" style="text-align: center">
-            <label>${message}</label>
-        </div>
-
-        <div>
+        
+        <ul id="myUL1">
             <c:forEach var = "type" items = "${sessionScope.allType}">
-                <div class="col-xs-6">
-
-                    <table  id="block" >
-                        <tr>
-                            <td>
-                                <br>
+                <li>
                                 <c:choose>
                                     <c:when test="${type.getType_id() == '15'}">
                                         <a href="viewMajorServlet" >${type.getType_name()}</a><br>
@@ -43,17 +36,10 @@
                                         <a href="viewTypeServlet?id=${type.getType_id()}&name=${type.getType_name()}" >${type.getType_name()}</a><br>
                                     </c:otherwise>
                                 </c:choose>
-
-
-                                <br>
-                            </td>
-                        </tr>
-                    </table>
-                    <br>
-
-                </div>
+                </li>
             </c:forEach>
-        </div>
+        </ul>
+        
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

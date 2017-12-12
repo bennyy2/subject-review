@@ -120,7 +120,7 @@
                                     <hr style="width: 80%;">
                                     <p><c:choose>
                                             <c:when test="${review.getDisplay_user()=='no'}">
-                                                User : Unknow User<br>
+                                                User : Unknown User<br>
                                             </c:when>    
                                             <c:otherwise>
                                                 User : ${review.getUser()}

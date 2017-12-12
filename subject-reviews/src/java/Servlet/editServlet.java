@@ -47,6 +47,7 @@ public class editServlet extends HttpServlet {
             String n_password = request.getParameter("n-password");
             String c_password = request.getParameter("c-password");
             String message = null;
+            
             UserProfile u = new UserProfile();
             HttpSession session = request.getSession();
             u = (UserProfile) session.getAttribute("user");
@@ -56,7 +57,7 @@ public class editServlet extends HttpServlet {
             ResultSet rs = null;
 
             boolean errorRegis = false;
-
+            String welcome = null;
             try {
                 conn = DBConnection.getConnection();
                 String sql = "UPDATE user SET username ='" + username + "' WHERE user.email='" + u.getEmail() + "'";
@@ -64,10 +65,7 @@ public class editServlet extends HttpServlet {
 
                 pstm.execute();
                 u.setUsername(username);
-                out.println(u.getUsername());
-                //RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/profile.jsp");
-                //dispatcher.forward(request, response);
-                if (o_password != null && n_password != null && c_password != null) {
+                if (o_password != "" && n_password != "" && c_password != "") {
                     if (u.getPassword().equals(o_password)) {
                         out.println(u.getPassword());
                         if (n_password.equals(c_password)) {
@@ -89,7 +87,12 @@ public class editServlet extends HttpServlet {
                         dispatcher.forward(request, response);
                     }
 
-                }
+                }else {
+                        welcome = "Username has changed already.";
+                        request.setAttribute("welcome", welcome);
+                        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/edituser.jsp");
+                        dispatcher.forward(request, response);
+                    }
 
             } catch (Exception ex) {
                 out.println(ex.getMessage());

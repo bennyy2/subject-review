@@ -42,6 +42,8 @@
 
                                 </div>
                                     <br><label style="color: red;">***แก้ Username ไม่ต้องกรอก Password</label>
+                                    
+                                    <hr>
                                 <div class="form-group">
                                     <label for="pwd">Old-Password:</label>
                                     <input type="password" class="form-control" id="password" name="o-password" placeholder="Old-Password">
@@ -57,6 +59,9 @@
 
                                 <div class="message">
                                     <label>${message}</label>
+                                </div>
+                                <div class="welcome">
+                                    <label>${welcome}</label>
                                 </div>
                                 <button type="submit" value="confirm" class="btn btn-default">save</button>
                             </form>

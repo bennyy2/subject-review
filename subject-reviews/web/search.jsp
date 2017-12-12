@@ -29,7 +29,7 @@
                     <h3 style="margin-left: 15%">There are no subject that you are searching for.</h3><br>
                 </c:when>    
                 <c:otherwise>
-                    <h3 style="margin-left: 15%">The subjects you search for..</h3>
+                    <h2 style="margin-left: 15%">The subjects you search for..  ${sessionScope.search}</h2>
                     <ul id="myUL">
                         <c:forEach var = "subject" items = "${sessionScope.subjectList}">
                             <li>

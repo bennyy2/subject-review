@@ -46,6 +46,7 @@ public class searchServlet extends HttpServlet {
             subjectList = subject.searchSubject(search);
             HttpSession session = request.getSession();
             session.setAttribute("subjectList", subjectList);
+            session.setAttribute("search", search);
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/search.jsp");
             dispatcher.forward(request, response);
             

@@ -41,7 +41,7 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span> 
                     </button> 
-                    <a class="navbar-brand" href="home.jsp" >KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" style="font-family: 'tcm';font-size: 27px; color: #e9573e">KMITL review</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse" style="overflow-x: hidden;">
 
@@ -61,7 +61,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Search" name="search" value="">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-default" type="submit">
+                                            <button class="btn btn-default" type="submit" style="font-size: 13px !important;">
                                                 <i class="glyphicon glyphicon-search"></i>
                                             </button>
                                         </div>
@@ -76,8 +76,8 @@
                                 </li>
                         </c:if>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.user.getUsername()}   <span class="caret"></span></a>
-                            <ul class="dropdown-menu" style="min-width: 110px;">
+                            <a href="javascript:void(0)"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.user.getUsername()}   <span class="caret"></span></a>
+                            <ul class="dropdown-menu" style="min-width: 130px;">
                                 <li><a href="viewHistory">Profile<span class="glyphicon glyphicon-user" aria-hidden="true" style="float: right"></span></a></li>
                                 <li><a href="logoutServlet">logout<span class="glyphicon glyphicon-log-out" aria-hidden="true" style="float: right"></span></a></li>
                             </ul>

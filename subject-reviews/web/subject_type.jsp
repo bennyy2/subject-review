@@ -21,7 +21,7 @@
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     </head>
     <body>
-        <img src="img/lib.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
+        
         <%@ include file = "navbar.jsp" %>
         <h1 style="text-align: center">วิชาสอนบริการ</h1><br>
         
@@ -39,7 +39,7 @@
                 </li>
             </c:forEach>
         </ul>
-        
+        <div id="bg"></div>
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

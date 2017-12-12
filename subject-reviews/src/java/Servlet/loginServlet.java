@@ -5,7 +5,6 @@
  */
 package Servlet;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -54,21 +53,21 @@ public class loginServlet extends HttpServlet {
             UserProfile user = new UserProfile(username, password);
             Type type = new Type();
             ArrayList<Type> allType = new ArrayList<>();
-            
+
             if (user.login()) {
                 HttpSession session = request.getSession();
                 allType = type.showAllType();
                 session.setAttribute("allType", allType);
                 session.setAttribute("user", user);
                 session.setAttribute("user_id", user.getId());
-                if("admin".equals(user.getRole())){
+                if ("admin".equals(user.getRole())) {
                     RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/manageReview.jsp");
-                dispatcher.forward(request, response);
+                    dispatcher.forward(request, response);
+                } else {
+                    RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
+                    dispatcher.forward(request, response);
                 }
-                RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/home.jsp");
-                dispatcher.forward(request, response);
-            } 
-            else {
+            } else {
                 message = "username or password is incorrect.";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/login.jsp");

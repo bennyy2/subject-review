@@ -24,14 +24,14 @@
 
             function editReview(rID, d, s) {
                 $('[name="text"]').val($("#C" + rID).text());
-                $('input:radio[value="'+s+'"]').attr('checked','true');
-                if(d==="no"){
-                    $('[name="disable"]').attr('checked','true');
-                }else{
-                    $('[name="disable"]').removeAttr('checked','true');
+                $('input:radio[value="' + s + '"]').attr('checked', 'true');
+                if (d === "no") {
+                    $('[name="disable"]').attr('checked', 'true');
+                } else {
+                    $('[name="disable"]').removeAttr('checked', 'true');
                 }
-                $('#save').attr('onclick','save("'+rID+'");')
-                
+                $('#save').attr('onclick', 'save("' + rID + '");');
+
 
             }
             function save(rID) {
@@ -43,7 +43,7 @@
 
             }
             function delre(rID) {
-                
+
             }
         </script>
         <title>Profile</title>
@@ -61,7 +61,7 @@
             <c:forEach var = "review" items = "${sessionScope.showHistory}">
                 <div id="review${review.getReview_id()}">
                     <div id="icon">
-                        <a style="color: black" href="deleteReviewServlet?id=${review.getReview_id()}"><i class="fa fa-trash" aria-hidden="true"  style="position: absolute;width: 120px;"></i></a>
+                        <i href="deleteReviewServlet?id=${review.getReview_id()}" class="fa fa-trash" aria-hidden="true"  style="position: absolute;width: 120px; color: black;"></i>
                         <i class="fa fa-pencil" aria-hidden="true" href="javascript:void(0)" onclick="editReview('${review.getReview_id()}', '${review.getDisplay_user()}', '${review.getScore()}'); return false;" style="position: absolute;right: 10px;" data-toggle="modal" data-target="#myModal"></i> 
                     </div>
                     <p >Content : <span id="C${review.getReview_id()}">${review.getContent()}</span></p>
@@ -111,7 +111,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        
+
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

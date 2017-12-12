@@ -32,7 +32,7 @@
 
                     <div class="panel panel-login">
                         <div class="panel-heading">
-                            <h3>Log in</h3>
+                            <h2>Log in</h2>
                             <hr>
                         </div>
                         <div class="panel-body">

@@ -12,16 +12,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>KMITL Subject review system</title>
         <meta charset="utf-8">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.2.4/assets/owl.theme.default.css" rel="stylesheet" type="text/css"/>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2//2.0.0-beta.2.4/owl.carousel.min.js"></script>
+        <script src="js/jquery.fullPage.min.js"></script>
+        <script src="js/noframework.waypoints.min.js"></script>
+        
     </head>
-    <%            Review review = new Review();
+
+    <%
+        Review review = new Review();
         Subject subject = new Subject();
         ArrayList reviewList = new ArrayList<>();
         reviewList = review.showAllReview();
@@ -31,110 +39,110 @@
         topList = subject.getTopReview();
         session.setAttribute("topList", topList);
 
-        float width1 = ((subject.getTopReview().get(0)).getTotal_score() * 40) / 5 + 50;
-        float width2 = ((subject.getTopReview().get(1)).getTotal_score() * 40) / 5 + 50;
-        float width3 = ((subject.getTopReview().get(2)).getTotal_score() * 40) / 5 + 50;
-        float width4 = ((subject.getTopReview().get(3)).getTotal_score() * 40) / 5 + 50;
-        float width5 = ((subject.getTopReview().get(4)).getTotal_score() * 40) / 5 + 50;
+        float width1 = ((subject.getTopReview().get(0)).getTotal_score() * 100) / 5;
+        float width2 = ((subject.getTopReview().get(1)).getTotal_score() * 100) / 5;
+        float width3 = ((subject.getTopReview().get(2)).getTotal_score() * 100) / 5;
+        float width4 = ((subject.getTopReview().get(3)).getTotal_score() * 100) / 5;
+        float width5 = ((subject.getTopReview().get(4)).getTotal_score() * 100) / 5;
     %>
-    <body style="font-family: 'bangna';">
-        <img src="img/bg.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);width: 100%;">
+    <body>
         <%@ include file = "navbar.jsp" %>
+        <div id="fullpage">
+            <section class="vertical-scrolling">
+                <div class="header" style="overflow: hidden;position: absolute;">
 
-        <div class="header">
-            <div class="container text-center">
-                <h1>KMITL Subject review system</h1>      
-                <p>Tell me what is in your mind.</p>
-            </div>
-        </div>
-        <div class="row" style="margin: 0;">
-            <div class="col-xs-12 col-sm-6 col-md-8"> <!-- topscore-->
-                <h1 style="margin-left: 50px">Top review score</h1><br>
-                <div class="top5" style="margin-left: 4%;">
-                    <ul class="top5_bar">
-                        <li class="top5_bar_li" style="background: rgba(255, 57, 65, 0.9) !important;
-                            width: <%out.print(width1);%>% !important;">${topList[0].getSj_name_eng()}<br>${topList[0].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[0].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                        <li class="top5_bar_li" style="background: rgba(255, 103, 57, 0.9) !important;
-                            width: <%out.print(width2);%>% !important;">${topList[1].getSj_name_eng()}<br>${topList[1].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[1].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                        <li class="top5_bar_li" style="background: rgba(255, 218, 57, 0.9) !important;
-                            width: <%out.print(width3);%>% !important;">${topList[2].getSj_name_eng()}<br>${topList[2].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[2].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                        <li class="top5_bar_li" style="    background: rgba(193, 241, 78, 0.9) !important;
-                            width: <%out.print(width4);%>% !important;">${topList[3].getSj_name_eng()}<br>${topList[3].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[3].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                        <li class="top5_bar_li" style="background: rgba(29, 195, 246, 0.9) !important;
-                            width: <%out.print(width5);%>% !important;">${topList[4].getSj_name_eng()}<br>${topList[4].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[4].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                        <li class="top5_bar_li" style="background: rgba(255, 57, 65, 0.9) !important;
-                            width: <%out.print(width1);%>% !important;">${topList[0].getSj_name_eng()}<br>${topList[0].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[0].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                        <li class="top5_bar_li" style="background: rgba(255, 103, 57, 0.9) !important;
-                            width: <%out.print(width2);%>% !important;">${topList[1].getSj_name_eng()}<br>${topList[1].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[1].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                        <li class="top5_bar_li" style="background: rgba(255, 218, 57, 0.9) !important;
-                            width: <%out.print(width3);%>% !important;">${topList[2].getSj_name_eng()}<br>${topList[2].getSj_name_thai()}
-                            <span class="top5_bar_hold">
-                                <p class="top5_score">${topList[2].getTotal_score()}</p>
-                                <span class="top5_bar_tri"></span>
-                            </span>
-                        </li>
-                    </ul>
+                    <div class="text-center" style="padding-top: 15%">
+                        <p style="font-family: 'tcm';font-size: 75px !important;color: white;"><span style="color: #e9573e;font-size: 110px;" >KMITL</span> Subject review system</p>      
+                        <p style="font-family: 'srb';font-size: 60px !important;color: white;">ระบบรีวิววิชาเลือกในสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
+                    </div>
+                    <div id="godown" align="center">
+                        <a href="#secondSection"><span class="glyphicon glyphicon-menu-down" aria-hidden="true" style="color: #ffffff;"></span></a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-6 col-md-4"><!-- recent-->
-                <h1 style="margin-left: 50px">Recently review</h1><br>
-                <ul id="recent">
-                    <c:forEach var = "review" items = "${sessionScope.reviewList}">
-                        <li>
-                            <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}  ${review.getSj_name()}
-                            <p style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">${review.getContent()}</p>
-                            </a>
-                            
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
+                <div class="bg"></div>
+            </section>
+            <section class="vertical-scrolling" id="test">
+                <div style="background-color: white;padding-top: 6%;height: -webkit-fill-available;" data-anchor="page2">
+                    <h1 style="margin-left: 50px" align="center">Top review score</h1><br>
+                    <div class="topReview" style="padding: 0 10% 0 10%;">
+                        <a>${topList[0].getSj_name_eng()} ${topList[0].getSj_name_thai()}</a>
+                        <div class="progress" >
+                            <div class="progress-bar progress-bar-success1" style="width: <%=width1%>%;">
+                                
+                            </div>
+                        </div><a>${topList[1].getSj_name_eng()} ${topList[1].getSj_name_thai()}</a>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success2" style="width: <%=width2%>%">
+                                
+                            </div>
+                        </div><a>${topList[2].getSj_name_eng()} ${topList[2].getSj_name_thai()}</a>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success3" style="width: <%=width3%>%">
+                                
+                            </div>
+                        </div><a>${topList[3].getSj_name_eng()} ${topList[3].getSj_name_thai()}</a>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success4" style="width: <%=width4%>%">
+                                
+                            </div>
+                        </div><a>${topList[4].getSj_name_eng()} ${topList[4].getSj_name_thai()}</a>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success5" style="width: <%=width5%>%">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                </div>
+            </section>
+            <section class="vertical-scrolling">
+                <div class="carousel-wrap" style="background-color: #e6e6e6;height: -webkit-fill-available;padding-top: 6%;" data-anchor="page3">
+                    <br>
+                    <h1 align="center">Recently review</h1><br>
+                    <div class="owl-carousel">
+                        <c:forEach var = "review" items = "${sessionScope.reviewList}">
+                            <div class="item" >
+                                <div class="initem">
+                                    <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}<br>
+                                        ${review.getSj_name()}</a><hr style="width: 80%;">
+
+                                    <br>
+
+                                    <p style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden; font-size: 30px;">${review.getContent()}<p>
+                                        <br>
+
+
+                                    <hr style="width: 80%;">
+                                    <p><c:choose>
+                                            <c:when test="${review.getDisplay_user()=='no'}">
+                                                User : Unknow User<br>
+                                            </c:when>    
+                                            <c:otherwise>
+                                                User : ${review.getUser()}
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </p>
+                                </div>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                    
+                </div>
+                <%@ include file = "footer.jsp" %>
+            </section>
         </div>
 
 
 
-
-
-
-
-
-
-        <%@ include file = "footer.jsp" %>
+        
     </body>
 </html>
+
 <script src="js/bootstrap.min.js"></script>
+<script>
+
+</script>
+
+<script src="js/jsdown.js"></script>

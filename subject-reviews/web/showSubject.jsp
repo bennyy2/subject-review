@@ -20,14 +20,16 @@
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
-            
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
             function bind() {
-                
-                if ($('[name="textre"]').val()!=""){ 
-                    $('#save').attr('disabled',false);
-                    
+
+                if ($('[name="textre"]').val() != "") {
+                    $('#save').attr('disabled', false);
+
                 } else {
-                    $('#save').attr('disabled',true);
+                    $('#save').attr('disabled', true);
                 }
             }
             function reportFunction() {
@@ -67,9 +69,9 @@
                 <h2>${sessionScope.subject.getSj_name_eng()}<br><br>
                     ${sessionScope.subject.getSj_name_thai()}<br><br></h2></div>
 
-            <h3 >Description : </h3>${sessionScope.subject.getSj_description_eng()}<br><br>
-            <h3>คำอธิบายรายวิชา : </h3>${sessionScope.subject.getSj_description_thai()}<br><br>
-            <h3>score : </h3><fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.subject.getTotal_score()}"/>
+            <h2 >Description : </h2><p>${sessionScope.subject.getSj_description_eng()}</p><br>
+            <h2>คำอธิบายรายวิชา : </h2><p>${sessionScope.subject.getSj_description_thai()}</p><br>
+            <h1>score : <span><fmt:formatNumber type="number" maxFractionDigits="2" value="${sessionScope.subject.getTotal_score()}"/></span></h1>
 
 
             <br><br><hr>
@@ -80,7 +82,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Report</h4>
+                        <h2 class="modal-title">Report</h2>
                     </div>
                     <div class="modal-body">
                         <p id="userR" hidden=""></p>
@@ -99,8 +101,7 @@
             <c:forEach var = "show" items = "${sessionScope.showReview}">
                 <div class="content">
 
-                    <i href="javascript:void(0)" class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');
-                            return false;" id="bc" style="float: right;" data-toggle="modal" data-target="#myModal"></i>
+                    <i class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');return false;" id="bc" style="float: right;" data-toggle="modal" data-target="#myModal" data-placement="top" title="Report"></i>
                     <p>${show.getContent()}</p> 
                     <p><b>Score : </b>${show.getScore()}</p>
 
@@ -128,14 +129,14 @@
                     <div class="form-group">
                         <label for="comment">Comment:</label>
                         <textarea class="form-control" rows="5" name="text" style="resize: vertical;"></textarea></div><br>
-                    <input type="checkbox" name="disable" value="ON" />Disable  username <br><br>
-                    Score : 
-                    <input type="radio" name="score" value="0" /> 0
-                    <input type="radio" name="score" value="1" /> 1
-                    <input type="radio" name="score" value="2" /> 2
-                    <input type="radio" name="score" value="3" /> 3
-                    <input type="radio" name="score" value="4" /> 4
-                    <input type="radio" name="score" value="5" /> 5
+                    <input type="checkbox" name="disable" value="ON" /><label>Disable  username</label><br>
+                    <label>Score :</label> 
+                    <input type="radio" name="score" value="0" checked=""/> <label>0</label>
+                    <input type="radio" name="score" value="1" /> <label>1</label>
+                    <input type="radio" name="score" value="2" /> <label>2</label>
+                    <input type="radio" name="score" value="3" /> <label>3</label>
+                    <input type="radio" name="score" value="4" /> <label>4</label>
+                    <input type="radio" name="score" value="5" /> <label>5</label>
                     <br><br>
                     <button type="submit" value="submit" class="btn btn-primary btn-md">submit</button>
                 </form>

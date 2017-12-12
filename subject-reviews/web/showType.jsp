@@ -22,7 +22,7 @@
         
     </head>
     <body>
-        <img src="img/lib.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
+        <div id="bg"></div>
         <%@ include file = "navbar.jsp" %>
         <h1 style="text-align: center">${requestScope.type_name}</h1><br>
 
@@ -36,7 +36,8 @@
 
             </c:forEach>
         </ul>
-
+        <div id="bg"></div>
+        <%@ include file = "footer.jsp" %>
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

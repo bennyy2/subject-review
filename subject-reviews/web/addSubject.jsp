@@ -55,15 +55,14 @@
                 <div class="message">
                     <label>${message}</label>
                 </div>
-
-
                 <button type="submit" class="btn btn-default">Submit</button>
-
             </div>
 
 
         </form>
+        <br>
 
+        <%@ include file = "footer.jsp" %>
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

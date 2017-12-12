@@ -52,8 +52,8 @@
                 <div class="header" style="overflow: hidden;position: absolute;">
 
                     <div class="text-center" style="padding-top: 15%">
-                        <p style="font-family: 'tcm';font-size: 75px !important;color: white;"><span style="color: #e9573e;font-size: 110px;" >KMITL</span> Subject review system</p>      
-                        <p style="font-family: 'srb';font-size: 60px !important;color: white;">ระบบรีวิววิชาเลือกในสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
+                        <p style="font-family: 'tcm';font-size: 50px !important;color: white;"><span style="color: #e9573e;font-size: 85px;" >KMITL</span> Subject review system</p>      
+                        <p style="font-family: 'srb';font-size: 30px !important;color: white;">ระบบรีวิววิชาเลือกในสถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
                     </div>
                     <div id="godown" align="center">
                         <a href="#secondSection"><span class="glyphicon glyphicon-menu-down" aria-hidden="true" style="color: #ffffff;"></span></a>

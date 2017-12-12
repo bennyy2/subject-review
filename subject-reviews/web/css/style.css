@@ -517,3 +517,7 @@ blink, .blink {
     text-align: right !important;
     border-top: transparent !important;
 }
+.owl-theme .owl-controls .owl-nav [class*='owl-']{
+    font-size: 20px !important;
+    background: #ccd0d9 !important;
+}

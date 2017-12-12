@@ -21,7 +21,7 @@
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
-        <h3 id="header_name">KMITL Subject reviews</h3>
+        <h2 id="header_name" style="height: 25px;margin-top: 0px !important; ">KMITL Subject reviews</h2>
         <div class="container" id="login">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
@@ -41,6 +41,7 @@
                                     <input type="email" class="form-control" value="${sessionScope.user.getEmail()}" readonly>
 
                                 </div>
+                                    <br><label style="color: red;">***แก้ Username ไม่ต้องกรอก Password</label>
                                 <div class="form-group">
                                     <label for="pwd">Old-Password:</label>
                                     <input type="password" class="form-control" id="password" name="o-password" placeholder="Old-Password">

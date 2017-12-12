@@ -41,7 +41,7 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span> 
                     </button> 
-                    <a class="navbar-brand" href="home.jsp" style="font-family: 'tcm';font-size: 27px !important;font-weight: bolder;color: #e9573e">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" style="font-family: 'tcm';font-size: 27px !important;font-weight: bolder;color: #e9573e">KMITL REVIEW</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse" style="overflow-x: hidden;">
 

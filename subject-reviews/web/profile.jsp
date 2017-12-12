@@ -35,7 +35,7 @@
 
             }
             function save(rID) {
-                $.post("editReview", {text: $('[name=text1]').val(), disable: $('[name=disable1]').is(':checked'), score: $('[name=score1]:checked').val(), review_id: rID, from:"pf"}, function (responseText) {
+                $.post("editReview", {text: $('[name=text1]').val(), disable: $('[name=disable1]').is(':checked'), score: $('[name=score1]:checked').val(), review_id: rID, from: "pf"}, function (responseText) {
 
                     $("#review" + rID).html(responseText);///.delay(1200).fadeOut(1000);
                 });
@@ -50,20 +50,20 @@
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
+        <div class="bgpf"></div>
+        <div class="boxuser">
+            <p>Username : ${sessionScope.user.getUsername()}</p>
+            <p>Email : ${sessionScope.user.getEmail()}</p>
+            <p>ID : ${sessionScope.user.getId()}</p>
+            <p>Role : ${sessionScope.user.getRole()}</p>
+            <a href="edituser.jsp" ><button id="edit" type="button" class="btn btn-default" >edit</button></a>
+        </div>
+<br><br><br>
+<c:if test="${sessionScope.user.getUsername()!='admin'}"><p style="margin-left: 10%;margin-bottom: 20px; font-size: 35px !important;">Review History <i class="fa fa-history" aria-hidden="true"></i></p></c:if>
+        
 
-        <h1>Profile ${sessionScope.user.getUsername()}</h1>
-
-        <h1>Hi... ${sessionScope.user.getUsername()}</h1><a href="edituser.jsp">edit</a>
-
-        Username : ${sessionScope.user.getUsername()}<br>
-        Email : ${sessionScope.user.getEmail()}<br>
-        ID : ${sessionScope.user.getId()}<br>
-        Role : ${sessionScope.user.getRole()}<br>
-        <a href="edituser.jsp">edit password</a>
-
-        <h1>Review History <i class="fa fa-history" aria-hidden="true"></i></h1>
-        <div style="margin-left: 86px;margin-right: 100px;">
-            <c:forEach var = "review" items = "${sessionScope.showHistory}">
+        <c:forEach var = "review" items = "${sessionScope.showHistory}">
+            <div class="revHis">
                 <div id="review${review.getReview_id()}">
                     <div id="icon">
                         <a style="font-size: 15px !important;" href="deleteReviewServlet?id=${review.getReview_id()}"><i class="fa fa-trash" aria-hidden="true"  style="position: absolute;width: 120px; color: black;"></i></a>
@@ -74,20 +74,20 @@
                     <p id="D${review.getReview_id()}">
                         <c:choose>
                             <c:when test="${review.getDisplay_user()=='no'}">
-                                Status : Hiding post
+                                Status : Hiding User
                             </c:when>    
                             <c:otherwise>
-                                Status : Showing
+                                Status : Show User
                             </c:otherwise>
                         </c:choose></p>
                     <p>Date : ${review.getDate()}</p>
                     <p>Subject : ${review.getSubject_id()} ${review.getSj_name()}</p>
 
-                    <hr>
-                </div>
 
-            </c:forEach><br>
-        </div>
+                </div>
+            </div>
+        </c:forEach><br>
+
 
 
 

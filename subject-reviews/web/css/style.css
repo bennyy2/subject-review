@@ -25,16 +25,16 @@
     background-size: cover;
     filter: blur(5px);
 }
-html{
+html,body{
     min-height: 100%;
     height: max-content;
 }
 body {
+    position: relative;
     min-height: 100%;
     padding-top: 60px;
     margin-top: 0px;
     font-family: 'srb' !important;
-    height: 100%;
     background: #ccd0d9  !important; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#ffffff, #ccd0d9) !important; /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#ffffff, #ccd0d9) !important; /* For Opera 11.1 to 12.0 */
@@ -53,6 +53,10 @@ body {
 a,p,label,.form-control,input,button,select{
     font-family: 'srb';
     font-size: 25px !important;
+    text-decoration: none !important;
+}
+a{
+    cursor: pointer;
 }
 textarea{
     resize: vertical;
@@ -60,11 +64,19 @@ textarea{
 #header_name{
     text-align: center;
     font-size: 60px;
-    margin: 60px;
-    height: 120px;
+    margin: 20px 60px 10px 60px;
+    /*    height: 120px;*/
+}
+@media (min-width: 1080px){
+    #header_name{
+        text-align: center;
+        font-size: 60px;
+        margin: 40px 60px 10px 60px;
+        /*    height: 120px;*/
+    }
 }
 #login{
-    padding-top: 50px;
+    padding-top: 30px;
 }
 
 #block{
@@ -255,12 +267,16 @@ p{
 }
 /* Add a gray background color and some padding to the footer */
 footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
     background-color: #f2f2f2;
     padding: 15px 15px 5px 15px;
-    margin-top: 10px;
+    
     text-align: center;
-    bottom: 0px;
-    width: 100%;
+
 }
 .popup-position{
     display: none;
@@ -530,4 +546,50 @@ blink, .blink {
         padding-top: 20px !important;
         padding-bottom: 10px !important;
     }
+}
+.boxuser{
+    margin: 30px 28% 0px 28%;
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    padding:10px 10% 10px 10%;
+    box-shadow: 0 0 10px 5px rgb(204, 204, 204);
+}
+#edit{
+    background-color: #fb6e52;
+    color: white;
+    border-radius: 15px;
+    width: 90px;
+    font-size: 20px !important;
+    height: 35px;
+    line-height: 0px;
+    margin-left: calc(50% - 45px);
+    border-color: transparent;
+}
+#edit:hover{
+    box-shadow: 0px 5px 20px 0px rgb(193, 193, 193);
+}
+.revHis{
+    margin: 0px 15% 5px 15%;
+    text-align: left;
+    background-color: white;
+    padding:10px 10% 10px 10%;
+    box-shadow: 0 0 10px 5px rgb(204, 204, 204);
+}
+.bgpf{
+    background-image: url(../img/pro.jpg);
+    position: fixed;
+    bottom: -1px;
+    height: -webkit-fill-available;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
+.topReview a{
+    color: black;
+}
+i{
+    cursor: pointer;
 }

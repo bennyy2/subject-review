@@ -37,7 +37,7 @@
             </c:forEach>
         </ul>
         <div id="bg"></div>
-        <%@ include file = "footer.jsp" %>
+        
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

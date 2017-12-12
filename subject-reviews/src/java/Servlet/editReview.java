@@ -123,12 +123,12 @@ public class editReview extends HttpServlet {
                 out.println("<p >Content : <span id='C" + rs1.getString("review_id") + "'>" + rs1.getString("content") + "</span></p>");
                 out.println("<p id=\"S" + rs1.getString("review_id") + "\">Score : " + rs1.getString("score") + "</p>");
                 if ("no".equals(rs1.getString("display_user"))) {
-                    out.println("<p>Status : Hiding post</p>");
+                    out.println("<p>Status : Hiding User</p>");
                 } else {
-                    out.println("<p>Status : Showing</p>");
+                    out.println("<p>Status : Show User</p>");
                 }
                 out.println("<p>Date : " + rs1.getString("date") + "</p>");
-                out.println("<p>Subject : " + rs1.getString("subject_id") + " " + rs1.getString("sj_name") + "</p><hr>");
+                out.println("<p>Subject : " + rs1.getString("subject_id") + " " + rs1.getString("sj_name") + "</p>");
             } else if ("ss".equals(from)) {
                 out.println("<div id=\"icon\">");
                 out.println("<a style=\"font-size: 15px !important;\" href=\"deleteReviewServlet?id=" + review_id + "\"><i class=\"fa fa-trash\" aria-hidden=\"true\"  style=\"position: absolute;width: 120px;color: black;\"></i></a>");

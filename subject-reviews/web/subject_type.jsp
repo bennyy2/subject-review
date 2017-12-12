@@ -39,7 +39,9 @@
                 </li>
             </c:forEach>
         </ul>
+         
         <div id="bg"></div>
+        
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

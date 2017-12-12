@@ -58,7 +58,7 @@
         </form>
         <br>
 
-        <%@ include file = "footer.jsp" %>
+        
     </body>
 </html>
 <script src="js/bootstrap.min.js"></script>

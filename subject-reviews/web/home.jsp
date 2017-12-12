@@ -25,7 +25,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2//2.0.0-beta.2.4/owl.carousel.min.js"></script>
         <script src="js/jquery.fullPage.min.js"></script>
         <script src="js/noframework.waypoints.min.js"></script>
-        
+
     </head>
 
     <%
@@ -65,30 +65,34 @@
                 <div style="background-color: white;padding-top: 6%;height: -webkit-fill-available;" data-anchor="page2">
                     <h1 style="margin-left: 50px" align="center">Top review score</h1><br>
                     <div class="topReview" style="padding: 0 10% 0 10%;">
-                        <a>${topList[0].getSj_name_eng()} ${topList[0].getSj_name_thai()}</a>
+                        <a href="viewSubjectServlet?id=${topList[0].getSubject_id()}">${topList[0].getSj_name_eng()} ${topList[0].getSj_name_thai()}</a>
                         <div class="progress" >
                             <div class="progress-bar progress-bar-success1" style="width: <%=width1%>%;">
-                                
+
                             </div>
-                        </div><a>${topList[1].getSj_name_eng()} ${topList[1].getSj_name_thai()}</a>
+                        </div>
+                        <a href="viewSubjectServlet?id=${topList[1].getSubject_id()}">${topList[1].getSj_name_eng()} ${topList[1].getSj_name_thai()}</a>
                         <div class="progress">
                             <div class="progress-bar progress-bar-success2" style="width: <%=width2%>%">
-                                
+
                             </div>
-                        </div><a>${topList[2].getSj_name_eng()} ${topList[2].getSj_name_thai()}</a>
+                        </div>
+                        <a href="viewSubjectServlet?id=${topList[2].getSubject_id()}">${topList[2].getSj_name_eng()} ${topList[2].getSj_name_thai()}</a>
                         <div class="progress">
                             <div class="progress-bar progress-bar-success3" style="width: <%=width3%>%">
-                                
+
                             </div>
-                        </div><a>${topList[3].getSj_name_eng()} ${topList[3].getSj_name_thai()}</a>
+                        </div>
+                        <a href="viewSubjectServlet?id=${topList[3].getSubject_id()}">${topList[3].getSj_name_eng()} ${topList[3].getSj_name_thai()}</a>
                         <div class="progress">
                             <div class="progress-bar progress-bar-success4" style="width: <%=width4%>%">
-                                
+
                             </div>
-                        </div><a>${topList[4].getSj_name_eng()} ${topList[4].getSj_name_thai()}</a>
+                        </div>
+                        <a href="viewSubjectServlet?id=${topList[4].getSubject_id()}">${topList[4].getSj_name_eng()} ${topList[4].getSj_name_thai()}</a>
                         <div class="progress">
                             <div class="progress-bar progress-bar-success5" style="width: <%=width5%>%">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -104,7 +108,7 @@
                         <c:forEach var = "review" items = "${sessionScope.reviewList}">
                             <div class="item" >
                                 <div class="initem">
-                                    <a href="viewSubjectServlet?id=${review.getSubject_id()}">${review.getSubject_id()}<br>
+                                    <a href="viewSubjectServlet?id=${review.getSubject_id()}" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">${review.getSubject_id()}<br>
                                         ${review.getSj_name()}</a><hr style="width: 80%;">
 
                                     <br>
@@ -128,15 +132,15 @@
                         </c:forEach>
 
                     </div>
-                    
+
                 </div>
-                <%@ include file = "footer.jsp" %>
+
             </section>
         </div>
 
 
 
-        
+
     </body>
 </html>
 

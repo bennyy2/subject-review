@@ -180,7 +180,7 @@
         </div>
 
         <%@ include file = "popup.jsp" %>
-        <%@ include file = "footer.jsp" %>
+        
         <script>
             $("#cover").click(function () {
                 closepop();

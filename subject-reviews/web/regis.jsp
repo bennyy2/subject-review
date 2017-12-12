@@ -16,7 +16,8 @@
         <title>KMITL Subject review system</title>
     </head>
     <body>
-        <h3 id="header_name">KMITL Subject reviews</h3>
+        <img src="img/bglog.jpg" style="z-index: -1;position: fixed;top: 0px;filter:blur(5px);">
+        <h1 align="center"><span style="color: #fb6e52;font-size: 100px">KMITL</span> Subject review system</h1>
         <div class="container" id="login">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
@@ -32,7 +33,7 @@
                                     <input type="text" class="form-control" id="username" name="username" placeholder="User name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email:</label>
+                                    <label for="email">Email: <span style="color: red;">*ใช้อีเมล์ของสถาบันเท่านั้น</span></label>
                                     <input type="email" class="form-control" id="email" name="email" placeholder="E-mail : example@kmitl.ac.th">
                                 </div>
                                 <div class="form-group">
@@ -41,7 +42,7 @@
                                 </div>
 
                                 <div class="message">
-                                    *ใช้อีเมล์ของสถาบันได้เท่านั้น example@kmitl.ac.th
+                                    
                                     <label>${message}</label>
                                 </div>
                                 <button type="submit" value="regis" class="btn btn-default">Register</button>

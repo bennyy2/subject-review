@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.tomcat.jni.SSLContext;
 
 /**
  *
@@ -92,19 +93,21 @@ public class editReview extends HttpServlet {
         String disable = request.getParameter("disable");
         String score = request.getParameter("score");
         String review_id = request.getParameter("review_id");
+        String from = request.getParameter("from");
+        String user = request.getParameter("user");
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs1 = null;
-        if("true".equals(disable)){
+        if ("true".equals(disable)) {
             disable = "no";
-        }else if("false".equals(disable)){
+        } else if ("false".equals(disable)) {
             disable = "yes";
         }
         ArrayList<Report> showReport = new ArrayList<>();
         try {
             conn = DBConnection.getConnection();
             String sql = "UPDATE review SET content=\"" + text + "\" ,score=" + score + " ,display_user=\"" + disable + "\" where review_id=\"" + review_id + "\";";
-            
+
             pstm = conn.prepareStatement(sql);
             pstm.execute();
             sql = "SELECT review_id, content, date, score, display_user, subject_id, sj_name_eng 'sj_name' FROM review JOIN subject USING (subject_id) where review_id ='" + review_id + "';";
@@ -113,19 +116,32 @@ public class editReview extends HttpServlet {
             rs1.next();
             text = "";
             //response.getWriter().write(sql);
-            out.println("<div id=\"icon\">");
-            out.println("<a style=\"color: black\" href=\"deleteReviewServlet?id="+review_id+"\"><i class=\"fa fa-trash\" aria-hidden=\"true\"  style=\"position: absolute;width: 120px;\"></i></a>");
-            out.println("<i style=\"position: absolute;right: 10px;\" class=\"fa fa-pencil\" aria-hidden=\"true\" href=\"javascript:void(0)\" onclick=\"editReview('" + rs1.getString("review_id") + "','" + rs1.getString("display_user") + "','" + rs1.getString("score") + "');return false;\"data-toggle=\"modal\" data-target=\"#myModal\"></i></div>");
-            out.println("<p >Content : <span id='C" + rs1.getString("review_id") + "'>" + rs1.getString("content") + "</span></p>");
-            out.println("<p id=\"S" + rs1.getString("review_id") + "\">Score : " + rs1.getString("score") + "</p>");
-            if ("no".equals(rs1.getString("display_user"))) {
-                out.println("Status : Hiding post");
-            } else {
-                out.println("Status : Showing");
+            if ("pf".equals(from)) {
+                out.println("<div id=\"icon\">");
+                out.println("<a style=\"font-size: 15px !important;\" href=\"deleteReviewServlet?id=" + review_id + "\"><i class=\"fa fa-trash\" aria-hidden=\"true\"  style=\"position: absolute;width: 120px;color: black;\"></i></a>");
+                out.println("<i style=\"position: absolute;right: 10px;\" class=\"fa fa-pencil\" aria-hidden=\"true\" href=\"javascript:void(0)\" onclick=\"editReview('" + rs1.getString("review_id") + "','" + rs1.getString("display_user") + "','" + rs1.getString("score") + "');return false;\"data-toggle=\"modal\" data-target=\"#myModal\"></i></div>");
+                out.println("<p >Content : <span id='C" + rs1.getString("review_id") + "'>" + rs1.getString("content") + "</span></p>");
+                out.println("<p id=\"S" + rs1.getString("review_id") + "\">Score : " + rs1.getString("score") + "</p>");
+                if ("no".equals(rs1.getString("display_user"))) {
+                    out.println("<p>Status : Hiding post</p>");
+                } else {
+                    out.println("<p>Status : Showing</p>");
+                }
+                out.println("<p>Date : " + rs1.getString("date") + "</p>");
+                out.println("<p>Subject : " + rs1.getString("subject_id") + " " + rs1.getString("sj_name") + "</p><hr>");
+            } else if ("ss".equals(from)) {
+                out.println("<div id=\"icon\">");
+                out.println("<a style=\"font-size: 15px !important;\" href=\"deleteReviewServlet?id=" + review_id + "\"><i class=\"fa fa-trash\" aria-hidden=\"true\"  style=\"position: absolute;width: 120px;color: black;\"></i></a>");
+                out.println("<i style=\"position: absolute;right: 10px;\" class=\"fa fa-pencil\" aria-hidden=\"true\" href=\"javascript:void(0)\" onclick=\"editReview('" + rs1.getString("review_id") + "','" + rs1.getString("display_user") + "','" + rs1.getString("score") + "');return false;\"data-toggle=\"modal\" data-target=\"#myModal1\"></i></div>");
+                out.println("<p><b>Content : </b><span id='C" + rs1.getString("review_id") + "'>" + rs1.getString("content") + "</span></p>");
+                out.println("<p id=\"S" + rs1.getString("review_id") + "\"><b>Score : </b>" + rs1.getString("score") + "</p>");
+                if ("no".equals(rs1.getString("display_user"))) {
+                    out.println("<p><b>User : </b>Unknow User</p>");
+                } else {
+                    out.println("<p><b>User : </b>" + user + "</p>");
+                }
+                out.println("<p><b>Time : </b>" + rs1.getString("date") + "</p><hr>");
             }
-            out.println("<p>Date : " + rs1.getString("date") + "</p>");
-            out.println("<p>Subject : " + rs1.getString("subject_id") + " " + rs1.getString("sj_name") + "</p><hr>");
-            
 
         } catch (Exception ex) {
             response.getWriter().write(ex.getMessage());

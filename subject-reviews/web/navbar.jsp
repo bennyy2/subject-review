@@ -41,7 +41,7 @@
                         <span class="icon-bar"></span> 
                         <span class="icon-bar"></span> 
                     </button> 
-                    <a class="navbar-brand" href="home.jsp" style="font-family: 'tcm';font-size: 27px; color: #e9573e">KMITL review</a>
+                    <a class="navbar-brand" href="home.jsp" style="font-family: 'tcm';font-size: 27px !important;font-weight: bolder;color: #e9573e">KMITL review</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse" style="overflow-x: hidden;">
 
@@ -78,8 +78,8 @@
                         <li class="dropdown">
                             <a href="javascript:void(0)"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.user.getUsername()}   <span class="caret"></span></a>
                             <ul class="dropdown-menu" style="min-width: 130px;">
-                                <li><a href="viewHistory" style="font-size: 20px;">Profile<span class="glyphicon glyphicon-user" aria-hidden="true" style="float: right"></span></a></li>
-                                <li><a href="logoutServlet" style="font-size: 20px;">logout<span class="glyphicon glyphicon-log-out" aria-hidden="true" style="float: right"></span></a></li>
+                                <li><a href="viewHistory" style="font-size: 20px !important;">Profile<span class="glyphicon glyphicon-user" aria-hidden="true" style="float: right"></span></a></li>
+                                <li><a href="logoutServlet" style="font-size: 20px !important;">logout<span class="glyphicon glyphicon-log-out" aria-hidden="true" style="float: right"></span></a></li>
                             </ul>
                         </li>
                     </ul>

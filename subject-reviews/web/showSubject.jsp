@@ -21,8 +21,8 @@
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
             $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
+                $('[data-toggle="tooltip"]').tooltip();
+            });
             function bind() {
 
                 if ($('[name="textre"]').val() != "") {
@@ -58,8 +58,31 @@
                 $("#rID").text("");
                 $('textarea[name="textre"]').val("");
             }
+
+            function editReview(rID, d, s) {
+                $('[name="text1"]').val($("#C" + rID).text());
+                $('input:radio[value="' + s + '"]').attr('checked', 'true');
+                if (d === "no") {
+                    $('[name="disable1"]').attr('checked', 'true');
+                } else {
+                    $('[name="disable1"]').removeAttr('checked', 'true');
+                }
+                $('#save1').attr('onclick', 'save("' + rID + '");');
+                console.log('pass');
+
+            }
+            function save(rID) {
+                $.post("editReview", {text: $('[name=text1]').val(), disable: $('[name=disable1]').is(':checked'), score: $('[name=score1]:checked').val(), review_id: rID, from:"ss",user:"${sessionScope.user.getUsername()}"}, function (responseText) {
+
+                    $("#review" + rID).html(responseText);///.delay(1200).fadeOut(1000);
+                });
+//                $("#test").text($('[name=text]').val());
+
+            }
+
         </script>
     </head>
+
     <body>
         <%@ include file = "navbar.jsp" %>
         <div class="container">
@@ -99,10 +122,22 @@
 
         <div class="container" style="word-wrap: break-word;">
             <c:forEach var = "show" items = "${sessionScope.showReview}">
-                <div class="content">
+                <div class="content" id="review${show.getReview_id()}">
+                    <c:choose>
+                        <c:when test="${show.getUser()==sessionScope.user.getUsername()}">
+                            <div id="icon">
+                                <a style="font-size: 15px !important;" href="deleteReviewServlet?id=${show.getReview_id()}"><i class="fa fa-trash" aria-hidden="true"  style="position: absolute;width: 120px; color: black;"></i></a>
+                                <i class="fa fa-pencil" aria-hidden="true" href="javascript:void(0)" onclick="editReview('${show.getReview_id()}', '${show.getDisplay_user()}', '${show.getScore()}');
+                                        return false;" style="position: absolute;right: 10px;" data-toggle="modal" data-target="#myModal1"></i> 
+                            </div>
+                        </c:when>    
+                        <c:otherwise>
+                            <i class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');
+                                    return false;" id="bc" style="float: right;" data-toggle="modal" data-target="#myModal" data-placement="top" title="Report"></i>
+                        </c:otherwise>
+                    </c:choose>
 
-                    <i class="fa fa-bug" aria-hidden="true" onclick="toggle_visible('${show.getUser()}', '${show.getReview_id()}');return false;" id="bc" style="float: right;" data-toggle="modal" data-target="#myModal" data-placement="top" title="Report"></i>
-                    <p>${show.getContent()}</p> 
+                    <p ><b>Content : </b><span id="C${show.getReview_id()}">${show.getContent()}</span></p>
                     <p><b>Score : </b>${show.getScore()}</p>
 
 
@@ -144,7 +179,7 @@
             </c:if>
         </div>
 
-
+        <%@ include file = "popup.jsp" %>
         <%@ include file = "footer.jsp" %>
         <script>
             $("#cover").click(function () {

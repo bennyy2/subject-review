@@ -23,19 +23,19 @@
         <script>
 
             function editReview(rID, d, s) {
-                $('[name="text"]').val($("#C" + rID).text());
+                $('[name="text1"]').val($("#C" + rID).text());
                 $('input:radio[value="' + s + '"]').attr('checked', 'true');
                 if (d === "no") {
-                    $('[name="disable"]').attr('checked', 'true');
+                    $('[name="disable1"]').attr('checked', 'true');
                 } else {
-                    $('[name="disable"]').removeAttr('checked', 'true');
+                    $('[name="disable1"]').removeAttr('checked', 'true');
                 }
-                $('#save').attr('onclick', 'save("' + rID + '");');
+                $('#save1').attr('onclick', 'save("' + rID + '");');
 
 
             }
             function save(rID) {
-                $.post("editReview", {text: $('[name=text]').val(), disable: $('[name=disable]').is(':checked'), score: $('[name=score]:checked').val(), review_id: rID}, function (responseText) {
+                $.post("editReview", {text: $('[name=text1]').val(), disable: $('[name=disable1]').is(':checked'), score: $('[name=score1]:checked').val(), review_id: rID, from:"pf"}, function (responseText) {
 
                     $("#review" + rID).html(responseText);///.delay(1200).fadeOut(1000);
                 });
@@ -67,7 +67,7 @@
                 <div id="review${review.getReview_id()}">
                     <div id="icon">
                         <a style="font-size: 15px !important;" href="deleteReviewServlet?id=${review.getReview_id()}"><i class="fa fa-trash" aria-hidden="true"  style="position: absolute;width: 120px; color: black;"></i></a>
-                        <i class="fa fa-pencil" aria-hidden="true" href="javascript:void(0)" onclick="editReview('${review.getReview_id()}', '${review.getDisplay_user()}', '${review.getScore()}'); return false;" style="position: absolute;right: 10px;" data-toggle="modal" data-target="#myModal"></i> 
+                        <i class="fa fa-pencil" aria-hidden="true" href="javascript:void(0)" onclick="editReview('${review.getReview_id()}', '${review.getDisplay_user()}', '${review.getScore()}'); return false;" style="position: absolute;right: 10px;" data-toggle="modal" data-target="#myModal1"></i> 
                     </div>
                     <p >Content : <span id="C${review.getReview_id()}">${review.getContent()}</span></p>
                     <p id="S${review.getReview_id()}">Score : ${review.getScore()}</p>
@@ -80,8 +80,8 @@
                                 Status : Showing
                             </c:otherwise>
                         </c:choose></p>
-                    Date : ${review.getDate()}<br>
-                    Subject : ${review.getSubject_id()} ${review.getSj_name()}<br>
+                    <p>Date : ${review.getDate()}</p>
+                    <p>Subject : ${review.getSubject_id()} ${review.getSj_name()}</p>
 
                     <hr>
                 </div>
@@ -91,31 +91,7 @@
 
 
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Edit</h4>
-                    </div>
-                    <div class="modal-body">
-                        <textarea class='form-control' rows='5' name='text'></textarea>
-                        <input type="checkbox" name="disable" value="ON" />Disable  username
-                        <br>
-                        <input type="radio" name="score" value="0" /> 0
-                        <input type="radio" name="score" value="1" /> 1
-                        <input type="radio" name="score" value="2" /> 2
-                        <input type="radio" name="score" value="3" /> 3
-                        <input type="radio" name="score" value="4" /> 4
-                        <input type="radio" name="score" value="5" /> 5
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save" data-dismiss="modal">Save changes</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        <%@ include file = "popup.jsp" %>
 
     </body>
 </html>

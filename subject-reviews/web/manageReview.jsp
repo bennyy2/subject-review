@@ -28,7 +28,7 @@
             function delReport(Rep) {
                 $.get("manageReport", {report: Rep}, function (responseText) {
 
-                    $("#re" + Rep).text(responseText).delay(1200).fadeOut(1000);
+                    $("#re" + Rep).text(responseText).delay(1200).fadeOut(1000).css('font-size','30px !mportant');
                 });
             }
             var a = "0";
@@ -65,20 +65,20 @@
 
         <h1>Review report</h1><br>
         <p id="refresh" style="display: none; position: fixed; padding:10px 20px 15px 20px; background-color: darkgray;border-radius: 10px 10px 10px 10px; left: 10px; bottom: 10px; width: auto;height: 50px; z-index: 1;">
-            <a id="newR" style="font-size: 20px;color: white;"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  You have new report</a>
+            <a id="newR" style="font-size: 20px ;color: white;"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  You have new report</a>
 
         </p><br>
 
 
         <c:forEach var = "show" items = "${sessionScope.showReport}">
             <div id="re${show.getReport_id()}" style="position: relative;padding-left: 5%;padding-right: 5%;"><i class="fa fa-times" aria-hidden="true" style="float: right;" onclick="delReport('${show.getReport_id()}')"></i>
-                ${c.toString()}
-                topic : ${show.getReport()}<br>
-                Content :${show.getContent()}<br>
-                Report by : ${show.getUser_report()}<br>
-                Date : ${show.getDate()}<br>  
-                Post by : ${show.getUser_post()}<br>
-                subject : ${show.getsubject()}<i class="fa fa-trash" aria-hidden="true" style="float: right;" onclick="delReportAndReview('${show.getReport_id()}', '${show.getReviewid()}')"></i><br>
+                
+                <p>topic : ${show.getReport()}</p>
+                <p>Content :${show.getContent()}</p>
+                <p>Report by : ${show.getUser_report()}</p>
+                <p>Date : ${show.getDate()}</p>  
+                <p>Post by : ${show.getUser_post()}</p>
+                <p>subject : ${show.getsubject()}<span style="font-size: 15px !important;"><i class="fa fa-trash" aria-hidden="true" style="float: right;" onclick="delReportAndReview('${show.getReport_id()}', '${show.getReviewid()}')"></i></span>></p>
 
                 <hr>
             </div>

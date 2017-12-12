@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Connection.DBConnection;
@@ -41,6 +36,7 @@ public class Major {
                 Major major = new Major(rs.getString("major_id"), rs.getString("major_name"));
                 allMajor.add(major);
             }
+            
             rs.close();
             pstm.close();
 
@@ -77,8 +73,5 @@ public class Major {
     public void setMajor_name(String major_name) {
         this.major_name = major_name;
     }
-
-    
-    
-    
+   
 }

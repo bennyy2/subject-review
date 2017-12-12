@@ -50,18 +50,23 @@
     </head>
     <body>
         <%@ include file = "navbar.jsp" %>
+
+        <h1>Profile ${sessionScope.user.getUsername()}</h1>
+
         <h1>Hi... ${sessionScope.user.getUsername()}</h1><a href="edituser.jsp">edit</a>
+
         Username : ${sessionScope.user.getUsername()}<br>
         Email : ${sessionScope.user.getEmail()}<br>
         ID : ${sessionScope.user.getId()}<br>
         Role : ${sessionScope.user.getRole()}<br>
+        <a href="edituser.jsp">edit password</a>
 
         <h1>Review History <i class="fa fa-history" aria-hidden="true"></i></h1>
         <div style="margin-left: 86px;margin-right: 100px;">
             <c:forEach var = "review" items = "${sessionScope.showHistory}">
                 <div id="review${review.getReview_id()}">
                     <div id="icon">
-                        <i href="deleteReviewServlet?id=${review.getReview_id()}" class="fa fa-trash" aria-hidden="true"  style="position: absolute;width: 120px; color: black;"></i>
+                        <a style="font-size: 15px !important;" href="deleteReviewServlet?id=${review.getReview_id()}"><i class="fa fa-trash" aria-hidden="true"  style="position: absolute;width: 120px; color: black;"></i></a>
                         <i class="fa fa-pencil" aria-hidden="true" href="javascript:void(0)" onclick="editReview('${review.getReview_id()}', '${review.getDisplay_user()}', '${review.getScore()}'); return false;" style="position: absolute;right: 10px;" data-toggle="modal" data-target="#myModal"></i> 
                     </div>
                     <p >Content : <span id="C${review.getReview_id()}">${review.getContent()}</span></p>

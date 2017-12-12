@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlet;
 
 import Model.Subject;
@@ -53,7 +48,7 @@ public class addSubjectServlet extends HttpServlet {
                 if (subject.insertNewSubject(id, subject_thai, subject_eng, des_thai, des_eng, type_id)) {
                     HttpSession session = request.getSession();
                     allType = type.showAllType();
-                    message = "Add Subject Completed";
+                    message = "The subject is added completely.";
                     request.setAttribute("message", message);
                     session.setAttribute("allType", allType);
                     RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/subject_type.jsp");
@@ -64,7 +59,7 @@ public class addSubjectServlet extends HttpServlet {
                 }
 
             } else {
-                message = "Fill the form";
+                message = "please fill out this form completely";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/addSubject.jsp");
                 dispatcher.forward(request, response);

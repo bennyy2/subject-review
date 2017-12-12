@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Connection.DBConnection;
@@ -133,7 +128,6 @@ public class Subject {
         try {
             conn = DBConnection.getConnection();
             String sql = "Select * from subject where subject_id = ?";
-
             pstm = conn.prepareStatement(sql);
             pstm.setString(1, id);
             rs = pstm.executeQuery();
@@ -214,7 +208,6 @@ public class Subject {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
                 Subject subject = new Subject(rs.getString("subject_id"), rs.getString("sj_name_eng"),
                         rs.getString("sj_name_thai"), rs.getFloat("total_score"));
                 topList.add(subject);

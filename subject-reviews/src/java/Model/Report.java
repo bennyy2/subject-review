@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Connection.DBConnection;
@@ -24,23 +19,6 @@ import javax.servlet.http.HttpSession;
  */
 public class Report {
 
-    /**
-     * @return the reviewid
-     */
-    public String getReviewid() {
-        return reviewid;
-    }
-
-    /**
-     * @param reviewid the reviewid to set
-     */
-    public void setReviewid(String reviewid) {
-        this.reviewid = reviewid;
-    }
-
-    /**
-     * @return the user_post
-     */
     private String report_id;
     private String report;
     private String date;
@@ -75,6 +53,14 @@ public class Report {
     }
 
     public Report() {
+    }
+    
+    public String getReviewid() {
+        return reviewid;
+    }
+
+    public void setReviewid(String reviewid) {
+        this.reviewid = reviewid;
     }
 
     public String getUser_post_id() {
@@ -121,51 +107,30 @@ public class Report {
         return user_post;
     }
 
-    /**
-     * @param user_post the user_post to set
-     */
     public void setUser_post() {
         this.user_post = user_post;
     }
 
-    /**
-     * @return the user_report
-     */
     public String getUser_report() {
         return user_report;
     }
 
-    /**
-     * @param user_report the user_report to set
-     */
     public void setUser_report(String user_report) {
         this.user_report = user_report;
     }
 
-    /**
-     * @return the subject
-     */
     public String getsubject() {
         return subject;
     }
 
-    /**
-     * @param subject the subject to set
-     */
     public void setsubject(String subject) {
         this.subject = subject;
     }
 
-    /**
-     * @return the content
-     */
     public String getContent() {
         return content;
     }
 
-    /**
-     * @param content the content to set
-     */
     public void setContent(String content) {
         this.content = content;
     }

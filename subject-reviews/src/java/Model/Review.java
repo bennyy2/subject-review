@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
 import Connection.DBConnection;
@@ -19,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -35,6 +31,17 @@ public class Review {
     private String display_user;
     private String subject_id;
     private String sj_name;
+    
+    
+    public Review(String review_id, String content, String date, int score, String display_user, String subject_id, String sj_name) {
+        this.review_id = review_id;
+        this.content = content;
+        this.date = date;
+        this.score = score;
+        this.display_user = display_user;
+        this.subject_id = subject_id;
+        this.sj_name = sj_name;
+    }
 
     public Review(String review_id, String content, String date, int score, String user, String display_user, String subject_id, String sj_name) {
         this.review_id = review_id;
@@ -73,7 +80,6 @@ public class Review {
         Timestamp time = new Timestamp(System.currentTimeMillis());
         String date = time.toString();
         try {
-
             conn = DBConnection.getConnection();
             String sql = "INSERT INTO review VALUES(?,?,?,?,?,?,?)";
             pstm = conn.prepareStatement(sql);
@@ -152,10 +158,8 @@ public class Review {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
                 Review review = new Review(rs.getString("review_id"), rs.getString("content"),
                         rs.getString("date"), rs.getInt("score"), rs.getString("user"), rs.getString("display_user"));
-
                 reviewList.add(review);
             }
             rs.close();
@@ -189,11 +193,9 @@ public class Review {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
                 Review review = new Review(rs.getString("review_id"), rs.getString("content"),
                         rs.getString("date"), rs.getInt("score"), rs.getString("user"), rs.getString("display_user"),
                         rs.getString("subject_id"), rs.getString("sj_name"));
-
                 reviewList.add(review);
             }
             rs.close();
@@ -256,11 +258,11 @@ public class Review {
             rs = pstm.executeQuery();
 
             while (rs.next()) {
-
                 Review review = new Review(rs.getString("review_id"), rs.getString("content"), rs.getString("date"), rs.getInt("score"),
                         rs.getString("display_user"), rs.getString("subject_id"), rs.getString("sj_name"));
                 reviewList.add(review);
             }
+            
             rs.close();
             pstm.close();
 
@@ -284,7 +286,6 @@ public class Review {
         PreparedStatement pstm = null;
         boolean status = true;
         try {
-
             conn = DBConnection.getConnection();
             String sql = "UPDATE review SET content = ? WHERE review_id = ?";
             pstm = conn.prepareStatement(sql);
@@ -306,16 +307,6 @@ public class Review {
             }
         }
         return status;
-    }
-
-    public Review(String review_id, String content, String date, int score, String display_user, String subject_id, String sj_name) {
-        this.review_id = review_id;
-        this.content = content;
-        this.date = date;
-        this.score = score;
-        this.display_user = display_user;
-        this.subject_id = subject_id;
-        this.sj_name = sj_name;
     }
 
     public String getSubject_id() {

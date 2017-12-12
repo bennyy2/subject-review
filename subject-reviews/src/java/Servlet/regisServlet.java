@@ -50,9 +50,7 @@ public class regisServlet extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-
             String message = null;
-
             Connection conn = null;
             PreparedStatement pstm = null;
             ResultSet rs = null;
@@ -71,7 +69,10 @@ public class regisServlet extends HttpServlet {
                 if (username.length() == 0 || password.length() == 0 || email.length() == 0) {
                     errorRegis = true;
                     message = "Please fill in your registration details.";
-                } else {
+                } else if(password.length() < 7 ){
+                    errorRegis = true;
+                    message = "password should be at least 8 characters.";
+                }else {
                     if (rs.next()) {
                         errorRegis = true;
                         message = "This username is already in use!";

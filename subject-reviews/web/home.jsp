@@ -63,7 +63,7 @@
             </section>
             <section class="vertical-scrolling" id="test">
                 <div style="background-color: white;padding-top: 6%;height: -webkit-fill-available;" data-anchor="page2">
-                    <h1 style="margin-left: 50px" align="center">Top review score</h1><br>
+                    <h1 style="margin-left: 50px" align="center">Top score review</h1><br>
                     <div class="topReview" style="padding: 0 10% 0 10%;">
                         <a href="viewSubjectServlet?id=${topList[0].getSubject_id()}">${topList[0].getSj_name_eng()} ${topList[0].getSj_name_thai()}</a>
                         <div class="progress" >

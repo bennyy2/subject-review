@@ -104,7 +104,9 @@ public class editServlet extends HttpServlet {
                     }
                 }
             }
-            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/profile.jsp");
+            welcome = "Password has changed already.";
+                        request.setAttribute("welcome", welcome);
+            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/edituser.jsp");
             dispatcher.forward(request, response);
         }
 
